@@ -1,7 +1,7 @@
 function Btnoida() {
   return (
     <>
-      <h1>Btnoida making New project</h1>
+      <h1>Btnoida making New projects</h1>
     </>
   );
 }
