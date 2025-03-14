@@ -1,9 +1,19 @@
-import logo from "./logo.svg";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Btnoida from "./Btnoida";
+import Home from "./Pages/Home";
+import ProductDetailpage from "./Pages/Productdetailspage";
 
 function App() {
-  return <Btnoida />;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/details/:id" element={<ProductDetailpage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;

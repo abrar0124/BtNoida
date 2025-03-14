@@ -1,0 +1,55 @@
+.nav-link-custom {
+  position: relative;
+  color: white !important;
+  text-decoration: none;
+
+  //   transition: color 0.3s ease-in-out;
+}
+
+/* Default bottom line for Home */
+.nav-link-custom.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 57px;
+  width: 100%; /* Text ke barabar width */
+  height: 2px;
+  background-color: white; /* Light gray */
+}
+
+/* Hover bottom line for all links */
+.nav-link-custom:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 57px;
+  width: 100%; /* Text ke barabar width */
+  height: 2px;
+  background-color: white; /* Light gray */
+}
+
+.hero-section {
+  // background: url("/Images/bg.jpeg") no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  top: 0;
+  z-index: 1000;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
