@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Header from "../Header";
+import "./customscss.scss";
 
 const Bgpic = () => {
   return (
@@ -15,20 +16,27 @@ const Bgpic = () => {
           backgroundPosition: "center",
         }}
       >
-        <section className="hero-section">
+        <section>
           <div className="overlay">
             <Container>
               <Row>
-                <Col md={5} className="text-white text-start lh-lg fs-5 mt-5">
-                  <h1>Departure Control System</h1>
-                  <p>
+                <Col md={5} className="text-white text-start lh-lg fs-5 mt-5 m">
+                  <h1>
+                    Departure Control <br /> System
+                  </h1>
+                  <p style={{ fontSize: "17px" }}>
                     Departure Control System (DCS) is developed to automate all
                     processes related to the airline management operations,
                     which is introduced as a way of cost reduction and safety
                     growth by connecting check-in functions with load control
                     and aircraft mass and balance.
                   </p>
-                  <Button variant="primary">Discover Vendors</Button>
+                  <Button
+                    className="p-3 custom-button"
+                    style={{ width: "40%", fontSize: "16px" }}
+                  >
+                    Discover Venders
+                  </Button>
                 </Col>
               </Row>
             </Container>
@@ -38,5 +46,4 @@ const Bgpic = () => {
     </>
   );
 };
-
 export default Bgpic;

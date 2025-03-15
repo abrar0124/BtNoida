@@ -6,7 +6,6 @@ const Footer = () => {
     <div style={{ backgroundColor: "#333", color: "#ccc", padding: "40px 0" }}>
       <Container>
         <Row>
-          {/* Left Side: Logo + Description */}
           <Col md={6}>
             <h2 style={{ color: "#3fa9f5" }}>
               <strong>DCS</strong>
