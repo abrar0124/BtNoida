@@ -2,12 +2,12 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Header from "../Header";
 import "./customscss.scss";
+import { Link } from "react-router-dom";
 
 const Bgpic = () => {
   return (
     <>
       <Header />
-
       <div
         className="vh-100 d-flex flex-column justify-content-center text-center"
         style={{
@@ -31,12 +31,9 @@ const Bgpic = () => {
                     growth by connecting check-in functions with load control
                     and aircraft mass and balance.
                   </p>
-                  <Button
-                    className="p-3 custom-button"
-                    style={{ width: "40%", fontSize: "16px" }}
-                  >
+                  <Link className="p-3  rounded  custom-button">
                     Discover Venders
-                  </Button>
+                  </Link>
                 </Col>
               </Row>
             </Container>

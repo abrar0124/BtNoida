@@ -3,7 +3,14 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <div style={{ backgroundColor: "#333", color: "#ccc", padding: "40px 0" }}>
+    <div
+      style={{
+        width: "100%",
+        backgroundColor: "#333",
+        color: "#ccc",
+        padding: "40px 0",
+      }}
+    >
       <Container>
         <Row>
           <Col md={6}>

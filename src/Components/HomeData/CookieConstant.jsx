@@ -9,17 +9,18 @@ const CookieConsent = () => {
   return (
     <>
       <div
-        className=" w-100 bg-white p-2 d-flex align-items-center justify-content-center flex-wrap"
+        className=" w-100  text-white p-2 d-flex align-items-center justify-content-center flex-wrap"
         style={{
           position: "fixed",
           bottom: 0,
           left: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
       >
-        <p className="m-0 text-dark fs-6">
+        <p className="m-0  fs-6">
           This website uses cookies to improve your experience. Click{" "}
           <strong>Accept</strong> to allow us to use cookies.{" "}
-          <a href="#" className="text-dark text-decoration-underline">
+          <a href="#" className=" text-white text-decoration-underline">
             settings
           </a>
           .

@@ -5,11 +5,20 @@ const Productarray = [
     description:
       "An aircraft Weight and Balance (W&B) system is a critical component of the Departure Control System (DCS), ensuring that the aircraft is loaded correctly for safe flight.",
     image: "/Images/cmp1.png",
-    extraInfo:
-      "DCS.aero provides all weight and balance systems in one place for analysis and comparison.",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
+    extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
-      { text: "See More Info", link: "/more-info", style: "primary" },
-      { text: "See FAQ", link: "/faq", style: "outline-primary" },
+      { text: "Learn More", style: "primary" },
+      { text: "FAQ", style: "outline-primary" },
     ],
   },
   {
@@ -18,6 +27,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp2.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -30,6 +48,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp3.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -38,10 +65,19 @@ const Productarray = [
   },
   {
     id: 4,
-    name: "Gate Reader",
+    name: "Gate Reader ",
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp4.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -50,10 +86,19 @@ const Productarray = [
   },
   {
     id: 5,
-    name: "Border Pass and Bag Tag",
+    name: "Bording Pass ",
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cpm4.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -66,6 +111,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp5.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -78,6 +132,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp6.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -86,10 +149,19 @@ const Productarray = [
   },
   {
     id: 8,
-    name: "MObile W & B",
+    name: "Mobile W & B",
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp7.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -102,6 +174,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp8.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -110,10 +191,19 @@ const Productarray = [
   },
   {
     id: 10,
-    name: "Turnaround Management",
+    name: "Turnarond Management",
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp9.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -126,6 +216,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp10.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -138,6 +237,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp11.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -150,6 +258,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp12.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -162,6 +279,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp13.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -174,6 +300,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp14.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -186,6 +321,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp15.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -198,6 +342,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp16.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -210,6 +363,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp17.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
@@ -222,6 +384,15 @@ const Productarray = [
     description:
       "The online check-in system allows passengers to check in for flights from the comfort of their home.",
     image: "/Images/cmp18.png",
+    images: "/Images/info.jpg",
+    Image: "/Images/benefit.jpg",
+    li1: "Provides high performance and efficiency.",
+    li2: "Trusted by thousands of customers worldwide.",
+    li3: "Saving time by eliminating the process of printing the boarding pass",
+    Description:
+      "Boarding pass is a mandatory document to identify passengers before boarding a particular flight. It contains the necessary information about the flight number, airline name, departure gate, departure time, departure and arrival points, and seat assignment (when applicable).",
+    Discriptopn:
+      "Passengers are free to choose either paper or mobile boarding pass. Each type has some advantages and drawbacks.",
     extraInfo: "It reduces wait times at the airport and improves efficiency.",
     buttons: [
       { text: "Learn More", style: "primary" },
