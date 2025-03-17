@@ -1,9 +1,9 @@
 const vendorsData = [
   {
     id: 1,
-    image: "/Images/logo1.png",
+    image: "/Images/pak.png",
     name: "Pakistan",
-    continent: "Karachi",
+    continent: "Asia",
     country: "🇵🇰",
     videoTutorials: 7,
     documents: 0,
@@ -17,8 +17,8 @@ const vendorsData = [
   {
     id: 2,
     Details: "➡️",
-    image: "/Images/logo2.png",
-    name: "A-ICE",
+    image: "/Images/engs.png",
+    name: "England",
     continent: "Europe",
     country: "🇮🇹",
     videoTutorials: 0,
@@ -32,9 +32,9 @@ const vendorsData = [
   {
     id: 3,
     Details: "➡️",
-    image: "/Images/logo3.png",
-    name: "Accelero",
-    continent: "Asia",
+    image: "/Images/france.jpeg",
+    name: "France",
+    continent: "Europe",
     country: "🇨🇳",
     videoTutorials: 3,
     documents: 2,
@@ -47,8 +47,8 @@ const vendorsData = [
   {
     id: 4,
     Details: "➡️",
-    image: "/Images/logo4.png",
-    name: "AFM Solutions",
+    image: "/Images/america.jpeg",
+    name: "America",
     continent: "North America",
     country: "🇺🇸",
     videoTutorials: 5,
@@ -62,9 +62,8 @@ const vendorsData = [
   {
     id: 5,
     Details: "➡️",
-    image: "/Images/logo5.png",
-
-    name: "Air Dispatch",
+    image: "/Images/germany.png",
+    name: "Germany",
     continent: "Europe",
     country: "🇨🇿",
     videoTutorials: 2,
@@ -78,9 +77,9 @@ const vendorsData = [
   {
     id: 6,
     Details: "➡️",
-    image: "/Images/logo6.png",
+    image: "/Images/canada.jpeg",
 
-    name: "Altair",
+    name: "Canada",
     continent: "North America",
     country: "🇲🇽",
     videoTutorials: 1,
@@ -94,8 +93,8 @@ const vendorsData = [
   {
     id: 7,
     Details: "➡️",
-    image: "/Images/logo7.png",
-    name: "Amadeus",
+    image: "/Images/Italy.png",
+    name: "Italy",
     continent: "Europe",
     country: "🇪🇸",
     videoTutorials: 4,
@@ -109,9 +108,9 @@ const vendorsData = [
   {
     id: 8,
     Details: "➡️",
-    image: "/Images/logo8.png",
+    image: "/Images/Max.png",
 
-    name: "APG",
+    name: "Maxico",
     continent: "North America",
     country: "🇬🇧",
     videoTutorials: 6,
@@ -124,10 +123,10 @@ const vendorsData = [
   },
   {
     id: 9,
-    image: "/Images/logo9.png",
+    image: "/Images/india.png",
     Details: "➡️",
-    name: "Aviation Safety Management Systems",
-    continent: "North America",
+    name: "India",
+    continent: "Asia",
     country: "🇫🇷",
     videoTutorials: 3,
     documents: 0,
@@ -140,10 +139,10 @@ const vendorsData = [
   {
     id: 10,
     Details: "➡️",
-    image: "/Images/logo10.png",
+    image: "/Images/b.jpeg",
 
-    name: "Avinet",
-    continent: "Australia",
+    name: "Barazil",
+    continent: "South Amercia",
     country: "🇦🇺",
     videoTutorials: 2,
     documents: 1,
