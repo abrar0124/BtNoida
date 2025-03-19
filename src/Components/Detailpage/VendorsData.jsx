@@ -78,7 +78,6 @@ const vendorsData = [
     id: 6,
     Details: "➡️",
     image: "/Images/canada.jpeg",
-
     name: "Canada",
     continent: "North America",
     country: "🇲🇽",
