@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.scss";
 import HeaderArray from "./HeaderArray";
-
 const Header = () => {
   const [hoveredDiv, setHoveredDiv] = useState(null);
   return (

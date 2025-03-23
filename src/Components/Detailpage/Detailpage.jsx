@@ -65,6 +65,16 @@ import Productarray from "../HomeData/Productarray";
 import VendorTable from "./Vendercheckout";
 import ProductsData from "./ProductsData";
 import Footer from "../HomeData/Footer";
+import Printers from "../Selfcomponents/Printers";
+import GateReader from "../Selfcomponents/GateReader";
+import OCR from "../Selfcomponents/OCR";
+import Selfcheckin from "../Selfcomponents/Selfcheckin";
+import Handheld from "../Selfcomponents/Handheld";
+import Selfbag from "../Selfcomponents/Selfbag";
+import Mobilebarcode from "../Selfcomponents/Mobilebarcode";
+import Wearable from "../Selfcomponents/Werable";
+import EgateArray from "../Selfcomponents/EgateArray";
+import Egate from "../Selfcomponents/Egate";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -114,7 +124,7 @@ function ProductDetail() {
         {/* Conditionally Render Components Based on ID */}
         {(id == 1 ||
           id == 2 ||
-          id == 4 ||
+          id == 5 ||
           id == 7 ||
           id == 8 ||
           id == 10 ||
@@ -122,15 +132,60 @@ function ProductDetail() {
           id == 17 ||
           id == 18 ||
           id == 19) && <VendorTable product={product} />}
-        {(id == 3 ||
-          id == 5 ||
-          id == 6 ||
-          id == 9 ||
-          id == 12 ||
-          id == 13 ||
-          id == 14 ||
-          id == 15 ||
-          id == 16) && <ProductsData product={product} />}
+        {product.id == 3 && (
+          <>
+            <Printers product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 4 && (
+          <>
+            <GateReader product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 6 && (
+          <>
+            <OCR product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 9 && (
+          <>
+            <Selfcheckin product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 12 && (
+          <>
+            <Handheld product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 13 && (
+          <>
+            <Selfbag product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 14 && (
+          <>
+            <Mobilebarcode product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 15 && (
+          <>
+            <Wearable product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
+        {product.id == 16 && (
+          <>
+            <Egate product={product} />
+            <ProductsData product={product} />
+          </>
+        )}
       </Container>
       <Footer />
     </>

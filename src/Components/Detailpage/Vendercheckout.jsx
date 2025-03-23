@@ -8,47 +8,36 @@ import {
   setSearch,
   addVendor,
   updateNewVendor,
-  resetNewVendor,
 } from "../../redux/VenderSlice";
-
-const VendorTable = ({ product }) => {
+const VendorTable = () => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { vendors, search, countryname, continent, newVendor, countries } =
     useSelector((state) => state.vendor);
-
   const filteredVendor = vendors.filter(
     (v) =>
-      v.name.toLowerCase().includes(search.toLowerCase()) &&
-      (countryname === "All Countries" || v.name === countryname) &&
-      (continent === "All Continents" || v.continent === continent)
+      v.name.toLowerCase().includes(search.toLowerCase()) ||
+      (v.continent.toLowerCase().includes(search.toLowerCase()) &&
+        (countryname === "All Countries" || v.name === countryname) &&
+        (continent === "All Continents" || v.continent === continent))
   );
-
   const countriesname = vendors.map((v) => v.name);
   const continentsname = vendors.map((v) => v.continent);
-
   const handleAddVendor = () => {
     console.log("Attempting to add vendor:", newVendor);
-
-    if (!newVendor.name || !newVendor.continent || !newVendor.country) {
-      alert("Please fill all required fields!");
-      return;
+    if (newVendor.name || newVendor.continent || newVendor.country) {
+      dispatch(addVendor({ id: vendors.length + 1, ...newVendor }));
+      setShow(false);
     }
-
-    dispatch(addVendor({ id: vendors.length + 1, ...newVendor }));
-    setShow(false);
-    dispatch(resetNewVendor());
   };
-
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between flex-wrap">
-        <h3 className="fw-medium">{product.name}</h3>
+        {/* <h3 className="fw-medium">{product.name}</h3> */}
         <Button className="btn btn-primary p-3" onClick={() => setShow(true)}>
           Add Your Company
         </Button>
       </div>
-
       <div className="d-flex align-items-center justify-content-between mb-4">
         <div style={{ flex: 1, maxWidth: "400px" }}>
           <InputGroup className="rounded shadow-sm">
@@ -87,7 +76,6 @@ const VendorTable = ({ product }) => {
           ))}
         </Form.Select>
       </div>
-
       {/* Table */}
       <Table striped bordered hover>
         <thead>
@@ -131,14 +119,8 @@ const VendorTable = ({ product }) => {
           ))}
         </tbody>
       </Table>
-
       {/* Modal */}
-      <Modal
-        show={show}
-        onHide={() => setShow(false)}
-        centered
-        backdrop="static"
-      >
+      <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add Your Company</Modal.Title>
         </Modal.Header>
@@ -158,7 +140,6 @@ const VendorTable = ({ product }) => {
               required
             />
           </Form.Group>
-
           <Form.Group>
             <Form.Label>Country *</Form.Label>
             <Form.Select
@@ -179,7 +160,6 @@ const VendorTable = ({ product }) => {
               ))}
             </Form.Select>
           </Form.Group>
-
           <Form.Group>
             <Form.Label>Continent *</Form.Label>
             <Form.Select
@@ -206,7 +186,7 @@ const VendorTable = ({ product }) => {
               name="country"
               value={newVendor.country}
               onChange={(e) => {
-                console.log("Selected Country:", e.target.value); // Debugging
+                console.log("Selected Country:", e.target.value);
                 dispatch(
                   updateNewVendor({ name: "country", value: e.target.value })
                 );
