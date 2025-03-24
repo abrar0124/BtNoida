@@ -1,0 +1,26 @@
+const vendors = [
+  { name: "ABOMIS", flag: "🇨🇦" },
+  { name: "Accelaero", flag: "🇦🇪" },
+  { name: "Airline Choice", flag: "🇺🇸" },
+  { name: "Avtra", flag: "🇸🇬" },
+  { name: "Bravo", flag: "🇹🇷" },
+  { name: "Crane", flag: "🇬🇧" },
+  { name: "Damarel", flag: "🇬🇧" },
+  { name: "Havatech", flag: "🇹🇷" },
+  { name: "Ink Innovation", flag: "🇪🇸" },
+  { name: "Kiu", flag: "🇺🇾" },
+  { name: "RADIXX", flag: "🇺🇸" },
+  { name: "RESA", flag: "🇫🇷" },
+  { name: "Zamar", flag: "🇨🇭" },
+  { name: "Videcom", flag: "🇬🇧" },
+  { name: "Sabre", flag: "🇺🇸" },
+  { name: "Arinc", flag: "🇺🇸" },
+  { name: "iPort", flag: "🇳🇱" },
+  { name: "A-Ice", flag: "🇮🇹" },
+  { name: "Amadeus", flag: "🇪🇸" },
+  { name: "Integral", flag: "🇩🇪" },
+  { name: "Travsys", flag: "🇳🇱" },
+  { name: "Flight Solutions", flag: "🇬🇧" },
+];
+
+export default vendors;

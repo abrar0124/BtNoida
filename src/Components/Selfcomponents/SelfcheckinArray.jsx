@@ -94,7 +94,7 @@ const SelfcheckinArray = [
     id: 8,
     name: "V1 Biometric",
     Images: "/Images/KCT.png",
-    image: "/Images/Self8.png",
+    image: "/Images/self8.png",
     company: "Epson",
     country: "Germany",
     features: "LED Indicator",

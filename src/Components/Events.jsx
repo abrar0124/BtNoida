@@ -1,3 +1,5 @@
+import EventsArray from "./Selfcomponents/EventsArray";
+
 import React, { useState } from "react";
 import {
   Container,
@@ -8,36 +10,6 @@ import {
   Button,
   InputGroup,
 } from "react-bootstrap";
-
-const events = [
-  {
-    title: "Asian GHI Conference 2025",
-    description:
-      "GHI returns to SE Asia to supercharge aviation growth The Asian...",
-    year: "2025",
-    month: "March",
-    country: "Japan",
-    location: "Da Nang, Vietnam",
-    image: "/Images/Asian.png",
-    link: "#",
-    continent: "Africa",
-    catagory: "Air show",
-  },
-  {
-    title: "Inter Airport South East Asia 2025",
-    description:
-      "The premier airport marketplace to buy, sell, and network with...",
-    year: "2019",
-    month: "April",
-    country: "France",
-    continent: "Asia",
-    location: "Marina Bay Sands, Singapore",
-    image: "/Images/InterAirport.png",
-    link: "#",
-    catagory: "Award",
-  },
-];
-
 const Events = () => {
   const [searchQuery, setSearchQuery] = useState(null);
   const [selectyear, setselectyear] = useState(null);
@@ -47,7 +19,7 @@ const Events = () => {
   const [selectcatagory, setselectedcatagory] = useState(null);
 
   // Filter events based on searchQuery
-  const FilteredEvents = events.filter(
+  const FilteredEvents = EventsArray.filter(
     (event) =>
       (searchQuery === null ||
         event.title.toLowerCase().includes(searchQuery)) &&
@@ -59,34 +31,49 @@ const Events = () => {
   );
 
   return (
-    <Container fluid className="p-4" style={{ marginTop: "10%" }}>
+    <Container className="p-4" style={{ marginTop: "10%" }}>
       <Row>
         {/* Filters Section */}
-        <Col md={3}>
+        <Col md={4}>
           <h4 className="fs-1 fw-normal">Events</h4>
           <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Year</Form.Label>
-              <Form.Select onChange={(e) => setselectyear(e.target.value)}>
-                <option>2025</option>
-                <option>2019</option>
-                <option>2020</option>
-                <option>2021</option>
-                <option>2022</option>
-                <option>2023</option>
-                <option>2024</option>
-                <option>2025</option>
-                <option>2026</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Month</Form.Label>
-              <Form.Select onChange={(e) => setselectmonth(e.target.value)}>
-                <option>All Month</option>
-                <option>March</option>
-                <option>April</option>
-              </Form.Select>
-            </Form.Group>
+            <div className="d-flex gap-2">
+              <div>
+                <Form.Group className="mb-3">
+                  <Form.Label>Year</Form.Label>
+                  <Form.Select
+                    className="bg-light p-3 text-center text-muted"
+                    style={{ width: "100px" }}
+                    onChange={(e) => setselectyear(e.target.value)}
+                  >
+                    <option>2025</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                  </Form.Select>
+                </Form.Group>
+              </div>
+              <div>
+                <Form.Group className="mb-3">
+                  <Form.Label>Month</Form.Label>
+                  <Form.Select
+                    className="bg-light p-3 text-muted text-center"
+                    style={{ width: "300px" }}
+                    onChange={(e) => setselectmonth(e.target.value)}
+                  >
+                    <option>All Month</option>
+                    <option>March</option>
+                    <option>April</option>
+                  </Form.Select>
+                </Form.Group>
+              </div>
+            </div>
+
             <Form.Group className="mb-3">
               <Form.Label>Continent</Form.Label>
               <Form.Select onChange={(e) => setselectcontinent(e.target.value)}>
@@ -128,8 +115,7 @@ const Events = () => {
         </Col>
 
         {/* Events Section */}
-        <Col md={9}>
-          <h2>Events</h2>
+        <Col md={8}>
           <InputGroup className="mb-3">
             <Form.Control
               placeholder="Search"
@@ -137,7 +123,6 @@ const Events = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </InputGroup>
-          <h5>March 2025</h5>
           {FilteredEvents.length > 0 ? (
             FilteredEvents.map((event, index) => (
               <Card className="mb-3" key={index}>
@@ -171,5 +156,4 @@ const Events = () => {
     </Container>
   );
 };
-
 export default Events;
