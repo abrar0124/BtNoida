@@ -14,8 +14,7 @@ const DCSVendors = ({ selectedVendors }) => {
       }}
     >
       {/* Selected Vendors Heading Left-aligned */}
-      <p className="fw-bold fs-4 text-start w-100">Selected DCS Vendors</p>
-
+      <p className=" fs-2 text-start w-100">My favourite countries</p>
       <Row className="w-100 d-flex flex-column">
         {selectedVendors.length > 0 ? (
           selectedVendors.map((vendor, index) => (

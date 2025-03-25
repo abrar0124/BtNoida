@@ -1,28 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import vendors from "./FlagArray";
 
 const VendorList = ({ onSelectionChange }) => {
   const [selectedVendors, setSelectedVendors] = useState([]);
 
+  useEffect(() => {
+    const storedVendors = JSON.parse(localStorage.getItem("selectedVendors"));
+    if (storedVendors) {
+      setSelectedVendors(storedVendors);
+      onSelectionChange(storedVendors);
+    }
+  }, []);
+
   const handleSelection = (vendor) => {
     let updatedSelection = [...selectedVendors];
 
     if (updatedSelection.includes(vendor)) {
-      // Remove if already selected
       updatedSelection = updatedSelection.filter((v) => v !== vendor);
     } else {
-      if (updatedSelection.length < 3) {
-        // Allow selection only up to 3
+      if (updatedSelection.length < 5) {
         updatedSelection.push(vendor);
       } else {
-        alert("You can select only 3 vendors.");
+        alert("You can select only 5 vendors.");
         return;
       }
     }
-
-    setSelectedVendors(updatedSelection);
-    onSelectionChange(updatedSelection); // Pass selected vendors to parent
+    setSelectedVendors(updatedSelection); // ✅ State Update
+    localStorage.setItem("selectedVendors", JSON.stringify(updatedSelection)); // ✅ localStorage Update
+    onSelectionChange(updatedSelection); // ✅ Callback Function
   };
 
   return (
@@ -57,7 +63,7 @@ const VendorList = ({ onSelectionChange }) => {
             cursor: pointer;
           }
           .selected {
-            border: 2px solid yellow;
+            border: 2px solid white;
           }
           .flag-icon {
             font-size: 2em;
