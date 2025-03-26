@@ -6,9 +6,9 @@ const VendorList = ({ onSelectionChange }) => {
   const [selectedVendors, setSelectedVendors] = useState([]);
 
   useEffect(() => {
-    const storedVendors = JSON.parse(localStorage.getItem("selectedVendors"));
+    const storedVendors = JSON.parse(localStorage.getItem("selectedVendors")); // convert selected product in array/object
     if (storedVendors) {
-      setSelectedVendors(storedVendors); // tstate update
+      setSelectedVendors(storedVendors); // state update
       onSelectionChange(storedVendors); // tell another component for selecting  products
     }
   }, []);
@@ -27,10 +27,11 @@ const VendorList = ({ onSelectionChange }) => {
       }
     }
 
-    setSelectedVendors(updatedSelection); // ✅ State Update
-    localStorage.setItem("selectedVendors", JSON.stringify(updatedSelection)); // ✅ localStorage Update
-    onSelectionChange(updatedSelection); // ✅ Callback Function
+    setSelectedVendors(updatedSelection);
+    localStorage.setItem("selectedVendors", JSON.stringify(updatedSelection)); // ✅ localStorage Update in the form of string
+    onSelectionChange(updatedSelection);
   };
+
   return (
     <div className="bg-dark text-white p-3">
       <h2 className="text-center py-3">Select DCS Vendors</h2>

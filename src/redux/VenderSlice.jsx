@@ -16,9 +16,10 @@ const initialState = {
     { flag: "🇨🇳", name: "France" },
     { flag: "🇦🇺", name: "Australia" },
     { flag: "🇮🇹", name: "England" },
-    { flag: "🇬🇧", name: "Mexico" }, // Fixed spelling mistake
-    { flag: "🇧🇷", name: "Brazil" }, // Fixed spelling mistake & corrected flag
+    { flag: "🇬🇧", name: "Mexico" },
+    { flag: "🇧🇷", name: "Brazil" },
   ],
+
   newVendor: {
     name: "",
     continent: "",
@@ -54,6 +55,9 @@ const vendorSlice = createSlice({
       console.log("Updating Vendor:", action.payload);
       state.newVendor[action.payload.name] = action.payload.value;
     },
+    setVendors: (state, action) => {
+      state.vendors = action.payload;
+    },
   },
 });
 
@@ -64,5 +68,6 @@ export const {
   addVendor,
   updateNewVendor,
   resetNewVendor,
+  setVendors,
 } = vendorSlice.actions;
 export default vendorSlice.reducer;

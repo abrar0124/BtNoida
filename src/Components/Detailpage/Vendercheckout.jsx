@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Form, InputGroup, Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,12 +8,35 @@ import {
   setSearch,
   addVendor,
   updateNewVendor,
+  setVendors,
 } from "../../redux/VenderSlice";
+
 const VendorTable = () => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { vendors, search, countryname, continent, newVendor, countries } =
     useSelector((state) => state.vendor);
+
+  // Load vendors from localStorage on mount
+  useEffect(() => {
+    const storedVendors = JSON.parse(localStorage.getItem("vendors"));
+    if (storedVendors) {
+      dispatch(setVendors(storedVendors)); // Pehle Redux state clear karein aur naye vendors load karein
+    }
+  }, []);
+
+  const handleAddVendor = () => {
+    console.log("Attempting to add vendor:", newVendor);
+
+    if (newVendor.name && newVendor.continent && newVendor.country) {
+      const newVendorData = { id: vendors.length + 1, ...newVendor };
+      const updatedVendors = [...vendors, newVendorData];
+      localStorage.setItem("vendors", JSON.stringify(updatedVendors)); // Local storage update
+
+      dispatch(setVendors(updatedVendors));
+      setShow(false); // Modal close karna
+    }
+  };
   const filteredVendor = vendors.filter(
     (v) =>
       v.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -21,23 +44,19 @@ const VendorTable = () => {
         (countryname === "All Countries" || v.name === countryname) &&
         (continent === "All Continents" || v.continent === continent))
   );
+
   const countriesname = vendors.map((v) => v.name);
   const continentsname = vendors.map((v) => v.continent);
-  const handleAddVendor = () => {
-    console.log("Attempting to add vendor:", newVendor);
-    if (newVendor.name || newVendor.continent || newVendor.country) {
-      dispatch(addVendor({ id: vendors.length + 1, ...newVendor }));
-      setShow(false);
-    }
-  };
+
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between flex-wrap">
-        {/* <h3 className="fw-medium">{product.name}</h3> */}
         <Button className="btn btn-primary p-3" onClick={() => setShow(true)}>
           Add Your Company
         </Button>
       </div>
+
+      {/* Search & Filters */}
       <div className="d-flex align-items-center justify-content-between mb-4">
         <div style={{ flex: 1, maxWidth: "400px" }}>
           <InputGroup className="rounded shadow-sm">
@@ -76,7 +95,8 @@ const VendorTable = () => {
           ))}
         </Form.Select>
       </div>
-      {/* Table */}
+
+      {/* Vendor Table */}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -119,7 +139,8 @@ const VendorTable = () => {
           ))}
         </tbody>
       </Table>
-      {/* Modal */}
+
+      {/* Modal for Adding Vendor */}
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add Your Company</Modal.Title>
