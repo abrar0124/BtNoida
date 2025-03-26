@@ -8,8 +8,8 @@ const VendorList = ({ onSelectionChange }) => {
   useEffect(() => {
     const storedVendors = JSON.parse(localStorage.getItem("selectedVendors"));
     if (storedVendors) {
-      setSelectedVendors(storedVendors);
-      onSelectionChange(storedVendors);
+      setSelectedVendors(storedVendors); // tstate update
+      onSelectionChange(storedVendors); // tell another component for selecting  products
     }
   }, []);
 
@@ -19,18 +19,18 @@ const VendorList = ({ onSelectionChange }) => {
     if (updatedSelection.includes(vendor)) {
       updatedSelection = updatedSelection.filter((v) => v !== vendor);
     } else {
-      if (updatedSelection.length < 5) {
+      if (updatedSelection.length < 3) {
         updatedSelection.push(vendor);
       } else {
-        alert("You can select only 5 vendors.");
+        alert("You can select only 3 vendors.");
         return;
       }
     }
+
     setSelectedVendors(updatedSelection); // ✅ State Update
     localStorage.setItem("selectedVendors", JSON.stringify(updatedSelection)); // ✅ localStorage Update
     onSelectionChange(updatedSelection); // ✅ Callback Function
   };
-
   return (
     <div className="bg-dark text-white p-3">
       <h2 className="text-center py-3">Select DCS Vendors</h2>
