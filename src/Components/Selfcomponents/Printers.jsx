@@ -14,7 +14,6 @@ const Printers = ({ product }) => {
     country: false,
     type: false,
   });
-
   const handleCheckboxChange = (key, value) => {
     setFilters((prevFilters) => {
       const updatedFilters = prevFilters[key].includes(value)
