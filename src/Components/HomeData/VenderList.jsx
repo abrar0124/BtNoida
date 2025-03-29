@@ -6,18 +6,16 @@ const VendorList = ({ onSelectionChange }) => {
   const [selectedVendors, setSelectedVendors] = useState([]);
 
   useEffect(() => {
-    const storedVendors = JSON.parse(localStorage.getItem("selectedVendors")); // convert selected product in array/object
-    if (storedVendors) {
-      setSelectedVendors(storedVendors); // state update
-      onSelectionChange(storedVendors); // tell another component for selecting  products
-    }
+    const storedVendors = JSON.parse(localStorage.getItem("selectedVendors"));
+    setSelectedVendors(storedVendors);
+    onSelectionChange(storedVendors);
   }, []);
 
   const handleSelection = (vendor) => {
     let updatedSelection = [...selectedVendors];
 
-    if (updatedSelection.includes(vendor)) {
-      updatedSelection = updatedSelection.filter((v) => v !== vendor);
+    if (updatedSelection.some((v) => v.name === vendor.name)) {
+      updatedSelection = updatedSelection.filter((v) => v.name !== vendor.name);
     } else {
       if (updatedSelection.length < 3) {
         updatedSelection.push(vendor);
@@ -28,7 +26,7 @@ const VendorList = ({ onSelectionChange }) => {
     }
 
     setSelectedVendors(updatedSelection);
-    localStorage.setItem("selectedVendors", JSON.stringify(updatedSelection)); // ✅ localStorage Update in the form of string
+    localStorage.setItem("selectedVendors", JSON.stringify(updatedSelection));
     onSelectionChange(updatedSelection);
   };
 
@@ -40,7 +38,9 @@ const VendorList = ({ onSelectionChange }) => {
           <Col key={index} md={2} className="mb-3">
             <div
               className={`vendor-box ${
-                selectedVendors.includes(vendor) ? "selected" : ""
+                selectedVendors.some((v) => v.name === vendor.name)
+                  ? "selected"
+                  : ""
               }`}
               onClick={() => handleSelection(vendor)}
               style={{ cursor: "pointer" }}
@@ -62,9 +62,11 @@ const VendorList = ({ onSelectionChange }) => {
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: 0.3s;
           }
-          .selected {
+          .vendor-box.selected {
             border: 2px solid white;
+             background-color: rgba(255, 255, 255, 0.1);
           }
           .flag-icon {
             font-size: 2em;
