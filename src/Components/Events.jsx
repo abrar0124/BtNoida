@@ -23,11 +23,21 @@ const Events = () => {
     (event) =>
       (searchQuery === null ||
         event.title.toLowerCase().includes(searchQuery)) &&
-      (selectyear === null || event.year === selectyear) &&
-      (selectmonth === null || event.month === selectmonth) &&
-      (selectcontinent === null || event.continent === selectcontinent) &&
-      (selectcountry === null || event.country === selectcountry) &&
-      (selectcatagory === null || event.catagory === selectcatagory)
+      (selectyear === null ||
+        selectyear === "All" ||
+        event.year === selectyear) &&
+      (selectmonth === null ||
+        selectmonth === "All Month" ||
+        event.month === selectmonth) &&
+      (selectcontinent === null ||
+        selectcontinent === "All Continents" ||
+        event.continent === selectcontinent) &&
+      (selectcountry === null ||
+        selectcountry === "All Countires" ||
+        event.country === selectcountry) &&
+      (selectcatagory === null ||
+        selectcatagory === "All Catagories" ||
+        event.catagory === selectcatagory)
   );
 
   return (
@@ -46,7 +56,7 @@ const Events = () => {
                     style={{ width: "100px" }}
                     onChange={(e) => setselectyear(e.target.value)}
                   >
-                    <option>2025</option>
+                    <option>All </option>
                     <option>2019</option>
                     <option>2020</option>
                     <option>2021</option>
@@ -60,7 +70,7 @@ const Events = () => {
               </div>
               <div>
                 <Form.Group className="mb-3">
-                  <Form.Label>Month</Form.Label>
+                  <Form.Label>Months</Form.Label>
                   <Form.Select
                     className="bg-light p-3 text-muted text-center"
                     style={{ width: "300px" }}
@@ -77,7 +87,7 @@ const Events = () => {
             <Form.Group className="mb-3">
               <Form.Label>Continent</Form.Label>
               <Form.Select onChange={(e) => setselectcontinent(e.target.value)}>
-                <option>Continent</option>
+                <option> All Continents</option>
                 <option>Africa</option>
                 <option>Asia</option>
                 <option>Australia</option>
@@ -90,7 +100,7 @@ const Events = () => {
             <Form.Group className="mb-3">
               <Form.Label>Country</Form.Label>
               <Form.Select onChange={(e) => setselectcountry(e.target.value)}>
-                <option>All</option>
+                <option>All Countires</option>
                 <option>Austria</option>
                 <option>Japan</option>
                 <option>Africa</option>
@@ -103,7 +113,7 @@ const Events = () => {
               <Form.Select
                 onChange={(e) => setselectedcatagory(e.target.value)}
               >
-                <option>All</option>
+                <option>All Catagories</option>
                 <option>Air show</option>
                 <option>Award</option>
                 <option>Conference</option>

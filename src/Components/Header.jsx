@@ -42,7 +42,7 @@ const Header = () => {
                   {hoveredDiv === item.name && item.subMenu && (
                     <div
                       className=" position-absolute bg-dark text-white p-4"
-                      style={{ width: "280px", marginTop: "19%" }}
+                      style={{ width: "280px" }}
                     >
                       {item.subMenu.map((sub) => (
                         <Nav.Link

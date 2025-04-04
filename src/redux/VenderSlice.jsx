@@ -6,6 +6,10 @@ const initialState = {
   search: "",
   countryname: "All Countries",
   continent: "All Continents",
+  sortBy: null,
+  isAscending: true,
+  sortname: null,
+  isAsendingname: true,
   countries: [
     { flag: "🇵🇰", name: "Pakistan" },
     { flag: "🇺🇸", name: "America" },
@@ -58,6 +62,18 @@ const vendorSlice = createSlice({
     setVendors: (state, action) => {
       state.vendors = action.payload;
     },
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload;
+    },
+    toggleSortOrder: (state) => {
+      state.isAscending = !state.isAscending;
+    },
+    setsortname: (state, action) => {
+      state.sortname = action.payload;
+    },
+    togglesortname: (state) => {
+      state.isAsendingname = !state.sortname;
+    },
   },
 });
 
@@ -67,7 +83,10 @@ export const {
   setContinent,
   addVendor,
   updateNewVendor,
-  resetNewVendor,
   setVendors,
+  toggleSortOrder,
+  setSortBy,
+  setsortname,
+  togglesortname,
 } = vendorSlice.actions;
 export default vendorSlice.reducer;

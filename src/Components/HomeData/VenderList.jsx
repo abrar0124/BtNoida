@@ -6,7 +6,8 @@ const VendorList = ({ onSelectionChange }) => {
   const [selectedVendors, setSelectedVendors] = useState([]);
 
   useEffect(() => {
-    const storedVendors = JSON.parse(localStorage.getItem("selectedVendors"));
+    const storedVendors =
+      JSON.parse(localStorage.getItem("selectedVendors")) || [];
     setSelectedVendors(storedVendors);
     onSelectionChange(storedVendors);
   }, []);
@@ -66,7 +67,7 @@ const VendorList = ({ onSelectionChange }) => {
           }
           .vendor-box.selected {
             border: 2px solid white;
-             background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
           }
           .flag-icon {
             font-size: 2em;

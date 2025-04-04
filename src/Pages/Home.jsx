@@ -1,5 +1,4 @@
 import HomeData from "../Components/HomeData/HomeData";
-
 function Home() {
   return (
     <>

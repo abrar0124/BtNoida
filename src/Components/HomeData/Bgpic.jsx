@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Header from "../Header";
 import "./customscss.scss";
 import { Link } from "react-router-dom";
-
 const Bgpic = () => {
   return (
     <>

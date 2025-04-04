@@ -6,47 +6,53 @@ import {
   setContinent,
   setCountryname,
   setSearch,
-  addVendor,
   updateNewVendor,
   setVendors,
 } from "../../redux/VenderSlice";
 
 const VendorTable = () => {
   const [show, setShow] = useState(false);
+  const [sortBy, setSortBy] = useState(null);
+  const [isAscending, setIsAscending] = useState(true);
+
   const dispatch = useDispatch();
   const { vendors, search, countryname, continent, newVendor, countries } =
     useSelector((state) => state.vendor);
 
-  // Load vendors from localStorage on mount
   useEffect(() => {
     const storedVendors = JSON.parse(localStorage.getItem("vendors"));
     if (storedVendors) {
-      dispatch(setVendors(storedVendors)); // Pehle Redux state clear karein aur naye vendors load karein
+      dispatch(setVendors(storedVendors));
     }
-  }, []);
+  }, [dispatch]);
 
   const handleAddVendor = () => {
-    console.log("Attempting to add vendor:", newVendor);
-
     if (newVendor.name && newVendor.continent && newVendor.country) {
       const newVendorData = { id: vendors.length + 1, ...newVendor };
       const updatedVendors = [...vendors, newVendorData];
-      localStorage.setItem("vendors", JSON.stringify(updatedVendors)); // Local storage update
-
+      localStorage.setItem("vendors", JSON.stringify(updatedVendors));
       dispatch(setVendors(updatedVendors));
-      setShow(false); // Modal close karna
+      setShow(false);
     }
   };
-  const filteredVendor = vendors.filter(
-    (v) =>
-      v.name.toLowerCase().includes(search.toLowerCase()) ||
-      (v.continent.toLowerCase().includes(search.toLowerCase()) &&
-        (countryname === "All Countries" || v.name === countryname) &&
-        (continent === "All Continents" || v.continent === continent))
-  );
-
   const countriesname = vendors.map((v) => v.name);
   const continentsname = vendors.map((v) => v.continent);
+
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setIsAscending(!isAscending);
+    } else {
+      setSortBy(column);
+      setIsAscending(true);
+    }
+  };
+  const sortedVendors = [...vendors].sort((a, b) => {
+    if (sortBy) {
+      return isAscending
+        ? a[sortBy].toString().localeCompare(b[sortBy].toString())
+        : b[sortBy].toString().localeCompare(a[sortBy].toString());
+    }
+  });
 
   return (
     <div className="container mt-4">
@@ -55,8 +61,6 @@ const VendorTable = () => {
           Add Your Company
         </Button>
       </div>
-
-      {/* Search & Filters */}
       <div className="d-flex align-items-center justify-content-between mb-4">
         <div style={{ flex: 1, maxWidth: "400px" }}>
           <InputGroup className="rounded shadow-sm">
@@ -79,8 +83,8 @@ const VendorTable = () => {
           onChange={(e) => dispatch(setCountryname(e.target.value))}
         >
           <option>All Countries</option>
-          {countriesname.map((c, index) => (
-            <option key={index}>{c}</option>
+          {vendors.map((v, index) => (
+            <option key={index}>{v.name}</option>
           ))}
         </Form.Select>
 
@@ -90,20 +94,65 @@ const VendorTable = () => {
           onChange={(e) => dispatch(setContinent(e.target.value))}
         >
           <option>All Continents</option>
-          {continentsname.map((c, index) => (
-            <option key={index}>{c}</option>
+          {vendors.map((v, index) => (
+            <option key={index}>{v.continent}</option>
           ))}
         </Form.Select>
       </div>
 
-      {/* Vendor Table */}
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Logo</th>
-            <th>#</th>
-            <th>Name</th>
-            <th>Continent</th>
+            <button>
+              <th
+                onClick={() => handleSort("id")}
+                style={{ cursor: "pointer" }}
+              >
+                <img
+                  src={
+                    isAscending
+                      ? "/Images/logo512.png"
+                      : "/Images/down-arrow.png"
+                  }
+                  style={{
+                    width: "22px",
+                    marginBottom: "10px",
+                    marginLeft: "10px",
+                  }}
+                />
+              </th>
+            </button>
+            <th
+              onClick={() => handleSort("name")}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={
+                  isAscending ? "/Images/logo512.png" : "/Images/down-arrow.png"
+                }
+                style={{
+                  width: "22px",
+                  marginBottom: "10px",
+                  marginLeft: "10px",
+                }}
+              />
+            </th>
+            <th
+              onClick={() => handleSort("continent")}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={
+                  isAscending ? "/Images/logo512.png" : "/Images/down-arrow.png"
+                }
+                style={{
+                  width: "22px",
+                  marginBottom: "10px",
+                  marginLeft: "10px",
+                }}
+              />
+            </th>
             <th>Country</th>
             <th>Free Trial</th>
             <th>CLC</th>
@@ -113,8 +162,9 @@ const VendorTable = () => {
             <th>Details</th>
           </tr>
         </thead>
+
         <tbody>
-          {filteredVendor.map((v) => (
+          {sortedVendors.map((v) => (
             <tr key={v.id}>
               <td>
                 <img
@@ -140,7 +190,8 @@ const VendorTable = () => {
         </tbody>
       </Table>
 
-      {/* Modal for Adding Vendor */}
+      {/* model */}
+
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add Your Company</Modal.Title>
