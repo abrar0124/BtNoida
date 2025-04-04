@@ -1,9 +1,9 @@
 const EventsArray = [
   {
-    title: "CAPA Airline Leader Summit – Americas 2025",
+    title: "CAPA Airline Leader Summit – Americas 2019",
     description:
       "The CAPA Airline Leader Summit – Americas 2025, held April ...",
-    year: "2025",
+    year: "2019",
     month: "April",
     country: "Italy",
     location: "Da Nang, Vietnam",
@@ -14,10 +14,10 @@ const EventsArray = [
     Days: "3 Days Left",
   },
   {
-    title: "Passenger Terminal Expo 2025",
+    title: "Passenger Terminal Expo 2020",
     description:
       "The world’s leading international airport conference and exhibition, and host ...",
-    year: "2025",
+    year: "2020",
     month: "April",
     country: "Africa",
     continent: "Asia",
@@ -28,10 +28,10 @@ const EventsArray = [
     Days: "8 Days Left",
   },
   {
-    title: "Philippine Airport Modernization and Expansion Summit 2025",
+    title: "Philippine Airport Modernization and Expansion Summit 2020",
     description:
       "Over the next four years, the Philippine government, under the ...",
-    year: "2025",
+    year: "2020",
     month: "April",
     country: "Japan",
     continent: "Europe",
@@ -42,10 +42,10 @@ const EventsArray = [
     Days: "23 Days Left",
   },
   {
-    title: "ACI EUROPE Regional Airports Conference and Exhibition 2025",
+    title: "ACI EUROPE Regional Airports Conference and Exhibition 2021",
     description:
       "The ACI EUROPE Regional Airports Conference and Exhibition is the ...",
-    year: "2025",
+    year: "2021",
     month: "April",
     country: "France",
     continent: "North America",
@@ -56,10 +56,10 @@ const EventsArray = [
     Days: "28 Days Left",
   },
   {
-    title: "Airport Show 2025",
+    title: "Airport Show 2021",
     description:
       "The Airport Show will bring together leading airport suppliers, service ...",
-    year: "2025",
+    year: "2021",
     month: "May",
     country: "Dubai",
     continent: "Asia",
@@ -70,10 +70,10 @@ const EventsArray = [
     Days: "36 Days Left",
   },
   {
-    title: "CAPA Airline Leader Summit – Airlines in Transition 2025",
+    title: "CAPA Airline Leader Summit – Airlines in Transition 2021",
     description:
       "The Airline Leader Summit - Airlines in Transition is CAPA’s ...",
-    year: "2025",
+    year: "2021",
     month: "May",
     country: "Athens",
     continent: "Asia",
@@ -84,10 +84,10 @@ const EventsArray = [
     Days: "38 Days Left",
   },
   {
-    title: "Aviation Festival Americas 2025",
+    title: "Aviation Festival Americas 2022",
     description:
       "Business models. Technology. Sustainability. For the Americas aviation industry. Now in its ...",
-    year: "2025",
+    year: "2022",
     month: "May",
     country: "Athens",
     continent: "Asia",
@@ -98,10 +98,10 @@ const EventsArray = [
     Days: "40 Days Left",
   },
   {
-    title: "Airports Canada Conference 2025",
+    title: "Airports Canada Conference 2022",
     description:
       "Airports play a critical role in the interconnected economy, acting ...",
-    year: "2025",
+    year: "2022",
     month: "May",
     country: "Athens",
     continent: "Asia",
@@ -112,10 +112,10 @@ const EventsArray = [
     Days: "52 Days Left",
   },
   {
-    title: "Transport Logistic 2025",
+    title: "Transport Logistic 2022",
     description:
       "Transport Logistic 2025 offers unparalleled insights, groundbreaking innovations, and transformative ...",
-    year: "2025",
+    year: "2022",
     month: "June",
     country: "Athens",
     continent: "Asia",
@@ -126,10 +126,10 @@ const EventsArray = [
     Days: "59 Days Left",
   },
   {
-    title: "Americas GHI Conference 2025",
+    title: "Americas GHI Conference 2022",
     description:
       "GATEWAY TO AMERICAS Discover new business opportunities in the world’s fastest-growing ...",
-    year: "2025",
+    year: "2022",
     month: "June",
     country: "Athens",
     continent: "Asia",
@@ -140,8 +140,8 @@ const EventsArray = [
     Days: "60 Days Left",
   },
   {
-    title: "EAA AirVenture 2025",
-    year: "2025",
+    title: "EAA AirVenture 2022",
+    year: "2022",
     month: "July",
     country: "Athens",
     continent: "Asia",
@@ -152,10 +152,10 @@ const EventsArray = [
     Days: "108 Days Left",
   },
   {
-    title: "Airport Experience Summit 2025",
+    title: "Airport Experience Summit 2023",
     description:
       "The ACI World's Airport Experience Summit is the leading global ...",
-    year: "2025",
+    year: "2023",
     month: "September",
     country: "Athens",
     continent: "Asia",
@@ -166,10 +166,10 @@ const EventsArray = [
     Days: "157 Days Left",
   },
   {
-    title: "Future Travel Experience Global 2025",
+    title: "Future Travel Experience Global 2023",
     description:
       "The definitive event for innovators, technologists, designers, collaborators, and gamechangers FTE ...",
-    year: "2025",
+    year: "2023",
     month: "September",
     country: "Athens",
     continent: "Asia",
@@ -180,8 +180,8 @@ const EventsArray = [
     Days: "158 Days Left",
   },
   {
-    title: "Aviation Forum 2025",
-    year: "2025",
+    title: "Aviation Forum 2023",
+    year: "2023",
     month: "September",
     country: "Athens",
     continent: "Asia",
@@ -192,10 +192,10 @@ const EventsArray = [
     Days: "108 Days Left",
   },
   {
-    title: "International GSE Expo 2025",
+    title: "International GSE Expo 2023",
     description:
       "The Premier Event Dedicated to the Advancement of the Ground ...",
-    year: "2025",
+    year: "2023",
     month: "September",
     country: "Athens",
     continent: "Asia",
@@ -206,10 +206,10 @@ const EventsArray = [
     Days: "165 Days Left",
   },
   {
-    title: "African GHI Stakeholders’ Conference 2025",
+    title: "African GHI Stakeholders’ Conference 2023",
     description:
       "Championing African Aviation Growth GHI’s 8th African Stakeholders’ Conference will bring ...",
-    year: "2025",
+    year: "2023",
     month: "September",
     country: "Athens",
     continent: "Asia",
@@ -220,10 +220,10 @@ const EventsArray = [
     Days: "172 Days Left",
   },
   {
-    title: "World Aviation Festival 2025",
+    title: "World Aviation Festival 2024",
     description:
       "Business models. Technology. Sustainability. Innovation. For the global aviation industry The World ...",
-    year: "2025",
+    year: "2024",
     month: "Octobar",
     country: "Athens",
     continent: "Asia",
@@ -234,9 +234,9 @@ const EventsArray = [
     Days: "186 Days Left",
   },
   {
-    title: "Inter Airport Europe 2025",
+    title: "Inter Airport Europe 2024",
     description: "Inter Airport Europe is a leading event for the global ...",
-    year: "2025",
+    year: "2024",
     month: "Octobar",
     country: "Athens",
     continent: "Asia",
@@ -247,10 +247,10 @@ const EventsArray = [
     Days: "186 Days Left",
   },
   {
-    title: "ACI-NA Annual Conference and Exhibition 2025",
+    title: "ACI-NA Annual Conference and Exhibition 2024",
     description:
       "ACI-NA is excited to bring the airport industry together again ...",
-    year: "2025",
+    year: "2024",
     month: "Octobar",
     country: "Athens",
     continent: "Asia",
@@ -261,10 +261,10 @@ const EventsArray = [
     Days: "204 Days Left",
   },
   {
-    title: "Annual GHI Conference 2025",
+    title: "Annual GHI Conference 2024",
     description:
       "Connect the industry that connects the world   The GHI Annual, the ...",
-    year: "2025",
+    year: "2024",
     month: "November",
     country: "Athens",
     continent: "Asia",

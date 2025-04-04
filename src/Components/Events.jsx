@@ -153,7 +153,7 @@ const Events = () => {
               return (
                 <div key={index}>
                   {showMonthHeading && (
-                    <p className="fw-medium m-4 fs-3 me-5">{p.month} 2025</p>
+                    <p className="fw-medium m-4 fs-3 me-5">{p.month}</p>
                   )}
                   <Card className="mb-3 p-3">
                     <Row className="g-0">
