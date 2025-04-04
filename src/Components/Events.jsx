@@ -10,6 +10,7 @@ import {
   Button,
   InputGroup,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 const Events = () => {
   const [searchQuery, setSearchQuery] = useState(null);
   const [selectyear, setselectyear] = useState(null);
@@ -17,29 +18,28 @@ const Events = () => {
   const [selectcontinent, setselectcontinent] = useState(null);
   const [selectcountry, setselectcountry] = useState(null);
   const [selectcatagory, setselectedcatagory] = useState(null);
+  let lastMonth = ""; // Pichle month ko track karne ke liye
 
   // Filter events based on searchQuery
   const FilteredEvents = EventsArray.filter(
-    (event) =>
+    (e) =>
       (searchQuery === null ||
-        event.title.toLowerCase().includes(searchQuery)) &&
-      (selectyear === null ||
-        selectyear === "All" ||
-        event.year === selectyear) &&
+        e.title.toUpperCase().includes(searchQuery.toUpperCase()) ||
+        e.title.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      (selectyear === null || selectyear === "All" || e.year === selectyear) &&
       (selectmonth === null ||
         selectmonth === "All Month" ||
-        event.month === selectmonth) &&
+        e.month === selectmonth) &&
       (selectcontinent === null ||
         selectcontinent === "All Continents" ||
-        event.continent === selectcontinent) &&
+        e.continent === selectcontinent) &&
       (selectcountry === null ||
         selectcountry === "All Countires" ||
-        event.country === selectcountry) &&
+        e.country === selectcountry) &&
       (selectcatagory === null ||
         selectcatagory === "All Catagories" ||
-        event.catagory === selectcatagory)
+        e.catagory === selectcatagory)
   );
-
   return (
     <Container className="p-4" style={{ marginTop: "10%" }}>
       <Row>
@@ -77,8 +77,18 @@ const Events = () => {
                     onChange={(e) => setselectmonth(e.target.value)}
                   >
                     <option>All Month</option>
-                    <option>March</option>
                     <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>Octobar</option>
+                    <option>November</option>
+                    <option>December</option>
+                    <option>Junuary</option>
+                    <option>Febraury</option>
+                    <option>March</option>
                   </Form.Select>
                 </Form.Group>
               </div>
@@ -133,33 +143,48 @@ const Events = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </InputGroup>
-          {FilteredEvents.length > 0 ? (
-            FilteredEvents.map((event, index) => (
-              <Card className="mb-3" key={index}>
-                <Row className="g-0">
-                  <Col md={2}>
-                    <Card.Img src={event.image} alt={event.title} />
-                  </Col>
-                  <Col md={8}>
-                    <Card.Body>
-                      <Card.Title>{event.title}</Card.Title>
-                      <Card.Text>{event.description}</Card.Text>
-                      <Button variant="link">Details &gt;</Button>
-                    </Card.Body>
-                  </Col>
-                  <Col
-                    md={2}
-                    className="text-center d-flex flex-column justify-content-center"
-                  >
-                    <div>
-                      <strong>{event.location}</strong>
-                    </div>
-                  </Col>
-                </Row>
-              </Card>
-            ))
-          ) : (
+
+          {FilteredEvents.length === 0 ? (
             <p>No events found.</p>
+          ) : (
+            FilteredEvents.map((p, index) => {
+              const showMonthHeading = p.month !== lastMonth;
+              lastMonth = p.month; // Update last month
+              return (
+                <div key={index}>
+                  {showMonthHeading && (
+                    <p className="fw-medium m-4 fs-3 me-5">{p.month} 2025</p>
+                  )}
+                  <Card className="mb-3 p-3">
+                    <Row className="g-0">
+                      <Col md={2}>
+                        <Card.Img
+                          src={p.image}
+                          style={{ height: "px", width: "140px" }}
+                        />
+                      </Col>
+                      <Col md={8}>
+                        <Card.Body>
+                          <Card.Title>{p.title}</Card.Title>
+                          <Card.Text>{p.description}</Card.Text>
+                          <p className="text-danger">{p.Days}</p>
+                          <Link
+                            className="text-decoration-none text-dark"
+                            style={{ marginLeft: "78%" }}
+                          >
+                            Details
+                          </Link>
+                        </Card.Body>
+                      </Col>
+                      <Col
+                        md={2}
+                        className="text-center d-flex flex-column justify-content-center"
+                      ></Col>
+                    </Row>
+                  </Card>
+                </div>
+              );
+            })
           )}
         </Col>
       </Row>

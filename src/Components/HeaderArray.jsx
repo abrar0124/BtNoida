@@ -3,7 +3,7 @@ const HeaderArray = [
 
   {
     name: "DCS Solutions",
-    path: "/dcs-solutions",
+    path: "/",
     subMenu: [
       { name: "Departure Control System", path: "/dcs-solutions/departure" },
       { name: "Backup DCS", path: "/dcs-solutions/backup" },
@@ -14,7 +14,7 @@ const HeaderArray = [
   },
   {
     name: "Hardware",
-    path: "/hardware",
+    path: "/",
     subMenu: [
       { name: "Printers", path: "/hardware/printers" },
       { name: "Scanners", path: "/hardware/scanners" },
@@ -24,7 +24,7 @@ const HeaderArray = [
   },
   {
     name: "BRS Hardware",
-    path: "/brs-hardware",
+    path: "/",
     subMenu: [
       { name: "Baggage Tracking", path: "/brs-hardware/tracking" },
       { name: "RFID Readers", path: "/brs-hardware/rfid" },
@@ -32,7 +32,7 @@ const HeaderArray = [
   },
   {
     name: "Company A - Z",
-    path: "/company-a-z",
+    path: "/",
     subMenu: [
       { name: "Our History", path: "/company-a-z/history" },
       { name: "Leadership", path: "/company-a-z/leadership" },
@@ -42,7 +42,7 @@ const HeaderArray = [
   },
   // Ye last 4 items header mai show honge agar Navbar sahi implement ho
   { name: "Events", path: "/events" },
-  { name: "Mobile Apps", path: "/mobile-apps" },
+  { name: "Mobile Apps", path: "/mobileapps" },
   { name: "APIs", path: "/api" },
   { name: "Contact Us", path: "/contact" },
 ];

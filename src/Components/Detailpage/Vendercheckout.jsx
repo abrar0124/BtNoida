@@ -46,11 +46,17 @@ const VendorTable = () => {
       setIsAscending(true);
     }
   };
+  // const sortedVendors = [...vendors].sort((a, b) => {
+  //   if (sortBy) {
+  //     return isAscending
+  //       ? a[sortBy].toString().localeCompare(b[sortBy].toString())
+  //       : b[sortBy].toString().localeCompare(a[sortBy].toString());
+  //   }
+  // });
+
   const sortedVendors = [...vendors].sort((a, b) => {
     if (sortBy) {
-      return isAscending
-        ? a[sortBy].toString().localeCompare(b[sortBy].toString())
-        : b[sortBy].toString().localeCompare(a[sortBy].toString());
+      return isAscending ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
     }
   });
 
@@ -76,7 +82,6 @@ const VendorTable = () => {
             </InputGroup.Text>
           </InputGroup>
         </div>
-
         <Form.Select
           className="w-25 border-0 fs-5 p-3"
           value={countryname}
@@ -99,7 +104,6 @@ const VendorTable = () => {
           ))}
         </Form.Select>
       </div>
-
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -127,7 +131,8 @@ const VendorTable = () => {
               onClick={() => handleSort("name")}
               style={{ cursor: "pointer" }}
             >
-              <img
+              Name
+              {/* <img
                 src={
                   isAscending ? "/Images/logo512.png" : "/Images/down-arrow.png"
                 }
@@ -136,13 +141,14 @@ const VendorTable = () => {
                   marginBottom: "10px",
                   marginLeft: "10px",
                 }}
-              />
+              /> */}
             </th>
             <th
               onClick={() => handleSort("continent")}
               style={{ cursor: "pointer" }}
             >
-              <img
+              Continent
+              {/* <img
                 src={
                   isAscending ? "/Images/logo512.png" : "/Images/down-arrow.png"
                 }
@@ -151,7 +157,7 @@ const VendorTable = () => {
                   marginBottom: "10px",
                   marginLeft: "10px",
                 }}
-              />
+              /> */}
             </th>
             <th>Country</th>
             <th>Free Trial</th>
@@ -283,5 +289,4 @@ const VendorTable = () => {
     </div>
   );
 };
-
 export default VendorTable;
