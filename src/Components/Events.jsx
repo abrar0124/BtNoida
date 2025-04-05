@@ -152,26 +152,33 @@ const Events = () => {
                   {showMonthHeading && (
                     <p className="fw-medium m-4 fs-3 me-5">{p.month}</p>
                   )}
-                  <Card className="mb-3 p-3">
-                    <Row className="g-0">
-                      <Col md={2}>
-                        <Card.Img src={p.image} />
-                      </Col>
-                      <Col md={8}>
-                        <Card.Body>
-                          <Card.Title>{p.title}</Card.Title>
-                          <Card.Text>{p.description}</Card.Text>
-                          <p className="text-danger">{p.Days}</p>
-                          <Link
-                            className="text-decoration-none text-dark"
-                            style={{ marginLeft: "78%" }}
-                          >
-                            Details
-                          </Link>
-                        </Card.Body>
-                      </Col>
-                    </Row>
-                  </Card>
+                  <Link
+                    to={`/Eventsdetail/${p.id}`}
+                    className="text-decoration-none text-dark"
+                    style={{ marginLeft: "78%" }}
+                  >
+                    <Card className="mb-3 p-3">
+                      <Row className="g-0">
+                        <Col md={2}>
+                          <Card.Img src={p.image} />
+                        </Col>
+                        <Col md={8}>
+                          <Card.Body>
+                            <Card.Title>{p.title}</Card.Title>
+                            <Card.Text>{p.description}</Card.Text>
+                            <p className="text-danger">{p.Days}</p>
+                            <Link
+                              to={`/Eventsdetail/${p.id}`}
+                              className="text-decoration-none text-dark"
+                              style={{ marginLeft: "78%" }}
+                            >
+                              Details
+                            </Link>
+                          </Card.Body>
+                        </Col>
+                      </Row>
+                    </Card>
+                  </Link>
                 </div>
               );
             })
