@@ -41,7 +41,7 @@ const Events = () => {
         e.catagory === selectcatagory)
   );
   return (
-    <Container className="p-4" style={{ marginTop: "10%" }}>
+    <Container className="p-4" style={{ marginTop: "5%" }}>
       <Row>
         {/* Filters Section */}
         <Col md={4}>
@@ -133,9 +133,7 @@ const Events = () => {
             </Form.Group>
           </Form>
         </Col>
-
-        {/* Events Section */}
-        <Col md={8}>
+        <Col md={8} style={{ maxHeight: "430px", overflow: "auto" }}>
           <InputGroup className="mb-3">
             <Form.Control
               placeholder="Search"
@@ -143,7 +141,6 @@ const Events = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </InputGroup>
-
           {FilteredEvents.length === 0 ? (
             <p>No events found.</p>
           ) : (
@@ -158,10 +155,7 @@ const Events = () => {
                   <Card className="mb-3 p-3">
                     <Row className="g-0">
                       <Col md={2}>
-                        <Card.Img
-                          src={p.image}
-                          style={{ height: "px", width: "140px" }}
-                        />
+                        <Card.Img src={p.image} />
                       </Col>
                       <Col md={8}>
                         <Card.Body>
@@ -176,10 +170,6 @@ const Events = () => {
                           </Link>
                         </Card.Body>
                       </Col>
-                      <Col
-                        md={2}
-                        className="text-center d-flex flex-column justify-content-center"
-                      ></Col>
                     </Row>
                   </Card>
                 </div>
