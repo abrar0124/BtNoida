@@ -35,6 +35,7 @@ const VendorTable = () => {
       setShow(false);
     }
   };
+
   const countriesname = vendors.map((v) => v.name);
   const continentsname = vendors.map((v) => v.continent);
 
@@ -53,17 +54,38 @@ const VendorTable = () => {
   //       : b[sortBy].toString().localeCompare(a[sortBy].toString());
   //   }
   // });
-
-  const sortedVendors = [...vendors].sort((a, b) => {
-    if (sortBy) {
-      return isAscending ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
-    }
+  const filteredVendors = vendors.filter((v) => {
+    const searchLower = search.toLowerCase();
+    return (
+      v.name.toLowerCase().includes(searchLower) ||
+      v.continent.toLowerCase().includes(searchLower)
+    );
   });
+
+  const sortedVendors = [...filteredVendors].sort((a, b) => {
+    if (sortBy) {
+      if (typeof a[sortBy] === "string") {
+        return isAscending
+          ? a[sortBy].localeCompare(b[sortBy])
+          : b[sortBy].localeCompare(a[sortBy]);
+      } else {
+        return isAscending ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+      }
+    }
+    return 0; // default if no sorting applied
+  });
+
+  // const sortedVendors = [...vendors].sort((a, b) => {
+  //   if (sortBy) {
+  //     return isAscending ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+  //   }
+
+  // });
 
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between flex-wrap">
-        <Button className="btn btn-primary p-3" onClick={() => setShow(true)}>
+        <Button className=" m-4 p-3" onClick={() => setShow(true)}>
           Add Your Company
         </Button>
       </div>
@@ -71,7 +93,7 @@ const VendorTable = () => {
         <div style={{ flex: 1, maxWidth: "400px" }}>
           <InputGroup className="rounded shadow-sm">
             <Form.Control
-              className="p-3 border-0 bg-light fs-5"
+              className="p-3  border-0 bg-light fs-5"
               type="text"
               placeholder="Search"
               value={search}

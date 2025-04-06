@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
-import PrintersArray from "./PrintersArray";
+import { Mobilearray } from "../Mobilearray";
 
-const Printers = () => {
+const Mobiledata = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     company: [],
@@ -28,7 +28,7 @@ const Printers = () => {
     setOpenFilters((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const filteredProducts = PrintersArray.filter(
+  const filteredProducts = Mobilearray.filter(
     (product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (filters.company.length > 0
@@ -45,8 +45,9 @@ const Printers = () => {
       {/* Sidebar Filters */}
 
       <div className="w-25 p-4 border-end">
-        <p className="fs-2">Mobile Application</p>
+        <p className="fs-2 border-bottom">Mobile Applications</p>
         <p className="fs-2 border-bottom">Filters</p>
+
         {/* Filter Sections */}
         {[
           { key: "company", label: "Company", options: ["Custom4U", "Epson"] },
@@ -103,14 +104,13 @@ const Printers = () => {
               <img src="/Images/search.png" alt="Search" height="18" />
             </InputGroup.Text>
           </InputGroup>
-          <Button variant="primary">Add Your Company</Button>
         </div>
 
         <div className="row">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product.id} className="col-md-4 mb-4">
-                <Card className="p-3 shadow-sm">
+              <div key={product.id} className="col-md-3 mb-4">
+                <Card className="p-3 shadow-sm " style={{ width: "90%" }}>
                   <div className="text-primary text-center fw-bold mb-2 cursor-pointer">
                     ➕ To Compare
                   </div>
@@ -127,7 +127,8 @@ const Printers = () => {
                     variant="top"
                     src={product.image}
                     alt={product.name}
-                    className="w-100 h-50 object-contain"
+                    className=" h-50 object-contain"
+                    style={{ width: "100%" }}
                   />
                 </Card>
               </div>
@@ -141,4 +142,4 @@ const Printers = () => {
   );
 };
 
-export default Printers;
+export default Mobiledata;
