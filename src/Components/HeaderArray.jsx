@@ -45,6 +45,7 @@ const HeaderArray = [
   { name: "Mobile Apps", path: "/mobileapps" },
   { name: "APIs", path: "/api" },
   { name: "Contact Us", path: "/contact" },
+  { name: "Login Api", path: "/Loginapi" },
 ];
 
 export default HeaderArray;

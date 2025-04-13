@@ -7,6 +7,7 @@ import EventDetail from "./Pages/EventDetail";
 import Mobileapppage from "./Pages/Mobileapppage";
 import Apipage from "./Pages/Apipage";
 import Contactpage from "./Pages/Contactpage";
+import Loginapi from "./Pages/Loginapi";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/mobileapps" element={<Mobileapppage />} />
           <Route path="/api" element={<Apipage />} />
           <Route path="/contact" element={<Contactpage />} />
+          <Route path="/Loginapi" element={<Loginapi />} />
         </Routes>
       </BrowserRouter>
     </>
