@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { Mobilearray } from "../Mobilearray";
+import Text from "../Text";
 
 const Mobiledata = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,8 +46,12 @@ const Mobiledata = () => {
       {/* Sidebar Filters */}
 
       <div className="w-25 p-4 border-end">
-        <p className="fs-2 border-bottom">Mobile Applications</p>
-        <p className="fs-2 border-bottom">Filters</p>
+        <Text
+          type={"p"}
+          content={"Mobile Applications"}
+          className="fs-2 border-bottom"
+        />
+        <Text type={"p"} content={"Filters"} className="fs-2 border-bottom" />
 
         {/* Filter Sections */}
         {[
@@ -111,9 +116,11 @@ const Mobiledata = () => {
             filteredProducts.map((product) => (
               <div key={product.id} className="col-md-3 mb-4">
                 <Card className="p-3 shadow-sm " style={{ width: "90%" }}>
-                  <div className="text-primary text-center fw-bold mb-2 cursor-pointer">
-                    ➕ To Compare
-                  </div>
+                  <Text
+                    type={"div"}
+                    content={<>➕ To Compare</>}
+                    className="text-primary text-center fw-bold mb-2 cursor-pointer"
+                  />
                   <Card.Body>
                     <Card.Img
                       src="/Images/c.png"
@@ -134,7 +141,7 @@ const Mobiledata = () => {
               </div>
             ))
           ) : (
-            <p className="text-center w-100">No products found.</p>
+            <Text type={"p"} content={"No products found."} />
           )}
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import vendors from "./FlagArray";
+import Text from "../Text";
 
 const VendorList = ({ onSelectionChange }) => {
   const [selectedVendors, setSelectedVendors] = useState([]);
@@ -33,7 +34,11 @@ const VendorList = ({ onSelectionChange }) => {
 
   return (
     <div className="bg-dark text-white p-3">
-      <h2 className="text-center py-3">Select DCS Vendors</h2>
+      <Text
+        type={"h2"}
+        content={"Select DCS Vendors"}
+        className="text-center py-3"
+      />
       <Row className="w-100">
         {vendors.map((vendor, index) => (
           <Col key={index} md={2} className="mb-3">

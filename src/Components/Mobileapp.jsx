@@ -1,6 +1,7 @@
 import { Breadcrumb, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Mobiledata from "./Selfcomponents/Mobiledata";
+import Text from "./Text";
 
 function Mobileapp() {
   return (
@@ -15,20 +16,35 @@ function Mobileapp() {
             Mobile Application
           </Breadcrumb.Item>
         </Breadcrumb>
-        <p className="fs-1 fw-medium my-4">Mobile Applications</p>
-        <p className="fs-5  lh-lg">
-          Mobile applications have improved passenger experience dramatically
+        <Text
+          type={"p"}
+          content={"Mobile Applications"}
+          className="fs-1 fw-medium my-4"
+        />
+
+        <Text
+          type={"p"}
+          content={`Mobile applications have improved passenger experience dramatically
           over recent years. Travellers that are willing to handle their travel
           cycle at their convenience can check-in, get boarding passes, and
           choose desired seats by using Mobile applications. Meanwhile, airline
           and airport authorities/agents use mobile technology to streamline
           their processes, reduce costs and enhance efficiencies. On this page,
           DCS.aero provides some new, innovative, and robust mobile applications
-          that are useful for airlines, and ground handlers.
-        </p>
+          that are useful for airlines, and ground handlers.`}
+          className="fs-5  lh-lg"
+        />
         <div className="d-flex gap-2">
-          <Link className="p-3 fs-5 rounded custom-button">See more info</Link>
-          <Link className="p-3 fs-5 rounded custom-buttons">See FAQ</Link>
+          <Text
+            type={"Link"}
+            content={"See more info"}
+            className="p-3 fs-5 rounded custom-button"
+          />
+          <Text
+            type={"Link"}
+            content={"See FAQ"}
+            className="p-3 fs-5 rounded custom-buttons"
+          />
         </div>
       </Container>
       <Mobiledata />

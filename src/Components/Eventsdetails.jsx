@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import EventsArray from "./Selfcomponents/EventsArray";
+import Text from "./Text";
 
 const Eventsdetails = () => {
   const { id } = useParams();
@@ -14,10 +15,15 @@ const Eventsdetails = () => {
       {/* Countdown */}
       <Row className="mb-4">
         <Col>
-          <h5>
-            <strong>Event Start ➝</strong> 00 : 00 : 00 : 00{" "}
-            <small className="text-muted">Days Hours Minutes Seconds</small>
-          </h5>
+          <Text
+            type="h5"
+            content={
+              <>
+                <strong>Event Start ➝</strong> 00 : 00 : 00 : 00
+                <small className="text-muted">Days Hours Minutes Seconds</small>
+              </>
+            }
+          />
         </Col>
       </Row>
 
@@ -29,16 +35,19 @@ const Eventsdetails = () => {
             <Card.Body>
               {/* Dates */}
               <div className="d-flex align-items-center mb-3">
-                <i className="bi bi-calendar3 me-2"></i>
-                <div>
-                  <strong>Thu</strong> <br />
-                  03 April ➝ <strong>Fri</strong> <br /> 04 April
-                </div>
+                <Text
+                  type={"p"}
+                  content={
+                    <>
+                      <strong>Thu</strong> <br />
+                      03 April ➝ <strong>Fri</strong> <br /> 04 April
+                    </>
+                  }
+                />
               </div>
 
               {/* Location */}
               <div className="d-flex align-items-center mb-3">
-                <i className="bi bi-geo-alt me-2"></i>
                 <div>
                   <strong>
                     {event.country}, {event.continent}
@@ -49,8 +58,11 @@ const Eventsdetails = () => {
               {/* Category & Website */}
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <span>
-                  <i className="bi bi-folder me-1"></i>
-                  <span className="text-success">Summit</span>
+                  <Text
+                    type={"span"}
+                    content={"Summit"}
+                    className="text-success"
+                  />
                 </span>
                 <Button variant="primary" size="sm">
                   Website
@@ -85,21 +97,40 @@ const Eventsdetails = () => {
             </div>
           </div>
           <p>{event.description}</p>
-          <p>
-            North America’s aviation sector faces disruption with airline
-            mergers, bankruptcies, capacity issues, and booming travel,
-            potentially reaching record levels in {event.year}.
-          </p>
-          <p>
-            Political changes in the US may drive significant shifts in
-            regulations, funding, environmental policies, and trade, impacting
-            domestic and international airlines.
-          </p>
-          <p>
-            The summit offers expert insights, high-level panels, and networking
-            opportunities, serving as a pivotal event for shaping the future of
-            aviation in the Americas.
-          </p>
+
+          <Text
+            type={"p"}
+            content={
+              <>
+                North America’s aviation sector faces disruption with airline
+                mergers, bankruptcies, capacity issues, and booming travel,
+                potentially reaching record levels in{" "}
+                <strong>{event.year}</strong>.
+              </>
+            }
+          />
+
+          <Text
+            type={"p"}
+            content={
+              <>
+                Political changes in the US may drive significant shifts in
+                regulations, funding, environmental policies, and trade,
+                impacting domestic and international airlines.
+              </>
+            }
+          />
+
+          <Text
+            type={"p"}
+            content={
+              <>
+                The summit offers expert insights, high-level panels, and
+                networking opportunities, serving as a pivotal event for shaping
+                the future of aviation in the Americas.
+              </>
+            }
+          />
         </Col>
       </Row>
     </Container>

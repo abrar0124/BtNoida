@@ -15,6 +15,7 @@ import Mobilebarcode from "../Selfcomponents/Mobilebarcode";
 import Wearable from "../Selfcomponents/Werable";
 import Egate from "../Selfcomponents/Egate";
 import { useEffect } from "react";
+import Text from "../Text";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -56,10 +57,16 @@ function ProductDetail() {
             <p className="lead">{product.description}</p>
             <p>{product.extraInfo}</p>
             <div className="d-flex gap-2">
-              <Link className="p-3 fs-5 rounded custom-button">
-                See more info
-              </Link>
-              <Link className="p-3 fs-5 rounded custom-buttons">See FAQ</Link>
+              <Text
+                type={"Link"}
+                content={"See more info"}
+                className="p-3 fs-5 rounded custom-button"
+              />
+              <Text
+                type={"Link"}
+                content={"See FAQ"}
+                className="p-3 fs-5 rounded custom-buttons"
+              />
             </div>
           </Col>
         </Row>

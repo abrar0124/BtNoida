@@ -11,6 +11,8 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Text from "./Text";
+
 const Events = () => {
   const [searchQuery, setSearchQuery] = useState(null);
   const [selectyear, setselectyear] = useState(null);
@@ -45,7 +47,7 @@ const Events = () => {
       <Row>
         {/* Filters Section */}
         <Col md={4}>
-          <h4 className="fs-1 fw-normal">Events</h4>
+          <Text type={"h4"} content={"Events"} className="fs-1 fw-normal" />
           <Form>
             <div className="d-flex gap-2">
               <div>
@@ -142,7 +144,7 @@ const Events = () => {
             />
           </InputGroup>
           {FilteredEvents.length === 0 ? (
-            <p>No events found.</p>
+            <Text type={"p"} content={"No events found."} />
           ) : (
             FilteredEvents.map((p, index) => {
               const showMonthHeading = p.month !== lastMonth;

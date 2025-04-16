@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import Text from "../Text";
 
 const CookieConsent = () => {
   const [show, setShow] = useState(false);
@@ -26,14 +27,19 @@ const CookieConsent = () => {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
       }}
     >
-      <p className="m-0 fs-6">
-        This website uses cookies to improve your experience. Click{" "}
-        <strong>Accept</strong> to allow us to use cookies.{" "}
-        <a href="#" className="text-white text-decoration-underline">
-          settings
-        </a>
-        .
-      </p>
+      <Text
+        type={"p"}
+        content={`
+        This website uses cookies to improve your experience. Click
+      Accept to allow us to use cookies`}
+        className="m-0 fs-6"
+      />
+
+      <Text
+        type={"a"}
+        content={"settings"}
+        className="text-white text-decoration-underline"
+      />
       <div>
         <Button
           className="m-1 "

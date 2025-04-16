@@ -3,7 +3,7 @@ const EventsArray = [
     id: 1,
     title: "CAPA Airline Leader Summit – Americas 2019",
     description:
-      "The CAPA Airline Leader Summit – Americas 2025, held April ...",
+      "The CAPA Airline Leader Summit – Americas 2019, held April ...",
     year: "2019",
     month: "April",
     country: "Italy",
@@ -16,10 +16,10 @@ const EventsArray = [
   },
   {
     id: 2,
-    title: "Passenger Terminal Expo 2020",
+    title: "Passenger Terminal Expo 2025",
     description:
       "The world’s leading international airport conference and exhibition, and host ...",
-    year: "2020",
+    year: "2025",
     month: "April",
     country: "Africa",
     continent: "Asia",

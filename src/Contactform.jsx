@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import Text from "./Components/Text";
 
 const Contactform = () => {
   return (
@@ -7,13 +8,20 @@ const Contactform = () => {
       <Row>
         {/* Left Side Text */}
         <Col md={6} className="mb-4">
-          <h1>Contact us</h1>
-          <p className="fs-5">
-            Fill this form to get in touch with our experts, discuss your
-            issues, and have them solved by addressing your challenges. All
-            fields marked with an <span className="text-danger">*</span> are
-            required.
-          </p>
+          <Text type={"h1"} content={"Contact us"} />
+
+          <Text
+            type={"p"}
+            content={
+              <>
+                Fill this form to get in touch with our experts, discuss your
+                issues, and have them solved by addressing your challenges. All
+                fields marked with an <span className="text-danger">*</span> are
+                required.
+              </>
+            }
+            className="fs-5"
+          />
         </Col>
         {/* Right Side Form */}
         <Col md={6}>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import Text from "../Text";
 
 const DCSVendors = ({ selectedVendors }) => {
   return (
@@ -14,7 +15,12 @@ const DCSVendors = ({ selectedVendors }) => {
       }}
     >
       {/* Selected Vendors Heading Left-aligned */}
-      <p className=" fs-2 text-start w-100">My favourite countries</p>
+
+      <Text
+        type={"p"}
+        content={"My favourite countries"}
+        className=" fs-2 text-start w-100"
+      />
       <Row className="w-100 d-flex flex-column">
         {selectedVendors.length > 0 ? (
           selectedVendors.map((vendor, index) => (
@@ -47,7 +53,11 @@ const DCSVendors = ({ selectedVendors }) => {
             </Col>
           ))
         ) : (
-          <p className="text-start w-100">No vendors selected</p>
+          <Text
+            type={"p"}
+            content={"No vendors selected"}
+            className="text-start w-100"
+          />
         )}
       </Row>
     </div>
