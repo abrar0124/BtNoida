@@ -1,63 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
 import Footer2 from "../HomeData/Footer2";
 import Text from "../Text";
+import {
+  login,
+  logout,
+  restoreSession,
+  setMessage,
+  setPassword,
+  setUsername,
+} from "../Authslice/Authslice";
 
 const Login = () => {
-  // ✅ Default values set for testing
-  const [username, setUsername] = useState("mor_2314");
-  const [password, setPassword] = useState("83r5^_");
-  const [message, setMessage] = useState("");
-  const [userData, setUserData] = useState(null); // Local state for storing the response
+  const dispatch = useDispatch();
 
-  // ✅ Retrieve stored data from localStorage when the component mounts
+  const { username, password, token, message } = useSelector(
+    (state) => state.auth
+  );
+
   useEffect(() => {
-    const storedLoginData = JSON.parse(localStorage.getItem("loginData"));
-    if (storedLoginData) {
-      setUserData(storedLoginData); // Parse and set the login data from localStorage
-      setMessage("✅ Logged in from previous session!");
+    const stored = JSON.parse(localStorage.getItem("loginData"));
+    if (stored) {
+      dispatch(restoreSession(stored));
     }
   }, []);
 
   const handleLogin = async () => {
     try {
-      const credentials = {
-        username: username,
-        password: password,
-      };
-
-      const response = await axios.post(
+      const credentials = { username, password };
+      const res = await axios.post(
         "https://fakestoreapi.com/auth/login",
         credentials
       );
 
-      setMessage("✅ Login Successful!");
-
-      localStorage.setItem("loginData", JSON.stringify(response.data));
-      setUserData(response.data); // Save response in local state
-      // Save token and entire response in localStorage
-
-      console.log("Login Success:", response.data);
+      localStorage.setItem("loginData", JSON.stringify(res.data));
+      dispatch(login(res.data));
+      console.log(res.data);
     } catch {
-      setMessage("❌ Login Failed! Check username/password.");
+      dispatch(setMessage("❌ Login Failed! Check username/password."));
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginData");
+    dispatch(logout());
   };
 
   return (
     <>
-      <div
-        style={{
-          marginTop: "10%",
-          marginLeft: "30%",
-          padding: "20px",
-        }}
-      >
+      <div style={{ marginTop: "10%", marginLeft: "30%", padding: "20px" }}>
         <Text type={"h2"} content={"Login"} />
         <input
           type="text"
           placeholder="Enter Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => dispatch(setUsername(e.target.value))}
           style={{ width: "60%", padding: "10px", marginBottom: "10px" }}
         />
         <br />
@@ -65,7 +64,7 @@ const Login = () => {
           type="password"
           placeholder="Enter Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => dispatch(setPassword(e.target.value))}
           style={{ width: "60%", padding: "10px", marginBottom: "10px" }}
         />
         <br />
@@ -75,7 +74,7 @@ const Login = () => {
             padding: "10px 20px",
             width: "60%",
             fontSize: "16px",
-            backgroundColor: "red",
+            backgroundColor: "green",
             color: "white",
             border: "none",
             fontWeight: "bold",
@@ -87,45 +86,55 @@ const Login = () => {
         <Text
           type={"p"}
           content={
-            <>
-              <p
-                style={{
-                  marginTop: "15px",
-                  color: message.includes("Success") ? "green" : "red",
-                }}
-              >
-                {message}
-              </p>
-            </>
+            <p
+              style={{
+                marginTop: "15px",
+                color: message.includes("Success") ? "green" : "red",
+              }}
+            >
+              {message}
+            </p>
           }
         />
 
-        {/* Display the response data in UI (if available) */}
-        {userData && (
+        {token && (
           <Text
             type={"p"}
             content={
-              <>
-                <p
-                  style={{
-                    padding: "10px",
-                    borderRadius: "5px",
-                    marginBottom: "20px",
-                    fontSize: "14px",
-                    wordBreak: "break-word",
-                    width: "60%",
-                  }}
-                >
-                  <strong style={{ color: "green", fontSize: "16px" }}>
-                    Api,s Response:
-                  </strong>
-
-                  {userData.token}
-                </p>
-              </>
+              <p
+                style={{
+                  padding: "10px",
+                  borderRadius: "5px",
+                  marginBottom: "20px",
+                  fontSize: "14px",
+                  wordBreak: "break-word",
+                  width: "60%",
+                }}
+              >
+                <strong style={{ color: "green", fontSize: "16px" }}>
+                  API Token:
+                </strong>{" "}
+                {token}
+              </p>
             }
           />
         )}
+
+        <button
+          onClick={handleLogout}
+          style={{
+            marginTop: "10px",
+            padding: "10px 20px",
+            width: "60%",
+            fontSize: "16px",
+            backgroundColor: "red",
+            color: "white",
+            border: "none",
+            fontWeight: "bold",
+          }}
+        >
+          Logout
+        </button>
       </div>
       <Footer2 />
     </>
