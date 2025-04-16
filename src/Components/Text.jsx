@@ -30,6 +30,8 @@ function Text({ type, content, className = "" }) {
         <div className={className}>{content}</div>
       ) : type == "Button" ? (
         <Button className={className}>{content}</Button>
+      ) : type == "ul" ? (
+        <ul>{content}</ul>
       ) : null}
     </>
   );
