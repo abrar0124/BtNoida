@@ -21,23 +21,22 @@ const Login = () => {
   );
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("loginData"));
-    if (stored) {
-      dispatch(restoreSession(stored));
+    const storeddata = JSON.parse(localStorage.getItem("loginData"));
+    if (storeddata) {
+      dispatch(restoreSession(storeddata));
     }
   }, []);
 
   const handleLogin = async () => {
     try {
       const credentials = { username, password };
-      const res = await axios.post(
+      const response = await axios.post(
         "https://fakestoreapi.com/auth/login",
         credentials
       );
-
-      localStorage.setItem("loginData", JSON.stringify(res.data));
-      dispatch(login(res.data));
-      console.log(res.data);
+      dispatch(login(response.data));
+      localStorage.setItem("loginData", JSON.stringify(response.data));
+      console.log(response.data);
     } catch {
       dispatch(setMessage("❌ Login Failed! Check username/password."));
     }

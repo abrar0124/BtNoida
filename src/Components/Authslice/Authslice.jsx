@@ -17,10 +17,12 @@ const authSlice = createSlice({
     setPassword: (state, action) => {
       state.password = action.payload;
     },
+
     login: (state, action) => {
       state.token = action.payload.token;
       state.message = "✅ Login Successful!";
     },
+
     logout: (state) => {
       state.token = null;
       state.username = "";
