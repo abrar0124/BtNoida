@@ -8,6 +8,7 @@ import Mobileapppage from "./Pages/Mobileapppage";
 import Apipage from "./Pages/Apipage";
 import Contactpage from "./Pages/Contactpage";
 import Loginapi from "./Pages/Loginapi";
+import HomeData from "./Components/HomeData/HomeData";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/bgpic" element={<HomeData />} />
+          <Route path="/login" element={<Loginapi />} />
           <Route path="/details/:id" element={<ProductDetailpage />} />
           <Route path="/events" element={<Eventspage />} />
           <Route path="/Eventsdetail/:id" element={<EventDetail />} />

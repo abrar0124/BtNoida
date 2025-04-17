@@ -3,7 +3,19 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Header from "../Header";
 import "./customscss.scss";
 import Text from "../Text";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Authslice/Authslice";
+import { useNavigate } from "react-router-dom";
 const Bgpic = () => {
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.removeItem("loginData");
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <>
       <Header />
@@ -45,6 +57,34 @@ const Bgpic = () => {
                     content={"Discover Venders"}
                     className="p-3  rounded  custom-button"
                   />
+                  <div
+                    className="mt-5 bg-dark p-2"
+                    style={{
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    <h2 className=" text-warning" style={{ fontSize: "20px" }}>
+                      {" "}
+                      Api response:
+                    </h2>
+                    <p style={{ fontSize: "15px" }}>{token}</p>
+                  </div>
+
+                  <button
+                    onClick={handleLogout}
+                    style={{
+                      marginTop: "10px",
+                      padding: "10px 20px",
+                      width: "60%",
+                      fontSize: "16px",
+                      backgroundColor: "red",
+                      color: "white",
+                      border: "none",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Logout
+                  </button>
                 </Col>
               </Row>
             </Container>

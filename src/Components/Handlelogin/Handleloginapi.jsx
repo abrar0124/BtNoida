@@ -4,21 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Footer2 from "../HomeData/Footer2";
 import Text from "../Text";
+
 import {
   login,
-  logout,
   restoreSession,
   setMessage,
   setPassword,
   setUsername,
 } from "../Authslice/Authslice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
-  const { username, password, token, message } = useSelector(
-    (state) => state.auth
-  );
+  const { username, password, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const storeddata = JSON.parse(localStorage.getItem("loginData"));
@@ -37,14 +38,10 @@ const Login = () => {
       dispatch(login(response.data));
       localStorage.setItem("loginData", JSON.stringify(response.data));
       console.log(response.data);
+      navigate("/bgpic");
     } catch {
       dispatch(setMessage("❌ Login Failed! Check username/password."));
     }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("loginData");
-    dispatch(logout());
   };
 
   return (
@@ -95,45 +92,6 @@ const Login = () => {
             </p>
           }
         />
-
-        {token && (
-          <Text
-            type={"p"}
-            content={
-              <p
-                style={{
-                  padding: "10px",
-                  borderRadius: "5px",
-                  marginBottom: "20px",
-                  fontSize: "14px",
-                  wordBreak: "break-word",
-                  width: "60%",
-                }}
-              >
-                <strong style={{ color: "green", fontSize: "16px" }}>
-                  API Token:
-                </strong>{" "}
-                {token}
-              </p>
-            }
-          />
-        )}
-
-        <button
-          onClick={handleLogout}
-          style={{
-            marginTop: "10px",
-            padding: "10px 20px",
-            width: "60%",
-            fontSize: "16px",
-            backgroundColor: "red",
-            color: "white",
-            border: "none",
-            fontWeight: "bold",
-          }}
-        >
-          Logout
-        </button>
       </div>
       <Footer2 />
     </>
