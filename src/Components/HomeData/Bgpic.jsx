@@ -58,7 +58,7 @@ const Bgpic = () => {
                     className="p-3  rounded  custom-button"
                   />
                   <div
-                    className="mt-5 bg-dark p-2"
+                    className="mt-5  p-2"
                     style={{
                       wordBreak: "break-word",
                     }}
@@ -69,7 +69,6 @@ const Bgpic = () => {
                     </h2>
                     <p style={{ fontSize: "15px" }}>{token}</p>
                   </div>
-
                   <button
                     onClick={handleLogout}
                     style={{
