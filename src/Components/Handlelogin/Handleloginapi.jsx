@@ -16,9 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-
   const { username, password, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -27,6 +25,22 @@ const Login = () => {
       dispatch(restoreSession(storeddata));
     }
   }, []);
+
+  // const handleLogin = async () => {
+  //   try {
+  //     const credentials = { username, password };
+  //     const response = await axios.post(
+  //       "https://fakestoreapi.com/auth/login",
+  //       credentials
+  //     );
+  //     dispatch(login(response.data));
+  //     localStorage.setItem("loginData", JSON.stringify(response.data));
+  //     console.log(response.data);
+  //     navigate("/bgpic");
+  //   } catch {
+  //     dispatch(setMessage("❌ Login Failed! Check username/password."));
+  //   }
+  // };
 
   const handleLogin = async () => {
     try {
@@ -40,7 +54,7 @@ const Login = () => {
       console.log(response.data);
       navigate("/bgpic");
     } catch {
-      dispatch(setMessage("❌ Login Failed! Check username/password."));
+      dispatch(setMessage("login failed"));
     }
   };
 

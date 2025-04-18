@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Header from "../Header";
 import "./customscss.scss";
 import Text from "../Text";
@@ -10,6 +10,7 @@ const Bgpic = () => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const handleLogout = () => {
     localStorage.removeItem("loginData");
     dispatch(logout());
@@ -57,18 +58,29 @@ const Bgpic = () => {
                     content={"Discover Venders"}
                     className="p-3  rounded  custom-button"
                   />
-                  <div
-                    className="mt-5  p-2"
-                    style={{
-                      wordBreak: "break-word",
-                    }}
-                  >
-                    <h2 className=" text-warning" style={{ fontSize: "20px" }}>
-                      {" "}
-                      Api response:
-                    </h2>
-                    <p style={{ fontSize: "15px" }}>{token}</p>
-                  </div>
+
+                  <Text
+                    type={"h2"}
+                    content={
+                      <>
+                        <div
+                          className="mt-5  p-2"
+                          style={{
+                            wordBreak: "break-word",
+                          }}
+                        >
+                          <h2
+                            className=" text-warning"
+                            style={{ fontSize: "20px" }}
+                          >
+                            {" "}
+                            Api response:
+                          </h2>
+                          <p style={{ fontSize: "15px" }}>{token}</p>
+                        </div>
+                      </>
+                    }
+                  />
                   <button
                     onClick={handleLogout}
                     style={{
