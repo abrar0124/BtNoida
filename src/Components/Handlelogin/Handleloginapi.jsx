@@ -26,22 +26,6 @@ const Login = () => {
     }
   }, []);
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const credentials = { username, password };
-  //     const response = await axios.post(
-  //       "https://fakestoreapi.com/auth/login",
-  //       credentials
-  //     );
-  //     dispatch(login(response.data));
-  //     localStorage.setItem("loginData", JSON.stringify(response.data));
-  //     console.log(response.data);
-  //     navigate("/bgpic");
-  //   } catch {
-  //     dispatch(setMessage("❌ Login Failed! Check username/password."));
-  //   }
-  // };
-
   const handleLogin = async () => {
     try {
       const credentials = { username, password };
