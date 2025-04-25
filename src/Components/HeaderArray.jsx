@@ -2,8 +2,8 @@ const HeaderArray = [
   { name: "Home", path: "/" },
 
   {
-    name: "DCS Solutions",
-    path: "/",
+    name: "Products Crud",
+    path: "/Products crud",
     subMenu: [
       { name: "Departure Control System", path: "/dcs-solutions/departure" },
       { name: "Backup DCS", path: "/dcs-solutions/backup" },
