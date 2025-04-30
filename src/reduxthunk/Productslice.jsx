@@ -19,15 +19,20 @@ const productSlice = createSlice({
     builder
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
+        console.log("Fetching products... Pending state.");
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.items = action.payload;
         state.loading = false;
+        console.log(
+          "Products fetched successfully! Fulfilled state:",
+          action.payload
+        );
       })
-
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
         state.error = "API Error";
+        console.log("Error occurred while fetching products. Rejected state.");
       });
   },
 });

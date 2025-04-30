@@ -10,7 +10,6 @@ import Contactpage from "./Pages/Contactpage";
 import Loginapi from "./Pages/Loginapi";
 import HomeData from "./Components/HomeData/HomeData";
 import ProductsCruds from "./Pages/ProductsCruds";
-import { ProductProvider } from "./Components/Context/ProductContext";
 
 function App() {
   return (
@@ -18,15 +17,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/Products crud" element={<ProductsCruds />} /> */}
-          <Route
-            path="/Products crud"
-            element={
-              <ProductProvider>
-                <ProductsCruds />
-              </ProductProvider>
-            }
-          />
+          <Route path="/Products crud" element={<ProductsCruds />} />
+          <Route path="/Products crud" element={<ProductsCruds />} />
           <Route path="/bgpic" element={<HomeData />} />
           <Route path="/login" element={<Loginapi />} />
           <Route path="/details/:id" element={<ProductDetailpage />} />

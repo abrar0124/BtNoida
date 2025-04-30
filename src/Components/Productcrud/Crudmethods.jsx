@@ -1,4 +1,4 @@
-import { Container, Button, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import "./Productssass.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,7 +11,7 @@ const Crudmethods = () => {
 
   useEffect(() => {
     dispatch(fetchProducts()); // ✅ Thunk call
-  }, [dispatch]);
+  }, []);
 
   if (loading) return <p>Please wait...</p>;
 
