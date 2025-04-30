@@ -57,6 +57,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   // Update product (preserve rating.count)
+
   const handleUpdateProduct = async () => {
     const updatedProduct = {
       id: 1,
@@ -87,6 +88,7 @@ export const ProductProvider = ({ children }) => {
       console.error("Error updating product:", error);
     }
   };
+
   // *Delete product by ID*
   const handleDeleteProduct = async (id) => {
     try {
@@ -97,6 +99,7 @@ export const ProductProvider = ({ children }) => {
       console.error("Error deleting product:", error);
     }
   };
+
   return (
     <ProductContext.Provider
       value={{
