@@ -1,18 +1,17 @@
 import { Container, Button, Table } from "react-bootstrap";
 import "./Productssass.scss";
-import { ProductContext } from "../Context/ProductContext";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "../../reduxthunk/Productslice";
 
 const Crudmethods = () => {
-  const {
-    items,
-    singleProduct,
-    loading,
-    handleAddProduct,
-    handleGetSingleProduct,
-    handleUpdateProduct,
-    handleDeleteProduct, // <-- import delete
-  } = useContext(ProductContext);
+  const dispatch = useDispatch();
+
+  const { items, loading } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts()); // ✅ Thunk call
+  }, [dispatch]);
 
   if (loading) return <p>Please wait...</p>;
 
@@ -31,7 +30,6 @@ const Crudmethods = () => {
         Popular Products
       </h2>
 
-      {/* Product Table */}
       <Table striped bordered hover responsive>
         <thead>
           <tr>
@@ -41,7 +39,6 @@ const Crudmethods = () => {
             <th>Price ($)</th>
             <th>Category</th>
             <th>Rating Count</th>
-            <th>Actions</th> {/* new column */}
           </tr>
         </thead>
         <tbody>
@@ -63,80 +60,10 @@ const Crudmethods = () => {
               <td>{item.price}</td>
               <td>{item.category}</td>
               <td>{item.rating?.count}</td>
-              <td>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => handleDeleteProduct(item.id)}
-                >
-                  Delete
-                </Button>
-              </td>
             </tr>
           ))}
         </tbody>
       </Table>
-
-      {/* Single Product Table */}
-      {singleProduct && (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price ($)</th>
-              <th>Category</th>
-              <th>Rating Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{singleProduct.id}</td>
-              <td>
-                <img
-                  src={singleProduct.image}
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    objectFit: "contain",
-                  }}
-                  alt="product"
-                />
-              </td>
-              <td>{singleProduct.title}</td>
-              <td>{singleProduct.price}</td>
-              <td>{singleProduct.category}</td>
-              <td>{singleProduct.rating?.count}</td>
-            </tr>
-          </tbody>
-        </Table>
-      )}
-
-      {/* Action Buttons */}
-      <Button
-        variant="primary"
-        onClick={handleGetSingleProduct}
-        className="mb-4 me-2 p-3"
-      >
-        Get Single Product
-      </Button>
-
-      <Button
-        variant="success"
-        onClick={handleAddProduct}
-        className="mb-4 me-2 p-3"
-      >
-        Add New Product
-      </Button>
-
-      <Button
-        variant="warning"
-        onClick={handleUpdateProduct}
-        className="mb-4 p-3"
-      >
-        Update Product
-      </Button>
     </Container>
   );
 };
