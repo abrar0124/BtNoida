@@ -29,6 +29,7 @@ const productSlice = createSlice({
           action.payload
         );
       })
+
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
         state.error = "API Error";
