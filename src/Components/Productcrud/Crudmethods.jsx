@@ -67,5 +67,4 @@ const Crudmethods = () => {
     </Container>
   );
 };
-
 export default Crudmethods;
