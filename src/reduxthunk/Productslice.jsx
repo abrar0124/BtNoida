@@ -28,7 +28,7 @@ const productSlice = createSlice({
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
         state.error = "API Error";
-        console.log("error", state.error);
+        console.log("error:", state.error);
       });
   },
 });

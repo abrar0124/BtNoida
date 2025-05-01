@@ -2,7 +2,7 @@ import { Container, Table } from "react-bootstrap";
 import "./Productssass.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { addProduct, fetchProducts } from "../../reduxthunk/Productslice";
+import { fetchProducts } from "../../reduxthunk/Productslice";
 
 const Crudmethods = () => {
   const dispatch = useDispatch();
