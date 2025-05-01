@@ -50,7 +50,7 @@ const productSlice = createSlice({
 
       .addCase(addProduct.rejected, (state, action) => {
         state.error = "Error adding product";
-        console.error("Failed to add product:", action.error);
+        console.log("Failed to add product:", action.error);
       });
   },
 });
