@@ -15,6 +15,7 @@ const productSlice = createSlice({
     loading: false,
     error: null,
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -32,6 +33,7 @@ const productSlice = createSlice({
 
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
+
         state.error = "API Error";
         console.log("Error occurred while fetching products. Rejected state.");
       });
