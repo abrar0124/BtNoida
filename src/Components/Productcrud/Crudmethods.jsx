@@ -19,7 +19,7 @@ const Crudmethods = () => {
     <Container style={{ marginTop: "7%", paddingBottom: "30px" }}>
       <h2
         style={{
-          width: "180px",
+          width: "145px",
           textTransform: "capitalize",
           marginBottom: "20px",
           borderBottom: "3px solid red",
