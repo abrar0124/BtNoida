@@ -11,7 +11,7 @@ const Crudmethods = () => {
 
   useEffect(() => {
     dispatch(fetchProducts()); // ✅ Thunk call
-  }, [dispatch]);
+  }, []);
 
   // Inside Crudmethods component:
   const handleAdd = () => {
