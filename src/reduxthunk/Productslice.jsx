@@ -6,17 +6,6 @@ export const fetchProducts = createAsyncThunk("products/fetch", async () => {
   return response.data;
 });
 
-export const addProduct = createAsyncThunk(
-  "products/add",
-  async (newProduct) => {
-    const response = await axios.post(
-      "https://fakestoreapi.com/products",
-      newProduct
-    );
-    return { ...response.data, rating: { count: 340 } };
-  }
-);
-
 const productSlice = createSlice({
   name: "products",
   initialState: {
@@ -39,18 +28,7 @@ const productSlice = createSlice({
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
         state.error = "API Error";
-      })
-      .addCase(addProduct.fulfilled, (state, action) => {
-        state.items.push(action.payload);
-        console.log(
-          "Product added successfully. Updated products list:",
-          JSON.parse(JSON.stringify(state.items))
-        );
-      })
-
-      .addCase(addProduct.rejected, (state, action) => {
-        state.error = "Error adding product";
-        console.log("Failed to add product:", action.error);
+        console.log("error", state.error);
       });
   },
 });

@@ -13,18 +13,6 @@ const Crudmethods = () => {
     dispatch(fetchProducts()); // ✅ Thunk call
   }, []);
 
-  // Inside Crudmethods component:
-  const handleAdd = () => {
-    const newProduct = {
-      title: "New Product",
-      price: 20000,
-      category: "men's clothing",
-      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    };
-
-    dispatch(addProduct(newProduct)); // ✅ Redux Thunk se call
-  };
-
   if (loading) return <p>Please wait...</p>;
 
   return (
@@ -76,18 +64,6 @@ const Crudmethods = () => {
           ))}
         </tbody>
       </Table>
-      <button
-        onClick={handleAdd}
-        style={{
-          marginBottom: "20px",
-          backgroundColor: "green",
-          padding: "20px",
-          color: "white",
-          border: "none",
-        }}
-      >
-        Add New Product
-      </button>
     </Container>
   );
 };
