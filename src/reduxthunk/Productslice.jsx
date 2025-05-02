@@ -1,34 +1,61 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchProducts = createAsyncThunk("products/fetch", async () => {
+//first api call
+export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
+});
+
+//second api call
+
+export const fetchProducts2 = createAsyncThunk("products/fetch2", async () => {
+  const response = await axios.get("https://fakestoreapi.com/products");
+  const data = response.data;
+  return data.slice(0, 10);
 });
 
 const productSlice = createSlice({
   name: "products",
   initialState: {
-    items: [],
+    items1: [],
+    items2: [],
     loading: false,
     error: null,
   },
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchProduct1.pending, (state) => {
         state.loading = true;
-        console.log("pending...");
+        console.log("fetchProduct1 pending...");
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.items = action.payload;
-        console.log("fetching successfully", action.payload);
+      .addCase(fetchProduct1.fulfilled, (state, action) => {
+        state.items1 = action.payload;
+        state.loading = false;
+        console.log("fetchProduct1 success:", action.payload);
+      })
+      .addCase(fetchProduct1.rejected, (state) => {
+        state.loading = false;
+        state.error = "fetchProduct1 API Error";
+        console.log("fetchProduct1 error:", state.error);
+      })
+
+      .addCase(fetchProducts2.pending, (state) => {
+        state.loading = true;
+        console.log("fetchProducts2 pending...");
+      })
+      .addCase(fetchProducts2.fulfilled, (state, action) => {
+        state.items2 = action.payload;
+        console.log("fetch products2 success:", action.payload);
+
         state.loading = false;
       })
-      .addCase(fetchProducts.rejected, (state) => {
+
+      .addCase(fetchProducts2.rejected, (state) => {
         state.loading = false;
-        state.error = "API Error";
-        console.log("error:", state.error);
+        state.error = "fetchProducts2 API Error";
+        console.log("fetchProducts2 error:", state.error);
       });
   },
 });
