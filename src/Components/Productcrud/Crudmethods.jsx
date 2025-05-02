@@ -10,7 +10,7 @@ const Crudmethods = () => {
   const { items1, items2, loading } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchProduct1()); // ✅ Thunk call for first API
+    dispatch(fetchProduct1("men's clothing")); // pass the category
   }, []);
 
   useEffect(() => {

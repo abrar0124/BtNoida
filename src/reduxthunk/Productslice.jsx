@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //first api call
+
 export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
@@ -11,8 +12,7 @@ export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
 
 export const fetchProducts2 = createAsyncThunk("products/fetch2", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
-  const data = response.data;
-  return data.slice(0, 10);
+  return response.data;
 });
 
 const productSlice = createSlice({
@@ -30,11 +30,17 @@ const productSlice = createSlice({
         state.loading = true;
         console.log("fetchProduct1 pending...");
       })
+
       .addCase(fetchProduct1.fulfilled, (state, action) => {
-        state.items1 = action.payload;
+        console.log("Full action object:", action);
+        const category = action.meta.arg;
+        state.items1 = action.payload.filter(
+          (product) => product.category === category
+        );
         state.loading = false;
-        console.log("fetchProduct1 success:", action.payload);
+        console.log("first api:", state.items1);
       })
+
       .addCase(fetchProduct1.rejected, (state) => {
         state.loading = false;
         state.error = "fetchProduct1 API Error";
@@ -45,11 +51,11 @@ const productSlice = createSlice({
         state.loading = true;
         console.log("fetchProducts2 pending...");
       })
-      .addCase(fetchProducts2.fulfilled, (state, action) => {
-        state.items2 = action.payload;
-        console.log("fetch products2 success:", action.payload);
 
+      .addCase(fetchProducts2.fulfilled, (state, action) => {
+        state.items2 = action.payload.slice(0, 10); // logic moved here
         state.loading = false;
+        console.log("second api:", state.items2);
       })
 
       .addCase(fetchProducts2.rejected, (state) => {
