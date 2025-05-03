@@ -16,7 +16,6 @@ const Crudmethods = () => {
   useEffect(() => {
     dispatch(fetchProducts2()); // ✅ Thunk call for second API
   }, []);
-  // Inside Crudmethods component:
 
   if (loading) return <p>Please wait...</p>;
 
