@@ -2,13 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //first api call
-export const fetchProduct1 = createAsyncThunk(
-  "products/fetch1",
-  async (category) => {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    return { data: response.data, category };
-  }
-);
+export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
+  const response = await axios.get("https://fakestoreapi.com/products");
+  return response.data;
+});
 
 //second api call
 export const fetchProducts2 = createAsyncThunk("products/fetch2", async () => {
@@ -34,8 +31,10 @@ const productSlice = createSlice({
       })
       .addCase(fetchProduct1.fulfilled, (state, action) => {
         console.log("Full action object:", action);
-        const { data, category } = action.payload;
-        state.items1 = data.filter((product) => product.category === category);
+        const category = action.meta.arg;
+        state.items1 = action.payload.filter(
+          (product) => product.category === category
+        );
         state.loading = false;
         console.log("first api:", state.items1);
       })
