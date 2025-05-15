@@ -20,7 +20,7 @@ const Crudmethods = () => {
   return (
     <div className="mt-[7%] px-4 pb-10 max-w-7xl mx-auto">
       {/* First API Title */}
-      <h2 className="w-[21%] text-[18px] capitalize mb-6 border-b-4 border-red-600 pb-2 mt-6">
+      <h2 className="w-[22%] text-[18px] capitalize mb-6 border-b-4 border-red-600 pb-2 mt-6">
         Popular Products from first API
       </h2>
 
@@ -59,7 +59,7 @@ const Crudmethods = () => {
       </div>
 
       {/* Second API Title */}
-      <h2 className="w-[23%] text-[18px] capitalize mb-6 border-b-4 border-blue-600 pb-2 mt-10">
+      <h2 className="w-[24%] text-[18px] capitalize mb-6 border-b-4 border-blue-600 pb-2 mt-10">
         Popular Products from Second API
       </h2>
 

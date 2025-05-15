@@ -29,13 +29,13 @@ const Bgpic = () => {
             <Container>
               <Row>
                 <Col md={5}>
-                  <p className="font-normal text-white leading-snug text-5xl">
+                  <p className=" text-white leading-snug text-5xl">
                     Departure Control
                     <br />
                     System
                   </p>
 
-                  <p className="text-gray-100 font-normal text-lg leading-9">
+                  <p className="text-white font-light text-xlg leading-8">
                     Departure Control System (DCS) is developed to automate all
                     processes related to the airline management operations,
                     which is introduced as a way of cost reduction and safety
@@ -45,13 +45,13 @@ const Bgpic = () => {
 
                   <Link
                     to={""}
-                    className=" inline-block    p-3   rounded text-white no-underline bg-blue-500 border-2 border-transparent hover:!text-blue-500  hover:bg-white hover:border-[#0880e2] transition duration-300 ease-in-out"
+                    className=" inline-block  font-light  p-3   rounded text-white no-underline bg-blue-500 border-2 border-transparent hover:!text-blue-500  hover:bg-white hover:border-[#0880e2] transition duration-300 ease-in-out"
                   >
                     Discover Venders
                   </Link>
 
                   <div className="mt-5 p-2 break-words">
-                    <h2 className="text-green-500 text-[20px]">
+                    <h2 className="text-green-500  text-[20px]">
                       Api response:
                     </h2>
                     <p className="text-lg text-white">{token}</p>
@@ -59,7 +59,7 @@ const Bgpic = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="mt-2 px-5 py-3 w-1/2  bg-red-500 text-white  font-bold rounded transition duration-300 hover:bg-red-700 "
+                    className="mt-2 px-5 py-3 w-1/2  bg-red-500 text-white  text rounded transition duration-300 hover:bg-red-700 "
                   >
                     Logout
                   </button>

@@ -36,7 +36,9 @@ function Products() {
                   backgroundColors[(index + start) % backgroundColors.length],
               }}
             >
-              <p className="text-2xl text-start  p-4">{product.name}</p>
+              <p className="text-2xl  font-light text-start  p-4">
+                {product.name}
+              </p>
               <img
                 src={product.image}
                 alt={product.name}
