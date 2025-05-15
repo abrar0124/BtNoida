@@ -1,49 +1,36 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Text from "../Text";
 
 const Footer = () => {
   return (
-    <div
-      style={{
-        width: "100%",
-        backgroundColor: "#333",
-        color: "#ccc",
-        padding: "40px 0",
-      }}
-    >
-      <Container>
-        <Row>
-          <Col md={6}>
-            <Text
-              type={"p"}
-              content={`As a consulting company, 
-              we offer outstanding solutions,`}
-              className="fst-italic w-50 mt-1"
-            />
-          </Col>
-          <Col>
-            <Text
-              type={"h4"}
-              content={"Featured Pages"}
-              className="ms-4 text-white"
-            />
-            <div className="d-flex justify-content-between flex-wrap">
-              <ul style={{ listStyle: "none", cursor: "pointer" }}>
-                <Text type={"li"} content={"Baggage Reconciliation System"} />
-              </ul>
-              <ul style={{ listStyle: "none", cursor: "pointer" }}>
-                <Text type={"li"} content={"Boarding Gate Reader"} />
-              </ul>
+    <div className="w-full bg-dark text-white py-10">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row">
+          {/* Left Column */}
+          <div className="md:w-1/2">
+            <p className="italic w-1/2 mt-1">
+              As a consulting company, we offer outstanding solutions
+            </p>
+          </div>
 
-              {/* Column 3 */}
-              <ul style={{ listStyle: "none", cursor: "pointer" }}>
-                <Text type={"li"} content={"Company A-Z"} />
+          {/* Right Column */}
+          <div className="md:w-1/2 mt-6 md:mt-0">
+            <h2 className="ml-8 text-xlg font-normal text-white">
+              Featured Pages
+            </h2>
+            <div className="flex justify-between flex-wrap mt-2">
+              <ul className="list-none cursor-pointer">
+                <li>Baggage Reconciliation System</li>
+              </ul>
+              <ul className="list-none cursor-pointer">
+                <li>Boarding Gate Reader</li>
+              </ul>
+              <ul className="list-none cursor-pointer">
+                <li>Company A-Z</li>
               </ul>
             </div>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

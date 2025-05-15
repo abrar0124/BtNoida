@@ -1,15 +1,5 @@
 import EventsArray from "./Selfcomponents/EventsArray";
-
 import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Card,
-  Button,
-  InputGroup,
-} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Text from "./Text";
 
@@ -20,9 +10,8 @@ const Events = () => {
   const [selectcontinent, setselectcontinent] = useState(null);
   const [selectcountry, setselectcountry] = useState(null);
   const [selectcatagory, setselectedcatagory] = useState(null);
-  let lastMonth = ""; // Pichle month ko track karne ke liye
+  let lastMonth = "";
 
-  // Filter events based on searchQuery
   const FilteredEvents = EventsArray.filter(
     (e) =>
       (searchQuery === null ||
@@ -42,87 +31,100 @@ const Events = () => {
         selectcatagory === "All Catagories" ||
         e.catagory === selectcatagory)
   );
+
   return (
-    <Container className="p-4" style={{ marginTop: "5%" }}>
-      <Row>
-        {/* Filters Section */}
-        <Col md={4}>
-          <Text type={"h4"} content={"Events"} className="fs-1 fw-normal" />
-          <Form>
-            <div className="d-flex gap-2">
+    <div className="container mx-auto p-4 mt-20">
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* Filters */}
+        <div className="w-full md:w-1/3">
+          <h4 className="text-3xl font-normal mb-4">Events</h4>
+          <form className="space-y-4">
+            <div className="flex gap-2">
               <div>
-                <Form.Group className="mb-3">
-                  <Form.Label>Year</Form.Label>
-                  <Form.Select
-                    className="bg-light p-3 text-center text-muted"
-                    style={{ width: "100px" }}
-                    onChange={(e) => setselectyear(e.target.value)}
-                  >
-                    <option>All </option>
-                    <option>2019</option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                    <option>2024</option>
-                    <option>2025</option>
-                    <option>2026</option>
-                  </Form.Select>
-                </Form.Group>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Year
+                </label>
+                <select
+                  className="bg-gray-100 px-3 py-2 text-center text-gray-500 w-24"
+                  onChange={(e) => setselectyear(e.target.value)}
+                >
+                  <option>All</option>
+                  <option>2019</option>
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                </select>
               </div>
               <div>
-                <Form.Group className="mb-3">
-                  <Form.Label>Months</Form.Label>
-                  <Form.Select
-                    className="bg-light p-3 text-muted text-center"
-                    style={{ width: "300px" }}
-                    onChange={(e) => setselectmonth(e.target.value)}
-                  >
-                    <option>All Month</option>
-                    <option>April</option>
-                    <option>May</option>
-                    <option>June</option>
-                    <option>July</option>
-                    <option>August</option>
-                    <option>September</option>
-                    <option>Octobar</option>
-                    <option>November</option>
-                    <option>December</option>
-                    <option>Junuary</option>
-                    <option>Febraury</option>
-                    <option>March</option>
-                  </Form.Select>
-                </Form.Group>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Months
+                </label>
+                <select
+                  className="bg-gray-100 px-3 py-2 text-center text-gray-500 w-72"
+                  onChange={(e) => setselectmonth(e.target.value)}
+                >
+                  <option>All Month</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>Octobar</option>
+                  <option>November</option>
+                  <option>December</option>
+                  <option>Junuary</option>
+                  <option>Febraury</option>
+                  <option>March</option>
+                </select>
               </div>
             </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Continent</Form.Label>
-              <Form.Select onChange={(e) => setselectcontinent(e.target.value)}>
-                <option> All Continents</option>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Continent
+              </label>
+              <select
+                className="bg-gray-100 px-3 py-2 w-full text-gray-600"
+                onChange={(e) => setselectcontinent(e.target.value)}
+              >
+                <option>All Continents</option>
                 <option>Africa</option>
                 <option>Asia</option>
                 <option>Australia</option>
                 <option>Europe</option>
                 <option>North America</option>
                 <option>South America</option>
-              </Form.Select>
-            </Form.Group>
+              </select>
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Country</Form.Label>
-              <Form.Select onChange={(e) => setselectcountry(e.target.value)}>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Country
+              </label>
+              <select
+                className="bg-gray-100 px-3 py-2 w-full text-gray-600"
+                onChange={(e) => setselectcountry(e.target.value)}
+              >
                 <option>All Countires</option>
                 <option>Austria</option>
                 <option>Japan</option>
                 <option>Africa</option>
                 <option>Italy</option>
                 <option>France</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Select
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Category
+              </label>
+              <select
+                className="bg-gray-100 px-3 py-2 w-full text-gray-600"
                 onChange={(e) => setselectedcatagory(e.target.value)}
               >
                 <option>All Catagories</option>
@@ -131,63 +133,70 @@ const Events = () => {
                 <option>Conference</option>
                 <option>Exibition</option>
                 <option>Expo</option>
-              </Form.Select>
-            </Form.Group>
-          </Form>
-        </Col>
-        <Col md={8} style={{ maxHeight: "430px", overflow: "auto" }}>
-          <InputGroup className="mb-3">
-            <Form.Control
+              </select>
+            </div>
+          </form>
+        </div>
+
+        {/* Events List */}
+        <div className="w-full md:w-2/3 max-h-[430px] overflow-auto">
+          <div className="mb-4">
+            <input
+              type="text"
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md"
             />
-          </InputGroup>
+          </div>
+
           {FilteredEvents.length === 0 ? (
-            <Text type={"p"} content={"No events found."} />
+            <p>No events found</p>
           ) : (
             FilteredEvents.map((p, index) => {
               const showMonthHeading = p.month !== lastMonth;
-              lastMonth = p.month; // Update last month
+              lastMonth = p.month;
               return (
                 <div key={index}>
                   {showMonthHeading && (
-                    <p className="fw-medium m-4 fs-3 me-5">{p.month}</p>
+                    <p className="font-medium text-2xl my-4 ml-4">{p.month}</p>
                   )}
+
                   <Link
                     to={`/Eventsdetail/${p.id}`}
-                    className="text-decoration-none text-dark"
-                    style={{ marginLeft: "78%" }}
+                    className="text-black no-underline"
                   >
-                    <Card className="mb-3 p-3">
-                      <Row className="g-0">
-                        <Col md={2}>
-                          <Card.Img src={p.image} />
-                        </Col>
-                        <Col md={8}>
-                          <Card.Body>
-                            <Card.Title>{p.title}</Card.Title>
-                            <Card.Text>{p.description}</Card.Text>
-                            <p className="text-danger">{p.Days}</p>
-                            <Link
-                              to={`/Eventsdetail/${p.id}`}
-                              className="text-decoration-none text-dark"
-                              style={{ marginLeft: "78%" }}
-                            >
-                              Details
-                            </Link>
-                          </Card.Body>
-                        </Col>
-                      </Row>
-                    </Card>
+                    <div className="border rounded-lg mb-4 p-3 shadow-md">
+                      <div className="flex gap-4">
+                        <div className="w-1/5">
+                          <img
+                            src={p.image}
+                            alt={p.title}
+                            className="w-full h-auto object-cover"
+                          />
+                        </div>
+                        <div className="w-4/5">
+                          <h5 className="text-xl font-semibold">{p.title}</h5>
+                          <p className="text-gray-600">{p.description}</p>
+                          <p className="text-red-500">{p.Days}</p>
+                          <Link
+                            to={`/Eventsdetail/${p.id}`}
+                            className="text-blue-600 no-underline   font-medium"
+                          >
+                            Details
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </Link>
                 </div>
               );
             })
           )}
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
+
 export default Events;

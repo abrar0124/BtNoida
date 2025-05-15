@@ -54,7 +54,7 @@ const FilterSidebar = ({
   };
 
   return (
-    <div className="w-25 p-4 border-end">
+    <div className="w-25 p-4 ">
       <p className="fs-2 border-bottom">Filters</p>
       {filterOptions.map((filter) => (
         <div key={filter.key} className="border-bottom pb-2 mt-3">

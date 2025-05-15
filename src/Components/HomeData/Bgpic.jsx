@@ -1,11 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../Header";
-import "./customscss.scss";
-import Text from "../Text";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Authslice/Authslice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Bgpic = () => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
@@ -20,79 +18,48 @@ const Bgpic = () => {
   return (
     <>
       <Header />
-
       <div
+        className="bg-center bg-cover "
         style={{
           backgroundImage: "url('Images/bg2.avif')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
       >
         <section>
-          <div className="overlay">
+          <div className="w-full h-[900px] flex pt-[15%] items-center bg-black/50">
             <Container>
               <Row>
-                <Col md={5} className="text-white text-start lh-lg fs-5 mt-5 m">
-                  <Text
-                    type={"h1"}
-                    content={
-                      <>
-                        Departure Control
-                        <br />
-                        System
-                      </>
-                    }
-                  />
+                <Col md={5}>
+                  <p className="font-normal text-white leading-snug text-5xl">
+                    Departure Control
+                    <br />
+                    System
+                  </p>
 
-                  <Text
-                    type="p"
-                    content={`Departure Control System (DCS) is developed to automate all                      processes related to the airline management operations
+                  <p className="text-gray-100 font-normal text-lg leading-9">
+                    Departure Control System (DCS) is developed to automate all
+                    processes related to the airline management operations,
                     which is introduced as a way of cost reduction and safety
                     growth by connecting check-in functions with load control
-                    and aircraft mass and balance.`}
-                    className="fs-6"
-                  />
+                    and aircraft mass and balance.
+                  </p>
 
-                  <Text
-                    type={"Link"}
-                    content={"Discover Venders"}
-                    className="p-3  rounded  custom-button"
-                  />
+                  <Link
+                    to={""}
+                    className=" inline-block    p-3   rounded text-white no-underline bg-blue-500 border-2 border-transparent hover:!text-blue-500  hover:bg-white hover:border-[#0880e2] transition duration-300 ease-in-out"
+                  >
+                    Discover Venders
+                  </Link>
 
-                  <Text
-                    type={"h2"}
-                    content={
-                      <>
-                        <div
-                          className="mt-5  p-2"
-                          style={{
-                            wordBreak: "break-word",
-                          }}
-                        >
-                          <h2
-                            className=" text-warning"
-                            style={{ fontSize: "20px" }}
-                          >
-                            {" "}
-                            Api response:
-                          </h2>
-                          <p style={{ fontSize: "15px" }}>{token}</p>
-                        </div>
-                      </>
-                    }
-                  />
+                  <div className="mt-5 p-2 break-words">
+                    <h2 className="text-green-500 text-[20px]">
+                      Api response:
+                    </h2>
+                    <p className="text-lg text-white">{token}</p>
+                  </div>
+
                   <button
                     onClick={handleLogout}
-                    style={{
-                      marginTop: "10px",
-                      padding: "10px 20px",
-                      width: "60%",
-                      fontSize: "16px",
-                      backgroundColor: "red",
-                      color: "white",
-                      border: "none",
-                      fontWeight: "bold",
-                    }}
+                    className="mt-2 px-5 py-3 w-1/2  bg-red-500 text-white  font-bold rounded transition duration-300 hover:bg-red-700 "
                   >
                     Logout
                   </button>

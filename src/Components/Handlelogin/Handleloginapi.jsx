@@ -3,7 +3,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import Footer2 from "../HomeData/Footer2";
-import Text from "../Text";
 
 import {
   login,
@@ -44,14 +43,15 @@ const Login = () => {
 
   return (
     <>
-      <div style={{ marginTop: "10%", marginLeft: "30%", padding: "20px" }}>
-        <Text type={"h2"} content={"Login"} />
+      <div className="mt-[10%] ml-[30%] p-5">
+        <h2>Login</h2>
+
         <input
           type="text"
           placeholder="Enter Username"
           value={username}
           onChange={(e) => dispatch(setUsername(e.target.value))}
-          style={{ width: "60%", padding: "10px", marginBottom: "10px" }}
+          className="w-[60%] p-2 mb-2 border border-black"
         />
         <br />
         <input
@@ -59,37 +59,22 @@ const Login = () => {
           placeholder="Enter Password"
           value={password}
           onChange={(e) => dispatch(setPassword(e.target.value))}
-          style={{ width: "60%", padding: "10px", marginBottom: "10px" }}
+          className="w-[60%] p-2 mb-2 border border-black"
         />
         <br />
         <button
           onClick={handleLogin}
-          style={{
-            padding: "10px 20px",
-            width: "60%",
-            fontSize: "16px",
-            backgroundColor: "green",
-            color: "white",
-            border: "none",
-            fontWeight: "bold",
-          }}
+          className="w-[60%] py-2 px-4 text-white font-bold bg-green-600 hover:bg-green-700 transition"
         >
           Login
         </button>
-
-        <Text
-          type={"p"}
-          content={
-            <p
-              style={{
-                marginTop: "15px",
-                color: message.includes("Success") ? "green" : "red",
-              }}
-            >
-              {message}
-            </p>
-          }
-        />
+        <p
+          className={`mt-4 ${
+            message.includes("Success") ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {message}
+        </p>
       </div>
       <Footer2 />
     </>

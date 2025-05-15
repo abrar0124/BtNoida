@@ -1,4 +1,3 @@
-import { Breadcrumb, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Mobiledata from "./Selfcomponents/Mobiledata";
 import Text from "./Text";
@@ -6,49 +5,57 @@ import Text from "./Text";
 function Mobileapp() {
   return (
     <>
-      <Container className="p-2">
-        <Breadcrumb style={{ marginTop: "7%" }}>
-          <Link to="/" className="text-decoration-none text-dark fs-4">
+      <div className="container mx-auto px-4 py-2">
+        {/* Breadcrumb */}
+        <nav className="mt-[7%] flex items-center text-2xl">
+          <Link
+            to="/"
+            className="text-gray-800 no-underline hover:underline font-medium"
+          >
             Home
           </Link>
-          <Breadcrumb.Item active className="fs-4 ms-3 ">
-            <span className="me-4"> /</span>
-            Mobile Application
-          </Breadcrumb.Item>
-        </Breadcrumb>
-        <Text
-          type={"p"}
-          content={"Mobile Applications"}
-          className="fs-1 fw-medium my-4"
-        />
+          <span className="ml-3 flex items-center text-gray-800">
+            <span className="mr-4">/</span> Mobile Application
+          </span>
+        </nav>
 
-        <Text
-          type={"p"}
-          content={`Mobile applications have improved passenger experience dramatically
+        <p className="text-4xl font-medium my-6">Mobile Applications</p>
+
+        <p
+          className="text-lg
+          leading-loose text-gray-800"
+        >
+          Mobile applications have improved passenger experience dramatically
           over recent years. Travellers that are willing to handle their travel
           cycle at their convenience can check-in, get boarding passes, and
           choose desired seats by using Mobile applications. Meanwhile, airline
           and airport authorities/agents use mobile technology to streamline
           their processes, reduce costs and enhance efficiencies. On this page,
           DCS.aero provides some new, innovative, and robust mobile applications
-          that are useful for airlines, and ground handlers.`}
-          className="fs-5  lh-lg"
-        />
-        <div className="d-flex gap-2">
-          <Text
-            type={"Link"}
-            content={"See more info"}
-            className="p-3 fs-5 rounded custom-button"
-          />
-          <Text
-            type={"Link"}
-            content={"See FAQ"}
-            className="p-3 fs-5 rounded custom-buttons"
-          />
+          that are useful for airlines, and ground handlers
+        </p>
+
+        {/* Buttons */}
+        <div className="flex gap-2 mt-4 flex-wrap">
+          <Link
+            to={""}
+            className="px-4 py-3 text-lg rounded bg-blue-500 text-white no-underline transition transform hover:!text-blue-500 hover:bg-transparent hover:border-2 hover:border-blue-500"
+          >
+            See more info
+          </Link>
+          <Link
+            to={""}
+            className="px-4 py-3 text-lg no-underline transition rounded border-2  border-blue-500 text-blue-500 transform hover:bg-blue-500 hover:!text-white"
+          >
+            {" "}
+            See FAQ
+          </Link>
         </div>
-      </Container>
+      </div>
+
       <Mobiledata />
     </>
   );
 }
+
 export default Mobileapp;

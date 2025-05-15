@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, InputGroup, Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   setContinent,
   setCountryname,
@@ -9,6 +7,7 @@ import {
   updateNewVendor,
   setVendors,
 } from "../../redux/VenderSlice";
+import { Link } from "react-router-dom";
 
 const VendorTable = () => {
   const [show, setShow] = useState(false);
@@ -47,19 +46,20 @@ const VendorTable = () => {
       setIsAscending(true);
     }
   };
-  // const sortedVendors = [...vendors].sort((a, b) => {
-  //   if (sortBy) {
-  //     return isAscending
-  //       ? a[sortBy].toString().localeCompare(b[sortBy].toString())
-  //       : b[sortBy].toString().localeCompare(a[sortBy].toString());
-  //   }
-  // });
+
   const filteredVendors = vendors.filter((v) => {
     const searchLower = search.toLowerCase();
-    return (
+    const matchesSearch =
       v.name.toLowerCase().includes(searchLower) ||
-      v.continent.toLowerCase().includes(searchLower)
-    );
+      v.continent.toLowerCase().includes(searchLower);
+
+    const matchesCountry =
+      countryname === "All Countries" || v.name === countryname;
+
+    const matchesContinent =
+      continent === "All Continents" || v.continent === continent;
+
+    return matchesSearch && matchesCountry && matchesContinent;
   });
 
   const sortedVendors = [...filteredVendors].sort((a, b) => {
@@ -72,243 +72,241 @@ const VendorTable = () => {
         return isAscending ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
       }
     }
-    return 0; // default if no sorting applied
+    return 0;
   });
 
-  // const sortedVendors = [...vendors].sort((a, b) => {
-  //   if (sortBy) {
-  //     return isAscending ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
-  //   }
-
-  // });
-
   return (
-    <div className="container mt-4">
-      <div className="d-flex justify-content-between flex-wrap">
-        <Button className=" m-4 p-3" onClick={() => setShow(true)}>
+    <div className="max-w-7xl mx-auto p-4">
+      <div className="flex flex-wrap justify-between items-center mb-4">
+        <button
+          onClick={() => setShow(true)}
+          className="bg-blue-600 text-white px-5 py-3 rounded shadow-md hover:bg-blue-700 m-2"
+        >
           Add Your Company
-        </Button>
+        </button>
       </div>
-      <div className="d-flex align-items-center justify-content-between mb-4">
-        <div style={{ flex: 1, maxWidth: "400px" }}>
-          <InputGroup className="rounded shadow-sm">
-            <Form.Control
-              className="p-3  border-0 bg-light fs-5"
+
+      <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
+        <div className="w-full sm:w-[300px]">
+          <div className="flex items-center rounded shadow-sm bg-gray-100 px-3 py-2">
+            <input
               type="text"
               placeholder="Search"
+              className="w-full bg-transparent outline-none text-lg"
               value={search}
               onChange={(e) => dispatch(setSearch(e.target.value))}
             />
-            <InputGroup.Text className="bg-light border-0">
-              <img src="/Images/search.png" alt="Search" height="18" />
-            </InputGroup.Text>
-          </InputGroup>
+            <img
+              src="/Images/search.png"
+              alt="Search"
+              className="w-5 h-5 ml-2"
+            />
+          </div>
         </div>
-        <Form.Select
-          className="w-25 border-0 fs-5 p-3"
+
+        <select
+          className="w-full sm:w-1/4 p-3 border rounded text-lg"
           value={countryname}
           onChange={(e) => dispatch(setCountryname(e.target.value))}
         >
-          <option>All Countries</option>
-          {vendors.map((v, index) => (
-            <option key={index}>{v.name}</option>
+          <option value="All Countries">All Countries</option>
+          {vendors.map((v, i) => (
+            <option key={i}>{v.name}</option>
           ))}
-        </Form.Select>
+        </select>
 
-        <Form.Select
-          className="w-25 border-0 fs-5 p-3"
+        <select
+          className="w-full sm:w-1/4 p-3 border rounded text-lg"
           value={continent}
           onChange={(e) => dispatch(setContinent(e.target.value))}
         >
-          <option>All Continents</option>
-          {vendors.map((v, index) => (
-            <option key={index}>{v.continent}</option>
+          <option value="All Continents">All Continents</option>
+          {vendors.map((v, i) => (
+            <option key={i}>{v.continent}</option>
           ))}
-        </Form.Select>
+        </select>
       </div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Logo</th>
-            <button>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full border text-center text-sm">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="p-2 border">Logo</th>
               <th
+                className="p-2 border cursor-pointer"
                 onClick={() => handleSort("id")}
-                style={{ cursor: "pointer" }}
               >
+                ID
                 <img
                   src={
                     isAscending
                       ? "/Images/logo512.png"
                       : "/Images/down-arrow.png"
                   }
-                  style={{
-                    width: "22px",
-                    marginBottom: "10px",
-                    marginLeft: "10px",
-                  }}
+                  alt="Sort"
+                  className="w-5 inline-block ml-2"
                 />
               </th>
-            </button>
-            <th
-              onClick={() => handleSort("name")}
-              style={{ cursor: "pointer" }}
-            >
-              Name
-              {/* <img
-                src={
-                  isAscending ? "/Images/logo512.png" : "/Images/down-arrow.png"
-                }
-                style={{
-                  width: "22px",
-                  marginBottom: "10px",
-                  marginLeft: "10px",
-                }}
-              /> */}
-            </th>
-            <th
-              onClick={() => handleSort("continent")}
-              style={{ cursor: "pointer" }}
-            >
-              Continent
-              {/* <img
-                src={
-                  isAscending ? "/Images/logo512.png" : "/Images/down-arrow.png"
-                }
-                style={{
-                  width: "22px",
-                  marginBottom: "10px",
-                  marginLeft: "10px",
-                }}
-              /> */}
-            </th>
-            <th>Country</th>
-            <th>Free Trial</th>
-            <th>CLC</th>
-            <th>Mobile App</th>
-            <th>DCS</th>
-            <th>IATA Partner</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {sortedVendors.map((v) => (
-            <tr key={v.id}>
-              <td>
-                <img
-                  src={v.image}
-                  alt={v.name}
-                  style={{ height: "50px", width: "50px", objectFit: "cover" }}
-                />
-              </td>
-              <td>{v.id}</td>
-              <td>{v.name}</td>
-              <td>{v.continent}</td>
-              <td>{v.country}</td>
-              <td>{v.freeTrial ? "✔️" : "❌"}</td>
-              <td>{v.clc ? "✔️" : "❌"}</td>
-              <td>{v.mobileApp ? "✔️" : "❌"}</td>
-              <td>{v.dcs ? "✔️" : "❌"}</td>
-              <td>{v.iataPartner ? "✔️" : "❌"}</td>
-              <td>
-                <Link>{v.Details}</Link>
-              </td>
+              <th
+                className="p-2 border cursor-pointer"
+                onClick={() => handleSort("name")}
+              >
+                Name
+              </th>
+              <th
+                className="p-2 border cursor-pointer"
+                onClick={() => handleSort("continent")}
+              >
+                Continent
+              </th>
+              <th className="p-2 border">Country</th>
+              <th className="p-2 border">Free Trial</th>
+              <th className="p-2 border">CLC</th>
+              <th className="p-2 border">Mobile App</th>
+              <th className="p-2 border">DCS</th>
+              <th className="p-2 border">IATA Partner</th>
+              <th className="p-2 border">Details</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {sortedVendors.map((v) => (
+              <tr key={v.id} className="hover:bg-gray-50">
+                <td className="p-2 border">
+                  <img
+                    src={v.image}
+                    alt={v.name}
+                    className="h-12 w-12 object-cover rounded"
+                  />
+                </td>
+                <td className="p-2 border">{v.id}</td>
+                <td className="p-2 border">{v.name}</td>
+                <td className="p-2 border">{v.continent}</td>
+                <td className="p-2 border">{v.country}</td>
+                <td className="p-2 border">{v.freeTrial ? "✔️" : "❌"}</td>
+                <td className="p-2 border">{v.clc ? "✔️" : "❌"}</td>
+                <td className="p-2 border">{v.mobileApp ? "✔️" : "❌"}</td>
+                <td className="p-2 border">{v.dcs ? "✔️" : "❌"}</td>
+                <td className="p-2 border">{v.iataPartner ? "✔️" : "❌"}</td>
+                <td className="p-2 border text-blue-500 underline">
+                  <Link>{v.Details}</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* model */}
-
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Your Company</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group>
-            <Form.Label>Name *</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={newVendor.name}
-              onChange={(e) =>
-                dispatch(
-                  updateNewVendor({ name: "name", value: e.target.value })
-                )
-              }
-              placeholder="Enter country name"
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Country *</Form.Label>
-            <Form.Select
-              name="country"
-              value={newVendor.country}
-              onChange={(e) =>
-                dispatch(
-                  updateNewVendor({ name: "country", value: e.target.value })
-                )
-              }
-              required
-            >
-              <option value="">Select Country</option>
-              {countriesname.map((c, index) => (
-                <option key={index} value={c}>
-                  {c}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Continent *</Form.Label>
-            <Form.Select
-              name="continent"
-              value={newVendor.continent}
-              onChange={(e) =>
-                dispatch(
-                  updateNewVendor({ name: "continent", value: e.target.value })
-                )
-              }
-              required
-            >
-              <option value="">Select Continent</option>
-              {continentsname.map((c, index) => (
-                <option key={index} value={c}>
-                  {c}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Select your country flag</Form.Label>
-            <Form.Select
-              name="country"
-              value={newVendor.country}
-              onChange={(e) => {
-                console.log("Selected Country:", e.target.value);
-                dispatch(
-                  updateNewVendor({ name: "country", value: e.target.value })
-                );
-              }}
-              required
-            >
-              <option value="">Select Country</option>
-              {countries.map((c, index) => (
-                <option key={index} value={c.flag}>
-                  {c.flag} {c.name}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleAddVendor}>
-            Send
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* Modal */}
+      {show && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h2 className="text-xl font-semibold">Add Your Company</h2>
+              <button onClick={() => setShow(false)} className="text-gray-500">
+                ✕
+              </button>
+            </div>
+            <div className="p-4 space-y-4">
+              <div>
+                <label className="block font-medium mb-1">Name *</label>
+                <input
+                  type="text"
+                  value={newVendor.name}
+                  onChange={(e) =>
+                    dispatch(
+                      updateNewVendor({ name: "name", value: e.target.value })
+                    )
+                  }
+                  className="w-full border p-2 rounded"
+                  placeholder="Enter company name"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-medium mb-1">Country *</label>
+                <select
+                  value={newVendor.country}
+                  onChange={(e) =>
+                    dispatch(
+                      updateNewVendor({
+                        name: "country",
+                        value: e.target.value,
+                      })
+                    )
+                  }
+                  className="w-full border p-2 rounded"
+                  required
+                >
+                  <option value="">Select Country</option>
+                  {countriesname.map((c, i) => (
+                    <option key={i} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block font-medium mb-1">Continent *</label>
+                <select
+                  value={newVendor.continent}
+                  onChange={(e) =>
+                    dispatch(
+                      updateNewVendor({
+                        name: "continent",
+                        value: e.target.value,
+                      })
+                    )
+                  }
+                  className="w-full border p-2 rounded"
+                  required
+                >
+                  <option value="">Select Continent</option>
+                  {continentsname.map((c, i) => (
+                    <option key={i} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block font-medium mb-1">
+                  Select your country flag
+                </label>
+                <select
+                  value={newVendor.country}
+                  onChange={(e) =>
+                    dispatch(
+                      updateNewVendor({
+                        name: "country",
+                        value: e.target.value,
+                      })
+                    )
+                  }
+                  className="w-full border p-2 rounded"
+                  required
+                >
+                  <option value="">Select Country</option>
+                  {countries.map((c, i) => (
+                    <option key={i} value={c.flag}>
+                      {c.flag} {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="flex justify-end p-4 border-t">
+              <button
+                onClick={handleAddVendor}
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default VendorTable;

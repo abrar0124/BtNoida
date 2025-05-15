@@ -1,58 +1,57 @@
 import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Text from "./Components/Text";
 
 const Contactform = () => {
   return (
-    <Container style={{ marginTop: "10%" }}>
-      <Row>
-        {/* Left Side Text */}
-        <Col md={6} className="mb-4">
-          <Text type={"h1"} content={"Contact us"} />
+    <div className="container mx-auto mt-[10%] px-4">
+      <div className="flex flex-col md:flex-row md:space-x-8">
+        <div className="md:w-1/2 mb-8 md:mb-0">
+          <h1 className="font-serif font-bold">Contact us</h1>
 
-          <Text
-            type={"p"}
-            content={
-              <>
-                Fill this form to get in touch with our experts, discuss your
-                issues, and have them solved by addressing your challenges. All
-                fields marked with an <span className="text-danger">*</span> are
-                required.
-              </>
-            }
-            className="fs-5"
-          />
-        </Col>
-        {/* Right Side Form */}
-        <Col md={6}>
-          <Form>
-            <Form.Group className="mb-3" controlId="formName">
-              <Form.Control type="text" placeholder="* Name" />
-            </Form.Group>
+          <p className="text-lg font-serif">
+            Fill this form to get in touch with our experts, discuss your
+            issues, and have them solved by addressing your challenges. All
+            fields marked with an <span className="text-red-600">*</span>
+            are required.
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <form className="space-y-4">
+            <input
+              type="text"
+              placeholder="* Name"
+              className="w-full border  rounded px-4 py-2 "
+            />
 
-            <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Control type="email" placeholder="* Email" />
-            </Form.Group>
+            <input
+              type="email"
+              placeholder="* Email"
+              className="w-full border rounded px-4 py-2"
+            />
 
-            <Form.Group className="mb-3" controlId="formSubject">
-              <Form.Control type="text" placeholder="* Subject" />
-            </Form.Group>
+            <input
+              type="text"
+              placeholder="* Subject"
+              className="w-full border rounded px-4 py-2"
+            />
 
-            <Form.Group className="mb-3" controlId="formMessage">
-              <Form.Control as="textarea" rows={4} placeholder="* Message" />
-            </Form.Group>
+            <textarea
+              rows="4"
+              placeholder="* Message"
+              className="w-full border  rounded px-4 py-2"
+            />
 
-            <Form.Group className="mb-3" controlId="formFile">
-              <Form.Control type="file" />
-            </Form.Group>
+            <input type="file" className="w-full border" />
 
-            <Button variant="primary" type="submit">
+            <button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded mb-3"
+            >
               Send
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import Header from "../Header";
 import Productarray from "../HomeData/Productarray";
 import VendorTable from "./Vendercheckout";
@@ -19,59 +18,70 @@ import Text from "../Text";
 
 function ProductDetail() {
   const { id } = useParams();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const product = Productarray.find((item) => item.id === Number(id));
   if (!product) {
-    return <h2 className="text-center mt-5">Product not found</h2>;
+    return (
+      <h2 className="text-center mt-20 text-2xl font-semibold">
+        Product not found
+      </h2>
+    );
   }
 
   return (
     <>
       <Header />
-      <Container className="mt-5">
-        <Breadcrumb style={{ marginTop: "7%" }}>
-          <Link to="/" className="text-decoration-none text-dark fs-4">
+
+      <div className="mt-24 px-4 lg:px-20">
+        <div className="flex items-center text-sm">
+          <Link
+            to="/"
+            className="text-black no-underline  text-xl hover:underline"
+          >
             Home
           </Link>
-          <Breadcrumb.Item active className="fs-4 ms-3 ">
-            <span className="me-4"> /</span>
+          <span className="mx-3 text-xl">/</span>
+          <span className="text-gray-700 font-light text-xl">
             {product.name}
-          </Breadcrumb.Item>
-        </Breadcrumb>
+          </span>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-10 mt-10">
+          {/* Left Column - Image */}
 
-        <Row className="align-items-center">
-          <Col md={6} className="text-center">
-            <h2 className="mt-5 fw-medium" style={{ marginRight: "40%" }}>
-              {product.name}
-            </h2>
+          <div className="w-full lg:w-1/2 flex justify-center">
             <img
               src={product.image}
               alt={product.name}
-              className="img-fluid rounded"
-              style={{ maxWidth: "80%" }}
+              className="rounded max-w-full h-auto"
             />
-          </Col>
-          <Col md={6}>
-            <p className="lead">{product.description}</p>
-            <p>{product.extraInfo}</p>
-            <div className="d-flex gap-2">
-              <Text
-                type={"Link"}
-                content={"See more info"}
-                className="p-3 fs-5 rounded custom-button"
-              />
-              <Text
-                type={"Link"}
-                content={"See FAQ"}
-                className="p-3 fs-5 rounded custom-buttons"
-              />
-            </div>
-          </Col>
-        </Row>
+          </div>
 
-        {/* Conditionally Render Components Based on ID */}
+          {/* Right Column - Description */}
+          <div className="w-full lg:w-1/2  lg:text-left">
+            <p className="text-lg font-light">{product.description}</p>
+            <p className=" font-light">{product.extraInfo}</p>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+              <Link
+                to={""}
+                className=" inline-block    p-3   rounded text-white no-underline bg-blue-500 border-2 border-transparent hover:!text-blue-500  hover:bg-white hover:border-[#0880e2] transition duration-300 ease-in-out"
+              >
+                See more info
+              </Link>
+              <Link
+                to=""
+                className="p-3 text-lg no-underline  rounded border-2 border-blue-500 text-blue-500 hover:bg-blue-500  hover:!text-white transition"
+              >
+                See FAQ
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Conditional Rendering for Components */}
         {(id == 1 ||
           id == 2 ||
           id == 5 ||
@@ -82,63 +92,66 @@ function ProductDetail() {
           id == 17 ||
           id == 18 ||
           id == 19) && <VendorTable product={product} />}
-        {product.id == 3 && (
+        {product.id === 3 && (
           <>
             <Printers product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 4 && (
+        {product.id === 4 && (
           <>
             <GateReader product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 6 && (
+        {product.id === 6 && (
           <>
             <OCR product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 9 && (
+        {product.id === 9 && (
           <>
             <Selfcheckin product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 12 && (
+        {product.id === 12 && (
           <>
             <Handheld product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 13 && (
+
+        {product.id === 13 && (
           <>
             <Selfbag product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 14 && (
+        {product.id === 14 && (
           <>
             <Mobilebarcode product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 15 && (
+        {product.id === 15 && (
           <>
             <Wearable product={product} />
             <ProductsData product={product} />
           </>
         )}
-        {product.id == 16 && (
+        {product.id === 16 && (
           <>
             <Egate product={product} />
             <ProductsData product={product} />
           </>
         )}
-      </Container>
+      </div>
+
       <Footer />
     </>
   );
 }
+
 export default ProductDetail;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import Text from "../Text";
+import { Link } from "react-router-dom";
 
 const CookieConsent = () => {
   const [show, setShow] = useState(false);
@@ -16,35 +16,22 @@ const CookieConsent = () => {
     localStorage.setItem("cookieConsent", consent); // ✅ Consent ko store karna
     setShow(false);
   };
-  if (!show) return null;
-  return (
-    <div
-      className="w-100 text-white p-2 d-flex align-items-center justify-content-center flex-wrap"
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-      }}
-    >
-      <Text
-        type={"p"}
-        content={`
-        This website uses cookies to improve your experience. Click
-      Accept to allow us to use cookies`}
-        className="m-0 fs-6"
-      />
 
-      <Text
-        type={"a"}
-        content={"settings"}
-        className="text-white text-decoration-underline"
-      />
+  if (!show) return null;
+
+  return (
+    <div className="w-full text-white p-2 flex items-center justify-center flex-wrap fixed bottom-0 left-0 bg-black bg-opacity-50">
+      <p className="m-0 text-sm">
+        This website uses cookies to improve your experience. Click Accept to
+        allow us to use cookies
+      </p>
+
+      <Link className="text-white underline ml-1">settings</Link>
+
       <div>
         <Button
-          className="m-1 "
+          className="m-1"
           variant="primary"
-          style={{ borderRadius: "45%" }}
           onClick={() => handleConsent("accepted")}
         >
           Accept
@@ -52,20 +39,14 @@ const CookieConsent = () => {
         <Button
           className="m-1 "
           variant="primary"
-          style={{ borderRadius: "45%" }}
-          onClick={() => handleConsent("accepted")}
+          onClick={() => handleConsent("rejected")}
         >
           Reject
         </Button>
         <Button
-          className="p-0  border"
+          className="p-0 border border-white rounded-full w-8 h-8"
           variant="light"
           onClick={() => handleConsent("close")}
-          style={{
-            borderRadius: "50%",
-            width: "32px",
-            height: "32px",
-          }}
         >
           ✕
         </Button>

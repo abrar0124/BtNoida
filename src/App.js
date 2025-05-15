@@ -10,7 +10,7 @@ import Contactpage from "./Pages/Contactpage";
 import Loginapi from "./Pages/Loginapi";
 import HomeData from "./Components/HomeData/HomeData";
 import ProductsCruds from "./Pages/ProductsCruds";
-
+import "./index.css";
 function App() {
   return (
     <>

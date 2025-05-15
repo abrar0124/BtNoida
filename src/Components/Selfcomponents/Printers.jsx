@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import PrintersArray from "./PrintersArray";
 
 const Printers = () => {
@@ -14,12 +13,12 @@ const Printers = () => {
     country: false,
     type: false,
   });
+
   const handleCheckboxChange = (key, value) => {
     setFilters((prevFilters) => {
       const updatedFilters = prevFilters[key].includes(value)
         ? prevFilters[key].filter((item) => item !== value)
         : [...prevFilters[key], value];
-
       return { ...prevFilters, [key]: updatedFilters };
     });
   };
@@ -41,13 +40,12 @@ const Printers = () => {
   );
 
   return (
-    <div className="d-flex p-4 border-top">
+    <div className="flex p-4 border-t border-gray-300">
       {/* Sidebar Filters */}
+      <div className="w-1/4 p-4 border-gray-300">
+        <p className="text-2xl mb-2">Printers</p>
+        <p className="text-2xl border-b border-gray-300 pb-2">Filters</p>
 
-      <div className="w-25 p-4 border-end">
-        <p className="fs-2">Mobile Application</p>
-        <p className="fs-2 border-bottom">Filters</p>
-        {/* Filter Sections */}
         {[
           { key: "company", label: "Company", options: ["Custom4U", "Epson"] },
           {
@@ -61,26 +59,28 @@ const Printers = () => {
             options: ["Thermal", "Metal", "Inkjet", "Laser"],
           },
         ].map((filter) => (
-          <div className="border-bottom pb-2 mt-3">
+          <div key={filter.key} className="border-b border-gray-300 pb-2 mt-4">
             <div
-              className="d-flex justify-content-between align-items-center fw-semibold"
-              style={{ cursor: "pointer" }}
+              className="flex justify-between items-center font-semibold cursor-pointer"
               onClick={() => toggleFilter(filter.key)}
             >
-              <span className="fw-normal fs-5">{filter.label}</span>
+              <span className="font-normal text-lg">{filter.label}</span>
               <span>{openFilters[filter.key] ? "▲" : "▼"}</span>
             </div>
 
             {openFilters[filter.key] && (
-              <div className="mt-2">
+              <div className="mt-2 space-y-2">
                 {filter.options.map((option) => (
-                  <Form.Check
-                    type="checkbox"
-                    label={option}
-                    value={option}
-                    checked={filters[filter.key].includes(option)}
-                    onChange={() => handleCheckboxChange(filter.key, option)}
-                  />
+                  <label key={option} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value={option}
+                      checked={filters[filter.key].includes(option)}
+                      onChange={() => handleCheckboxChange(filter.key, option)}
+                      className="form-checkbox text-blue-600"
+                    />
+                    <span>{option}</span>
+                  </label>
                 ))}
               </div>
             )}
@@ -89,51 +89,47 @@ const Printers = () => {
       </div>
 
       {/* Main Content */}
-      <div className="w-75 p-4">
-        <div className="d-flex justify-content-between mb-4">
-          <InputGroup className="rounded shadow-sm w-50">
-            <Form.Control
-              className="p-3 border-0 bg-light fs-5"
+      <div className="w-3/4 p-4">
+        <div className="flex justify-between mb-6">
+          <div className="flex w-1/2 border rounded overflow-hidden">
+            <input
+              type="text"
+              className="flex-grow px-4 py-2 text-lg border-0 focus:outline-none"
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-
-            <InputGroup.Text className="bg-light border-0">
-              <img src="/Images/search.png" alt="Search" height="18" />
-            </InputGroup.Text>
-          </InputGroup>
-          <Button variant="primary">Add Your Company</Button>
+            <div className="flex items-center px-3 bg-white">
+              <img src="/Images/search.png" alt="Search" className="h-5 w-6" />
+            </div>
+          </div>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+            Add Your Company
+          </button>
         </div>
 
-        <div className="row">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product.id} className="col-md-4 mb-4">
-                <Card className="p-3 shadow-sm">
-                  <div className="text-primary text-center fw-bold mb-2 cursor-pointer">
-                    ➕ To Compare
-                  </div>
-                  <Card.Body>
-                    <Card.Img
-                      src="/Images/c.png"
-                      style={{ marginLeft: "40%", width: "29%" }}
-                    />
-                    <Card.Title className="text-center  fw-medium">
-                      {product.name}
-                    </Card.Title>
-                  </Card.Body>
-                  <Card.Img
-                    variant="top"
-                    src={product.image}
-                    alt={product.name}
-                    className="w-100 h-50 object-contain"
-                  />
-                </Card>
+              <div key={product.id} className="bg-white shadow p-4 rounded">
+                <div className="text-blue-600 text-center font-bold mb-2 cursor-pointer">
+                  ➕ To Compare
+                </div>
+                <div className="flex justify-center mb-4">
+                  <img src="/Images/c.png" alt="Logo" className="w-1/4" />
+                </div>
+                <h3 className="text-center font-medium text-lg mb-4">
+                  {product.name}
+                </h3>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-48 object-contain"
+                />
               </div>
             ))
           ) : (
-            <p className="text-center w-100">No products found.</p>
+            <p className="text-center col-span-full">No products found.</p>
           )}
         </div>
       </div>

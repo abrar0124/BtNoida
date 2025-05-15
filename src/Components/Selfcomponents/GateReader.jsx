@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import GateArray from "./GateArray";
-import FilterSidebar from "./FilterSidebar"; // ✅ Import FilterSidebar
+import FilterSidebar from "./FilterSidebar"; // Reusable Sidebar
 
 const GateReader = ({ product }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,60 +50,62 @@ const GateReader = ({ product }) => {
 
   return (
     <>
-      <p className="fs-2">{product.name}</p>
-      <div className="d-flex p-4 border-top">
-        {/* ✅ Reusable FilterSidebar */}
+      <p className="text-2xl font-semibold px-4">{product.name}</p>
+      <div className="flex border-t border-gray-300 p-4">
+        {/* Filter Sidebar */}
         <FilterSidebar
           filters={filters}
           setFilters={setFilters}
           openFilters={openFilters}
           setOpenFilters={setOpenFilters}
         />
+
         {/* Main Content */}
-        <div className="w-75 p-4">
-          <div className="d-flex justify-content-between mb-4">
-            <InputGroup className="rounded shadow-sm w-50">
-              <Form.Control
-                className="p-3 border-0 bg-light fs-5"
+        <div className="w-3/4 p-4">
+          <div className="flex justify-between mb-6">
+            <div className="flex w-1/2 border rounded overflow-hidden">
+              <input
+                type="text"
+                className="flex-grow px-4 py-3 text-lg border-0 focus:outline-none"
                 placeholder="Search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <InputGroup.Text className="bg-light border-0">
-                <img src="/Images/search.png" alt="Search" height="18" />
-              </InputGroup.Text>
-            </InputGroup>
-            <Button variant="primary">Add Your Company</Button>
+              <div className="flex items-center px-3 bg-white">
+                <img
+                  src="/Images/search.png"
+                  alt="Search"
+                  className="h-5 w-6"
+                />
+              </div>
+            </div>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+              Add Your Company
+            </button>
           </div>
 
-          <div className="row">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
-                <div key={product.id} className="col-md-4 mb-4">
-                  <Card className="p-3 shadow-sm">
-                    <div className="text-primary text-center fw-bold mb-2 cursor-pointer">
-                      ➕ To Compare
-                    </div>
-                    <Card.Body>
-                      <Card.Img
-                        src="/Images/c.png"
-                        style={{ marginLeft: "40%", width: "29%" }}
-                      />
-                      <Card.Title className="text-center  fw-medium">
-                        {product.name}
-                      </Card.Title>
-                    </Card.Body>
-                    <Card.Img
-                      variant="top"
-                      src={product.image}
-                      alt={product.name}
-                      className="w-100 h-50 object-contain"
-                    />
-                  </Card>
+                <div key={product.id} className="bg-white shadow p-4 rounded">
+                  <div className="text-blue-600 text-center font-bold mb-2 cursor-pointer">
+                    ➕ To Compare
+                  </div>
+                  <div className="flex justify-center mb-4">
+                    <img src="/Images/c.png" alt="Logo" className="w-1/4" />
+                  </div>
+                  <h3 className="text-center font-medium text-lg mb-4">
+                    {product.name}
+                  </h3>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-48 object-contain"
+                  />
                 </div>
               ))
             ) : (
-              <p className="text-center w-100">No products found.</p>
+              <p className="text-center col-span-full">No products found.</p>
             )}
           </div>
         </div>

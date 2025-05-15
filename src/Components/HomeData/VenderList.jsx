@@ -34,52 +34,23 @@ const VendorList = ({ onSelectionChange }) => {
 
   return (
     <div className="bg-dark text-white p-3">
-      <Text
-        type={"h2"}
-        content={"Select DCS Vendors"}
-        className="text-center py-3"
-      />
-      <Row className="w-100">
+      <h2 className="text-center py-3 text-xlg"> DCS Vendors</h2>
+      <div className="w-full flex flex-wrap gap-2 justify-center">
         {vendors.map((vendor, index) => (
-          <Col key={index} md={2} className="mb-3">
-            <div
-              className={`vendor-box ${
-                selectedVendors.some((v) => v.name === vendor.name)
-                  ? "selected"
-                  : ""
-              }`}
-              onClick={() => handleSelection(vendor)}
-              style={{ cursor: "pointer" }}
-            >
-              <span className="flag-icon">{vendor.flag}</span>
-              <span>{vendor.name}</span>
-            </div>
-          </Col>
+          <div
+            key={index}
+            className={` p-1 m-1 flex items-center   cursor-pointer rounded-lg border border-gray-100 transition-all duration-300 ${
+              selectedVendors.some((v) => v.name === vendor.name)
+                ? " border-white bg-gray-300  bg-opacity-20"
+                : ""
+            }`}
+            onClick={() => handleSelection(vendor)}
+          >
+            <span className="text-3xl mr-2">{vendor.flag}</span>
+            <span>{vendor.name}</span>
+          </div>
         ))}
-      </Row>
-
-      <style>
-        {`
-          .vendor-box {
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s;
-          }
-          .vendor-box.selected {
-            border: 2px solid white;
-            background-color: rgba(255, 255, 255, 0.1);
-          }
-          .flag-icon {
-            font-size: 2em;
-            margin-right: 5px;
-          }
-        `}
-      </style>
+      </div>
     </div>
   );
 };

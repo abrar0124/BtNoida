@@ -1,139 +1,106 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import EventsArray from "./Selfcomponents/EventsArray";
-import Text from "./Text";
 
 const Eventsdetails = () => {
   const { id } = useParams();
   const event = EventsArray.find((e) => e.id == id);
 
-  if (!event) return <p className="text-center mt-5">Event not found.</p>;
+  if (!event)
+    return (
+      <p className="text-center mt-20 text-lg font-semibold">
+        Event not found.
+      </p>
+    );
 
   return (
-    <Container style={{ marginTop: "7.9%" }}>
+    <div className="container mx-auto mt-40 px-4">
       {/* Countdown */}
-      <Row className="mb-4">
-        <Col>
-          <Text
-            type="h5"
-            content={
-              <>
-                <strong>Event Start ➝</strong> 00 : 00 : 00 : 00
-                <small className="text-muted">Days Hours Minutes Seconds</small>
-              </>
-            }
-          />
-        </Col>
-      </Row>
+      <div className="mb-6">
+        <h5>
+          <strong>Event Start ➝</strong> 00 : 00 : 00 : 00{" "}
+          <small className="text-gray-500">Days Hours Minutes Seconds</small>
+        </h5>
+      </div>
 
-      {/* Main Content */}
-      <Row className="g-4">
-        {/* Left Side Info Card */}
-        <Col md={4}>
-          <Card className="shadow-sm border-0">
-            <Card.Body>
-              {/* Dates */}
-              <div className="d-flex align-items-center mb-3">
-                <Text
-                  type={"p"}
-                  content={
-                    <>
-                      <strong>Thu</strong> <br />
-                      03 April ➝ <strong>Fri</strong> <br /> 04 April
-                    </>
-                  }
-                />
-              </div>
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Left Side Card */}
+        <div className="md:w-1/3">
+          <div className="shadow-md border border-gray-200 rounded-lg p-5 bg-white">
+            {/* Dates */}
+            <div className="mb-4">
+              <p>
+                <strong>Thu</strong> <br />
+                03 April ➝ <strong>Fri</strong> <br /> 04 April
+              </p>
+            </div>
 
-              {/* Location */}
-              <div className="d-flex align-items-center mb-3">
-                <div>
-                  <strong>
-                    {event.country}, {event.continent}
-                  </strong>
-                </div>
-              </div>
+            {/* Location */}
+            <div className="mb-4">
+              <strong>
+                {event.country}, {event.continent}
+              </strong>
+            </div>
 
-              {/* Category & Website */}
-              <div className="d-flex align-items-center justify-content-between mb-3">
-                <span>
-                  <Text
-                    type={"span"}
-                    content={"Summit"}
-                    className="text-success"
-                  />
-                </span>
-                <Button variant="primary" size="sm">
-                  Website
-                </Button>
-              </div>
+            {/* Category and Website */}
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-green-600 font-medium">Summit</span>
+              <button className="bg-blue-600 text-white text-sm px-3 py-1 rounded">
+                Website
+              </button>
+            </div>
 
-              {/* Visit All Events */}
-              <div className="mb-3">
-                <i className="bi bi-box-arrow-up-right me-2"></i>
-                <a href="/events">Visit All Events</a>
-              </div>
+            {/* Visit All Events */}
+            <div className="mb-4 text-blue-600 flex items-center space-x-2">
+              <i className="bi bi-box-arrow-up-right"></i>
+              <a href="/events" className="hover:underline">
+                Visit All Events
+              </a>
+            </div>
 
-              {/* Google Calendar */}
-              <Button variant="outline-primary" className="w-100">
-                <i className="bi bi-plus-lg me-2"></i>To Google Calendar
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
+            {/* Google Calendar */}
+            <button className="border border-blue-600 text-blue-600 px-4 py-2 transition  rounded w-full hover:bg-blue-500 hover:!text-white hover:duration-300 flex items-center justify-center gap-2">
+              <i className="bi bi-plus-lg"></i>
+              To Google Calendar
+            </button>
+          </div>
+        </div>
 
         {/* Right Content */}
-        <Col md={8}>
-          <div className="d-flex mb-4">
+        <div className="md:w-2/3">
+          <div className="flex items-start mb-6">
             <img
               src={event.image}
               alt={event.title}
-              style={{ width: "120px", height: "120px", objectFit: "cover" }}
-              className="me-3 rounded"
+              className="w-28 h-28 object-cover rounded mr-4"
             />
             <div>
-              <h3 className="fw-bold">{event.title}</h3>
+              <h3 className="text-2xl font-bold">{event.title}</h3>
             </div>
           </div>
-          <p>{event.description}</p>
 
-          <Text
-            type={"p"}
-            content={
-              <>
-                North America’s aviation sector faces disruption with airline
-                mergers, bankruptcies, capacity issues, and booming travel,
-                potentially reaching record levels in{" "}
-                <strong>{event.year}</strong>.
-              </>
-            }
-          />
+          <p className="mb-4">{event.description}</p>
 
-          <Text
-            type={"p"}
-            content={
-              <>
-                Political changes in the US may drive significant shifts in
-                regulations, funding, environmental policies, and trade,
-                impacting domestic and international airlines.
-              </>
-            }
-          />
+          <p className="mb-4">
+            North America’s aviation sector faces disruption with airline
+            mergers, bankruptcies, capacity issues, and booming travel,
+            potentially reaching record levels in <strong>{event.year}</strong>.
+          </p>
 
-          <Text
-            type={"p"}
-            content={
-              <>
-                The summit offers expert insights, high-level panels, and
-                networking opportunities, serving as a pivotal event for shaping
-                the future of aviation in the Americas.
-              </>
-            }
-          />
-        </Col>
-      </Row>
-    </Container>
+          <p className="mb-4">
+            Political changes in the US may drive significant shifts in
+            regulations, funding, environmental policies, and trade, impacting
+            domestic and international airlines.
+          </p>
+
+          <p>
+            The summit offers expert insights, high-level panels, and networking
+            opportunities, serving as a pivotal event for shaping the future of
+            aviation in the Americas.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
