@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
 import vendors from "./FlagArray";
-import Text from "../Text";
 
 const VendorList = ({ onSelectionChange }) => {
   const [selectedVendors, setSelectedVendors] = useState([]);
