@@ -49,31 +49,30 @@ function ProductDetail() {
             {product.name}
           </span>
         </div>
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-10 mt-10">
+        <div className="flex flex-col lg:flex-row  items-start  mt-32">
           {/* Left Column - Image */}
 
-          <div className="w-full lg:w-1/2 flex justify-center">
+          <div className="w-full lg:w-1/2 flex justify-center ">
             <img
               src={product.image}
               alt={product.name}
-              className="rounded max-w-full h-auto"
+              className="rounded max-w-[60%]"
             />
           </div>
 
           {/* Right Column - Description */}
-          <div className="w-full lg:w-1/2  lg:text-left">
+          <div className="w-full lg:w-1/2   lg:text-start">
             <p className="text-lg font-light">{product.description}</p>
-            <p className=" font-light">{product.extraInfo}</p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
               <Link
                 to={""}
-                className=" inline-block    p-3   rounded text-white no-underline bg-blue-500 border-2 border-transparent hover:!text-blue-500  hover:bg-white hover:border-[#0880e2] transition duration-300 ease-in-out"
+                className=" inline-block pt-2 text-center  h-[50px]  w-[25%]  rounded text-white no-underline bg-blue-600 border-2 border-transparent hover:!text-blue-600  hover:bg-white hover:border-[#0880e2] transition duration-300 ease-in-out"
               >
                 See more info
               </Link>
               <Link
                 to=""
-                className="p-3 text-lg no-underline  rounded border-2 border-blue-500 text-blue-500 hover:bg-blue-500  hover:!text-white transition"
+                className=" w-[19%] h-[50px] pt-2 text-center  no-underline   rounded border-2 border-blue-600 text-blue-600 hover:bg-blue-600  hover:!text-white transition"
               >
                 See FAQ
               </Link>

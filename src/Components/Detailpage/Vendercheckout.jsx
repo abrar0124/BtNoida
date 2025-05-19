@@ -80,7 +80,7 @@ const VendorTable = () => {
       <div className="flex flex-wrap justify-between items-center mb-4">
         <button
           onClick={() => setShow(true)}
-          className="bg-blue-600 text-white px-5 py-3 rounded shadow-md hover:bg-blue-700 m-2"
+          className="bg-blue-500  text-white px-5 py-3 transition rounded hover:bg-blue-800 text-right"
         >
           Add Your Company
         </button>
@@ -88,11 +88,11 @@ const VendorTable = () => {
 
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <div className="w-full sm:w-[300px]">
-          <div className="flex items-center rounded shadow-sm bg-gray-100 px-3 py-2">
+          <div className="flex items-center rounded border-1 border-gray-300 px-3 py-2">
             <input
               type="text"
               placeholder="Search"
-              className="w-full bg-transparent outline-none text-lg"
+              className="w-full font-light   outline-none  text-lg"
               value={search}
               onChange={(e) => dispatch(setSearch(e.target.value))}
             />
@@ -105,7 +105,7 @@ const VendorTable = () => {
         </div>
 
         <select
-          className="w-full sm:w-1/4 p-3 border rounded text-lg"
+          className="w-full sm:w-1/4 p-3 border font-light text-gray-500 bg-transparent rounded text-lg"
           value={countryname}
           onChange={(e) => dispatch(setCountryname(e.target.value))}
         >
@@ -116,7 +116,7 @@ const VendorTable = () => {
         </select>
 
         <select
-          className="w-full sm:w-1/4 p-3 border rounded text-lg"
+          className="w-full sm:w-1/4 p-3 border bg-transparent font-light text-gray-500  rounded text-lg"
           value={continent}
           onChange={(e) => dispatch(setContinent(e.target.value))}
         >
