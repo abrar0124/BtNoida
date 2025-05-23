@@ -11,6 +11,7 @@ import Loginapi from "./Pages/Loginapi";
 import HomeData from "./Components/HomeData/HomeData";
 import ProductsCruds from "./Pages/ProductsCruds";
 import "./index.css";
+import PortfolioPage from "./Pages/PortfolioPage";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
           <Route path="/api" element={<Apipage />} />
           <Route path="/contact" element={<Contactpage />} />
           <Route path="/Loginapi" element={<Loginapi />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />{" "}
         </Routes>
       </BrowserRouter>
     </>

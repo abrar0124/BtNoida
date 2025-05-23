@@ -46,6 +46,7 @@ const HeaderArray = [
   { name: "APIs", path: "/api" },
   { name: "Contact Us", path: "/contact" },
   { name: "Login Api", path: "/Loginapi" },
+  { name: "Porfolio", path: "/portfolio" },
 ];
 
 export default HeaderArray;

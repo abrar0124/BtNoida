@@ -1,53 +1,69 @@
-import VendorTable from "./Detailpage/Vendercheckout";
-import { Link } from "react-router-dom";
-import Text from "./Text";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Footer2 from "./HomeData/Footer2";
 
-function Api() {
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (!username || !password) {
+      setError("Please fill both username and password.");
+      return;
+    }
+
+    const passwordrequirments =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{8,}$/;
+
+    if (!passwordrequirments.test(password)) {
+      setError(
+        "Password must be at least 8 characters, include an uppercase letter, number, and special character."
+      );
+      return;
+    }
+
+    // Validation passed – navigate to /portfolio
+    setError("");
+    navigate("/portfolio");
+  };
+
   return (
-    <div className="mt-28 ml-10">
-      {/* Breadcrumb */}
-      <div className="text-3xl font-normal space-x-3">
-        <Link to="/" className="text-gray-800  no-underline hover:underline ">
-          Home
-        </Link>
-        <span className="">/</span>
-        <span className="text-gray-800">Api</span>
+    <>
+      <div className="mt-[10%] ml-[30%] p-5">
+        <h2>Login</h2>
+
+        <input
+          type="text"
+          placeholder="Enter Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-[60%] p-2 mb-2 border border-black"
+        />
+        <br />
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-[60%] p-2 mb-2 border border-black"
+        />
+        <br />
+        <button
+          onClick={handleLogin}
+          className="w-[60%] py-2 px-4 text-white font-bold bg-green-600 hover:bg-green-700 transition"
+        >
+          Login
+        </button>
+
+        {error && (
+          <p className="text-red-600 font-medium w-[60%] mt-2">{error}</p>
+        )}
       </div>
-
-      {/* Heading */}
-      <p className="text-3xl my-4">Advanced Passenger Information</p>
-
-      {/* Description Paragraph */}
-      <p className="text-xxlg leading-9 text-gray-700 mb-6">
-        The authorities of certain countries require airlines to transmit
-        Advance Passenger Information (API) for all passengers flying to or via
-        their country before departure. Passengers can provide their Advance
-        Passenger Information data during check-in (Web Check-in or Kiosk
-        Check-in in Airport) or using online form. Some airlines such as Air
-        Canada, easyjet, emirates, american airlines, singapore airlines, air
-        france, qatar airways, etihad, and iberia allow the passengers to
-        provide API using online form to enter required information before they
-        go to the airport. Passengers won’t be asked to provide the passenger
-        information again when checking in. Any inaccurate or incomplete data
-        provided could delay the journey, either at check-in or with the
-        immigration authorities. Those passengers who refuse to supply API will
-        be refused entry to these countries and therefore will not be allowed to
-        travel.
-      </p>
-
-      {/* Button */}
-      <button className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-200">
-        See More info
-      </button>
-
-      {/* Vendor Table Title */}
-      <h2 className="text-3xl font-normal my-8">
-        Advanced Passenger Information vendors
-      </h2>
-
-      <VendorTable />
-    </div>
+      <Footer2 />
+    </>
   );
-}
+};
 
-export default Api;
+export default Login;

@@ -1,16 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//first api call
-export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
+// First API call with category argument
+export const fetchProduct1 = createAsyncThunk(
+  "products/fetch1",
+  async (category) => {
+    const response = await axios.get("https://fakestoreapi.com/products");
+    return { data: response.data, category };
+  }
+);
+
+// Second API call
+export const fetchProducts2 = createAsyncThunk("products/fetch2", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
 });
 
-//second api call
-export const fetchProducts2 = createAsyncThunk("products/fetch2", async () => {
-  const response = await axios.get("https://fakestoreapi.com/products");
-  return response.data;
+// Delete product
+export const deleteProduct = createAsyncThunk("products/delete", async (id) => {
+  await axios.delete(`https://fakestoreapi.com/products/${id}`);
+  return id; // return deleted product ID
 });
 
 const productSlice = createSlice({
@@ -30,11 +39,8 @@ const productSlice = createSlice({
         console.log("fetchProduct1 pending...");
       })
       .addCase(fetchProduct1.fulfilled, (state, action) => {
-        console.log("Full action object:", action);
-        const category = action.meta.arg;
-        state.items1 = action.payload.filter(
-          (product) => product.category === category
-        );
+        const { data, category } = action.payload;
+        state.items1 = data.filter((product) => product.category === category);
         state.loading = false;
         console.log("first api:", state.items1);
       })
@@ -58,6 +64,20 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = "fetchProducts2 API Error";
         console.log("fetchProducts2 error:", state.error);
+      })
+
+      // deleteProduct
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.items1 = state.items1.filter(
+          (item) => item.id !== action.payload
+        );
+        state.items2 = state.items2.filter(
+          (item) => item.id !== action.payload
+        );
+        console.log("Deleted product with id:", action.payload);
+      })
+      .addCase(deleteProduct.rejected, (action) => {
+        console.log("Delete failed:", action.payload);
       });
   },
 });
