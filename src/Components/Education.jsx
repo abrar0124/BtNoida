@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./sassfile.scss";
 import { FaGraduationCap } from "react-icons/fa";
 import { Image } from "react-bootstrap";
@@ -6,7 +6,7 @@ import Title from "./layout/Title";
 import Body from "./layout/Body";
 const Education = () => {
   return (
-    <section id="education" className="edu-section text-black">
+    <section id="education" className="edu-section p-6 text-black">
       <Title level={2} className="text-black fw-bold text-center">
         <span className="spanish">
           <FaGraduationCap />

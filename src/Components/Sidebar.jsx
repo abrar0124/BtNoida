@@ -6,8 +6,8 @@ import { Image } from "react-bootstrap";
 import Body from "./layout/Body";
 
 const sections = [
-  { id: "about", label: "ProductsCruds", icon: <FaUser /> },
-  { id: "education", label: "EDUCATION", icon: <FaGraduationCap /> },
+  { id: "about", label: "Products", icon: <FaUser /> },
+  { id: "education", label: "Education", icon: <FaGraduationCap /> },
   { id: "experience", label: "EXPERIENCE", icon: <FaBriefcase /> },
 ];
 
