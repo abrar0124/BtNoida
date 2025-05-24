@@ -103,7 +103,7 @@ const productSlice = createSlice({
           );
         state.items1 = updatedList(state.items1);
         state.items2 = updatedList(state.items2);
-        console.log(updated);
+        console.log("Successfully Updated Product:", updated);
       })
 
       .addCase(updateProduct.rejected, (action) => {
