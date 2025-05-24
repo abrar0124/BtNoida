@@ -7,8 +7,7 @@ import Body from "./layout/Body";
 
 const sections = [
   { id: "about", label: "Products", icon: <FaUser /> },
-  { id: "education", label: "Education", icon: <FaGraduationCap /> },
-  { id: "experience", label: "EXPERIENCE", icon: <FaBriefcase /> },
+  { id: "education", label: "Users", icon: <FaGraduationCap /> },
 ];
 
 const Sidebar = ({ activeSection }) => {

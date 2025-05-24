@@ -1,36 +1,46 @@
 import React, { useEffect } from "react";
 import "./sassfile.scss";
-import { FaGraduationCap } from "react-icons/fa";
-import { Image } from "react-bootstrap";
-import Title from "./layout/Title";
-import Body from "./layout/Body";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "./Userslice/Userslice";
 const Education = () => {
+  const dispatch = useDispatch();
+  const { list, loading, error } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  if (loading) return <p>Loading users...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <section id="education" className="edu-section p-6 text-black">
-      <Title level={2} className="text-black fw-bold text-center">
-        <span className="spanish">
-          <FaGraduationCap />
-        </span>
-        Education
-      </Title>
+      <h2 className="text-xl font-serif font-bold mb-4">Users List</h2>
+      <table className="table-auto w-full border font-serif">
+        <thead>
+          <tr>
+            <th className="border px-4 py-2">ID</th>
+            <th className="border px-4 py-2">Name</th>
+            <th className="border px-4 py-2">Email</th>
+            <th className="border px-4 py-2">Password</th>
 
-      <Body variant={3} className="text-black fw-bold">
-        <span className="custom-font-serif">
-          Bachelor of Software Engineering (BSSE)
-        </span>
-        <p className="pic text-black fw-normal">
-          University of Gujrat, Punjab, Pakistan
-        </p>
-      </Body>
-
-      <Body variant={4} className="text-black  fw-bold">
-        <span className="custom-font-serif">
-          FSC Pre-Engineering (FSC Pre-Eng)
-        </span>
-        <p className="pic text-black fw-normal">
-          Punjab College Gujrat. Gujrat, Pakistan
-        </p>
-      </Body>
+            <th className="border px-4 py-2">Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map((user) => (
+            <tr key={user.id}>
+              <td className="border px-4 py-2">{user.id}</td>
+              <td className="border px-4 py-2">
+                {user.name.firstname} {user.name.lastname}
+              </td>
+              <td className="border px-4 py-2">{user.email}</td>
+              <td className="border px-4 py-2">{user.password}</td>
+              <td className="border px-4 py-2">{user.username}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 };

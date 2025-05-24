@@ -51,6 +51,8 @@ const About = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <h2 className="text-[30px] font-serif">Welcome to the Admin Panel</h2>
         </div>
+        <h2 className="text-xl font-serif font-bold mb-4">Products List</h2>
+
         <div className="flex mb-3 gap-2 flex-wrap">
           <input
             type="text"

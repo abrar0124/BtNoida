@@ -23,7 +23,6 @@ export const deleteProduct = createAsyncThunk("products/delete", async (id) => {
 });
 
 // Updated product
-
 export const updateProduct = createAsyncThunk(
   "products/update",
   async (updatedProduct) => {

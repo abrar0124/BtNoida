@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import About from "../Components/About";
 import Education from "../Components/Education";
-import Experience from "../Components/Experience";
-import Footer2 from "../Components/HomeData/Footer2";
 import Header from "../Components/Header";
 import Footer3 from "../Components/Footer2";
 
@@ -38,9 +36,7 @@ const PortfolioPage = () => {
           <section id="education" className="section-padding">
             <Education />
           </section>
-          <section id="experience" className="section-padding">
-            <Experience />
-          </section>
+
           <Footer3 />
         </div>
       </div>
