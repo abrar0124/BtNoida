@@ -4,6 +4,7 @@ import {
   deleteProduct,
   fetchProduct1,
   fetchProducts2,
+  updateProduct,
 } from "../reduxthunk/Productslice";
 
 const About = () => {
@@ -32,6 +33,11 @@ const About = () => {
       price: item.price,
       image: item.image,
     });
+  };
+
+  const handleUpdate = () => {
+    dispatch(updateProduct({ ...editData }));
+    setEditData({ id: null, title: "", category: "", price: "", image: "" });
   };
 
   if (loading)
@@ -82,6 +88,12 @@ const About = () => {
             }
             className="border w-[20%] px-3 py-2 rounded"
           />
+          <button
+            onClick={handleUpdate}
+            className="bg-red-900 text-white px-4 py-2 rounded"
+          >
+            Update
+          </button>
         </div>
         {/* First Table */}
         <div className="overflow-x-auto font-serif rounded-md">

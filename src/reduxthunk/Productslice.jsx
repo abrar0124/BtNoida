@@ -19,8 +19,21 @@ export const fetchProducts2 = createAsyncThunk("products/fetch2", async () => {
 // Delete product
 export const deleteProduct = createAsyncThunk("products/delete", async (id) => {
   await axios.delete(`https://fakestoreapi.com/products/${id}`);
-  return id; // return deleted product ID
+  return id;
 });
+
+// Updated product
+
+export const updateProduct = createAsyncThunk(
+  "products/update",
+  async (updatedProduct) => {
+    const response = await axios.put(
+      `https://fakestoreapi.com/products/${updatedProduct.id}`,
+      updatedProduct
+    );
+    return response.data;
+  }
+);
 
 const productSlice = createSlice({
   name: "products",
@@ -78,6 +91,23 @@ const productSlice = createSlice({
       })
       .addCase(deleteProduct.rejected, (action) => {
         console.log("Delete failed:", action.payload);
+      })
+
+      // Updated Product
+
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const updated = action.payload;
+        const updatedList = (list) =>
+          list.map((item) =>
+            item.id === updated.id ? { ...updated, rating: item.rating } : item
+          );
+        state.items1 = updatedList(state.items1);
+        state.items2 = updatedList(state.items2);
+        console.log(updated);
+      })
+
+      .addCase(updateProduct.rejected, (action) => {
+        console.log("Update failed:", action.payload);
       });
   },
 });
