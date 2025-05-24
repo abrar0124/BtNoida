@@ -9,7 +9,6 @@ const store = configureStore({
     vendor: VenderSlice,
     auth: Authslice,
     products: Productslice,
-    // user: Userslice,
   },
 });
 

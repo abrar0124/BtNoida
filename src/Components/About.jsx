@@ -30,7 +30,7 @@ const About = () => {
       title: item.title,
       category: item.category,
       price: item.price,
-      image: item.image, // <-- add this
+      image: item.image,
     });
   };
 
