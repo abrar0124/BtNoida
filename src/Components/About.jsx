@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteProduct,
   fetchProduct1,
-  fetchProducts2,
   updateProduct,
 } from "../reduxthunk/Productslice";
 
 const About = () => {
   const dispatch = useDispatch();
-  const { items1, items2, loading } = useSelector((state) => state.products);
+  const { items1, loading } = useSelector((state) => state.products);
+
   const [editData, setEditData] = useState({
     id: null,
     title: "",
@@ -18,13 +18,16 @@ const About = () => {
     image: "",
   });
 
+  const [updatingId, setUpdatingId] = useState(null);
+
   useEffect(() => {
-    dispatch(fetchProduct1("men's clothing"));
-    dispatch(fetchProducts2());
-  }, []);
+    dispatch(fetchProduct1());
+  }, [dispatch]);
+
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
   };
+
   const handleEdit = (item) => {
     setEditData({
       id: item.id,
@@ -35,8 +38,10 @@ const About = () => {
     });
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
+    setUpdatingId(editData.id);
     dispatch(updateProduct({ ...editData }));
+    setUpdatingId(null);
     setEditData({ id: null, title: "", category: "", price: "", image: "" });
   };
 
@@ -90,13 +95,8 @@ const About = () => {
             }
             className="border w-[20%] px-3 py-2 rounded"
           />
-          <button
-            onClick={handleUpdate}
-            className="bg-red-900 text-white px-4 py-2 rounded"
-          >
-            Update
-          </button>
         </div>
+
         {/* First Table */}
         <div className="overflow-x-auto font-serif rounded-md">
           <table className="min-w-full text-sm border-collapse">
@@ -129,77 +129,36 @@ const About = () => {
                   <td className="border px-4 py-2">${item.price}</td>
                   <td className="border px-4 py-2">{item.category}</td>
                   <td className="border px-4 py-2">{item.rating?.count}</td>
+
                   <td className="border px-4 py-2">
-                    <div className="flex">
-                      <button
-                        onClick={() => handleEdit(item)}
-                        className="bg-green-600 text-white px-3 py-1 rounded mr-2"
-                      >
-                        Edit
-                      </button>
+                    <div className="flex items-center">
+                      {editData.id === item.id ? (
+                        updatingId === item.id ? (
+                          <p className="text-sm italic text-gray-500 mr-2">
+                            Please wait...
+                          </p>
+                        ) : (
+                          <button
+                            onClick={handleUpdate}
+                            className="bg-yellow-600 text-white px-3 py-1 rounded mr-2"
+                          >
+                            Update
+                          </button>
+                        )
+                      ) : (
+                        <button
+                          onClick={() => handleEdit(item)}
+                          className="bg-green-600 text-white px-3 py-1 rounded mr-2"
+                          disabled={updatingId !== null}
+                        >
+                          Edit
+                        </button>
+                      )}
 
                       <button
                         onClick={() => handleDelete(item.id)}
                         className="bg-red-600 text-white px-3 py-1 rounded"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Second API Title */}
-        <h2 className="w-fit text-[18px] font-serif  capitalize mb-6 border-b-4 border-blue-600 pb-2 mt-12">
-          Popular Products from Second API
-        </h2>
-
-        {/* Second Table */}
-        <div className="overflow-x-auto font-serif rounded-md">
-          <table className="min-w-full text-sm border-collapse">
-            <thead className=" text-gray-800">
-              <tr>
-                <th className="border px-4 py-2">ID</th>
-                <th className="border px-4 py-2">Image</th>
-                <th className="border px-4 py-2">Title</th>
-                <th className="border px-4 py-2">Price ($)</th>
-                <th className="border px-4 py-2">Category</th>
-                <th className="border px-4 py-2">Rating Count</th>
-                <th className="border px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items2.map((item, index) => (
-                <tr
-                  key={item.id}
-                  className={index % 2 === 0 ? "bg-white" : "bg-green-100"}
-                >
-                  <td className="border px-4 py-2">{item.id}</td>
-                  <td className="border px-4 py-2">
-                    <img
-                      src={item.image}
-                      alt="product"
-                      className="w-[50px] h-[50px] object-contain"
-                    />
-                  </td>
-                  <td className="border px-4 py-2">{item.title}</td>
-                  <td className="border px-4 py-2">${item.price}</td>
-                  <td className="border px-4 py-2">{item.category}</td>
-                  <td className="border px-4 py-2">{item.rating?.count}</td>
-                  <td className="border px-4 py-2">
-                    <div className="flex">
-                      <button
-                        onClick={() => handleEdit(item)}
-                        className="bg-green-600 text-white px-3 py-1 rounded mr-2"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="bg-red-600 text-white px-3 py-1 rounded"
+                        disabled={updatingId === item.id}
                       >
                         Delete
                       </button>
