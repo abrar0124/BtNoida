@@ -8,7 +8,7 @@ import {
 
 const About = () => {
   const dispatch = useDispatch();
-  const { items1, loading } = useSelector((state) => state.products);
+  const { items1 } = useSelector((state) => state.products);
 
   const [editData, setEditData] = useState({
     id: null,
@@ -40,15 +40,9 @@ const About = () => {
 
   const handleUpdate = async () => {
     setUpdatingId(editData.id);
-    dispatch(updateProduct({ ...editData }));
-    setUpdatingId(null);
+    await dispatch(updateProduct({ ...editData })); // Wait for update to complete
     setEditData({ id: null, title: "", category: "", price: "", image: "" });
   };
-
-  if (loading)
-    return (
-      <p className="text-center mt-10 text-lg  text-gray-700">Please wait...</p>
-    );
 
   return (
     <section id="about" className="text-black py-10 bg-white min-h-screen">
@@ -96,8 +90,6 @@ const About = () => {
             className="border w-[20%] px-3 py-2 rounded"
           />
         </div>
-
-        {/* First Table */}
         <div className="overflow-x-auto font-serif rounded-md">
           <table className="min-w-full text-sm border-collapse">
             <thead className=" text-gray-800">
