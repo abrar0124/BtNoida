@@ -4,8 +4,22 @@ import axios from "axios";
 // Get Products
 export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
+  console.log("get products:", response.data);
   return response.data;
 });
+
+// Search Products from API
+export const searchProducts = createAsyncThunk(
+  "products/search",
+  async (query) => {
+    const response = await axios.get("https://fakestoreapi.com/products");
+    const filtered = response.data.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log("searching products from api:", filtered);
+    return filtered;
+  }
+);
 
 // Delete product
 export const deleteProduct = createAsyncThunk("products/delete", async (id) => {
@@ -13,7 +27,7 @@ export const deleteProduct = createAsyncThunk("products/delete", async (id) => {
   return id;
 });
 
-// Updated product
+// Update product
 export const updateProduct = createAsyncThunk(
   "products/update",
   async (updatedProduct) => {
@@ -35,37 +49,44 @@ const productSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      // fetchProduct
-
+      // Fetch Products
       .addCase(fetchProduct1.pending, (state) => {
         state.loading = true;
-        console.log("fetchProducts pending...");
       })
-
       .addCase(fetchProduct1.fulfilled, (state, action) => {
         state.items1 = action.payload;
         state.loading = false;
-        console.log("Successfully Get Products:", state.items1);
       })
       .addCase(fetchProduct1.rejected, (state) => {
         state.loading = false;
-        state.error = "fetchProducts API Error";
-        console.log("fetchProducts error:", state.error);
+        state.error = "Failed to fetch products";
       })
 
-      // deleteProduct
+      // Search Products
+      .addCase(searchProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(searchProducts.fulfilled, (state, action) => {
+        state.items1 = action.payload;
+        state.loading = false;
+      })
+      .addCase(searchProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Search failed";
+      })
+
+      // Delete Product
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.items1 = state.items1.filter(
           (item) => item.id !== action.payload
         );
-
-        console.log("Deleted product with id:", action.payload);
       })
       .addCase(deleteProduct.rejected, (action) => {
         console.log("Delete failed:", action.payload);
       })
 
-      // Updated Product
+      // Update Product
       .addCase(updateProduct.fulfilled, (state, action) => {
         const updated = action.payload;
         const updatedList = (list) =>
@@ -73,9 +94,7 @@ const productSlice = createSlice({
             item.id === updated.id ? { ...updated, rating: item.rating } : item
           );
         state.items1 = updatedList(state.items1);
-        console.log("Successfully Updated Product:", updated);
       })
-
       .addCase(updateProduct.rejected, (action) => {
         console.log("Update failed:", action.payload);
       });
