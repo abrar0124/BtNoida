@@ -90,11 +90,10 @@ const productSlice = createSlice({
       .addCase(updateProduct.fulfilled, (state, action) => {
         const updated = action.payload;
         const updatedList = (list) =>
-          list.map((item) =>
-            item.id === updated.id ? { ...updated, rating: item.rating } : item
-          );
+          list.map((item) => (item.id === updated.id ? { ...updated } : item));
         state.items1 = updatedList(state.items1);
       })
+
       .addCase(updateProduct.rejected, (action) => {
         console.log("Update failed:", action.payload);
       });
