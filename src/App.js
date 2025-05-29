@@ -29,7 +29,7 @@ function App() {
           <Route path="/api" element={<Apipage />} />
           <Route path="/contact" element={<Contactpage />} />
           <Route path="/Loginapi" element={<Loginapi />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />{" "}
+          <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </BrowserRouter>
     </>

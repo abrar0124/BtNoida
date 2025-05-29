@@ -1,8 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+// Async login function
+
+export const loginUsers = createAsyncThunk(
+  "auth/loginUser",
+  async ({ username, password }) => {
+    const response = await axios.post("https://fakestoreapi.com/auth/login", {
+      username,
+      password,
+    });
+
+    const loginData = {
+      token: response.data.token,
+      username,
+      password,
+    };
+    localStorage.setItem("loginData", JSON.stringify(loginData));
+    return loginData;
+  }
+);
 
 const initialState = {
-  username: "mor_2314",
-  password: "83r5^_",
+  username: "",
+  password: "",
   token: null,
   message: "",
 };
@@ -17,35 +38,35 @@ const authSlice = createSlice({
     setPassword: (state, action) => {
       state.password = action.payload;
     },
-
-    login: (state, action) => {
-      state.token = action.payload.token;
-      state.message = "✅ Login Successful!";
-    },
-
     logout: (state) => {
-      state.token = null;
       state.username = "";
       state.password = "";
-      state.message = "Log out successfully!";
-    },
-    setMessage: (state, action) => {
-      state.message = action.payload;
+      state.token = null;
+      state.message = "Logged out successfully!";
+      localStorage.removeItem("loginData");
     },
     restoreSession: (state, action) => {
+      state.username = action.payload.username;
+      state.password = action.payload.password;
       state.token = action.payload.token;
-      state.message = "✅ Logged in from previous session!";
+      state.message = "✅ Logged in from saved session.";
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUsers.fulfilled, (state, action) => {
+        state.username = action.payload.username;
+        state.password = action.payload.password;
+        state.token = action.payload.token;
+        state.message = "✅ Login successful!";
+        console.log("Api Response after user login:", state.token);
+      })
+      .addCase(loginUsers.rejected, (state, action) => {
+        state.message = action.payload;
+      });
   },
 });
 
-export const {
-  setUsername,
-  setPassword,
-  login,
-  logout,
-  setMessage,
-  restoreSession,
-} = authSlice.actions;
-
+export const { setUsername, setPassword, logout, restoreSession } =
+  authSlice.actions;
 export default authSlice.reducer;

@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
-import Footer2 from "../HomeData/Footer2";
+import { useNavigate } from "react-router-dom";
 
 import {
-  login,
+  loginUsers,
   restoreSession,
-  setMessage,
   setPassword,
   setUsername,
 } from "../Authslice/Authslice";
-import { useNavigate } from "react-router-dom";
+import Footer from "../HomeData/Footer";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,18 +23,9 @@ const Login = () => {
   }, []);
 
   const handleLogin = async () => {
-    try {
-      const credentials = { username, password };
-      const response = await axios.post(
-        "https://fakestoreapi.com/auth/login",
-        credentials
-      );
-      dispatch(login(response.data));
-      localStorage.setItem("loginData", JSON.stringify(response.data));
-      console.log(response.data);
+    const resultAction = await dispatch(loginUsers({ username, password }));
+    if (loginUsers.fulfilled.match(resultAction)) {
       navigate("/bgpic");
-    } catch {
-      dispatch(setMessage("login failed"));
     }
   };
 
@@ -76,7 +64,7 @@ const Login = () => {
           {message}
         </p>
       </div>
-      <Footer2 />
+      <Footer />
     </>
   );
 };

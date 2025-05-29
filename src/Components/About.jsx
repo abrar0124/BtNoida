@@ -10,6 +10,7 @@ import {
 const About = () => {
   const dispatch = useDispatch();
   const { items1, loading } = useSelector((state) => state.products);
+  const { username, password } = useSelector((state) => state.auth);
 
   const [editData, setEditData] = useState({
     id: null,
@@ -53,7 +54,29 @@ const About = () => {
           <h2 className="text-[30px] font-serif">Welcome to the Admin Panel</h2>
         </div>
 
-        <h2 className="text-xl font-serif font-bold mb-4">Products List</h2>
+        <div className="border border-2 w-[30%] p-3">
+          {!username || !password ? (
+            <p className="font-serif font-medium text-lg text-red-600">
+              User Detail will show after successfully login.
+            </p>
+          ) : (
+            <>
+              <p className="font-serif font-medium text-lg text-green-600">
+                User Detail has been shown after login:
+              </p>
+              <p className="text-lg font-serif font-bold text-black">
+                UserName:{" "}
+                <span className="text-xl text-green-700">{username}</span>
+              </p>
+              <p className="text-lg font-serif font-bold text-black">
+                Password:{" "}
+                <span className="ps-2 text-xl text-green-700">{password}</span>
+              </p>
+            </>
+          )}
+        </div>
+
+        <h2 className="text-xl font-serif font-bold my-4">Products List</h2>
 
         <input
           type="text"

@@ -1,44 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  loginUsers,
+  restoreSession,
+  setPassword,
+  setUsername,
+} from "./Authslice/Authslice";
 import Footer2 from "./HomeData/Footer2";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { username, password, message } = useSelector((state) => state.auth);
 
-  const handleLogin = () => {
-    if (!username || !password) {
-      setError("Please fill both username and password.");
-      return;
+  useEffect(() => {
+    const storeddata = JSON.parse(localStorage.getItem("loginData"));
+    if (storeddata) {
+      dispatch(restoreSession(storeddata));
     }
+  }, [dispatch]);
 
-    const passwordrequirments =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{8,}$/;
-
-    if (!passwordrequirments.test(password)) {
-      setError(
-        "Password must be at least 8 characters, include an uppercase letter, number, and special character."
-      );
-      return;
-    }
-
-    // Validation passed – navigate to /portfolio
-    setError("");
+  const handleLogin = async () => {
+    await dispatch(loginUsers({ username, password }));
     navigate("/portfolio");
   };
 
   return (
     <>
       <div className="mt-[10%] ml-[30%] p-5">
-        <h2>Login</h2>
+        <h2 className="font-serif">Login</h2>
 
         <input
           type="text"
           placeholder="Enter Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => dispatch(setUsername(e.target.value))}
           className="w-[60%] p-2 mb-2 border border-black"
         />
         <br />
@@ -46,7 +43,7 @@ const Login = () => {
           type="password"
           placeholder="Enter Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => dispatch(setPassword(e.target.value))}
           className="w-[60%] p-2 mb-2 border border-black"
         />
         <br />
@@ -57,9 +54,13 @@ const Login = () => {
           Login
         </button>
 
-        {error && (
-          <p className="text-red-600 font-medium w-[60%] mt-2">{error}</p>
-        )}
+        <p
+          className={`mt-4 ${
+            message.includes("✅") ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {message}
+        </p>
       </div>
       <Footer2 />
     </>
