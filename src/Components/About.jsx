@@ -5,12 +5,14 @@ import {
   fetchProduct1,
   updateProduct,
   searchProducts,
+  sortManually,
 } from "../reduxthunk/Productslice";
 
 const About = () => {
   const dispatch = useDispatch();
   const { items1, loading } = useSelector((state) => state.products);
   const { username, password } = useSelector((state) => state.auth);
+  const [sortAsc, setSortAsc] = useState(true);
 
   const [editData, setEditData] = useState({
     id: null,
@@ -57,7 +59,7 @@ const About = () => {
         <div className="border border-2 w-[30%] p-3">
           {!username || !password ? (
             <p className="font-serif font-medium text-lg text-red-600">
-              User Detail will show after successfully login.
+              User Detail will show after login.
             </p>
           ) : (
             <>
@@ -120,16 +122,94 @@ const About = () => {
             className="border w-[20%] px-3 py-2 rounded"
           />
         </div>
-
-        {/* 🧾 Table */}
         <div className="overflow-x-auto font-serif rounded-md">
           <table className="min-w-full text-sm border-collapse">
             <thead className="text-gray-800">
               <tr>
-                <th className="border px-4 py-2">ID</th>
-                <th className="border px-4 py-2">Title</th>
-                <th className="border px-4 py-2">Price ($)</th>
-                <th className="border px-4 py-2">Category</th>
+                <th className="border w-[10%] px-4 py-2">
+                  <button
+                    onClick={() => {
+                      const sorted = [...items1].sort((a, b) =>
+                        sortAsc ? a.id - b.id : b.id - a.id
+                      );
+                      dispatch(sortManually(sorted));
+                      setSortAsc(!sortAsc);
+                    }}
+                  >
+                    <span className="flex items-center">
+                      ID
+                      {sortAsc ? (
+                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
+                      ) : (
+                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
+                      )}
+                    </span>
+                  </button>
+                </th>
+                <th className="border px-4 ">
+                  <button
+                    onClick={() => {
+                      const sorted = [...items1].sort((a, b) =>
+                        sortAsc
+                          ? a.title.localeCompare(b.title)
+                          : b.title.localeCompare(a.title)
+                      );
+                      dispatch(sortManually(sorted));
+                      setSortAsc(!sortAsc);
+                    }}
+                  >
+                    <span className="flex items-center">
+                      Title
+                      {sortAsc ? (
+                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
+                      ) : (
+                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
+                      )}
+                    </span>
+                  </button>
+                </th>
+                <th className="border w-[14%] px-4 py-2">
+                  <button
+                    onClick={() => {
+                      const sorted = [...items1].sort((a, b) =>
+                        sortAsc ? a.price - b.price : b.price - a.price
+                      );
+                      dispatch(sortManually(sorted));
+                      setSortAsc(!sortAsc);
+                    }}
+                  >
+                    <span className="flex items-center">
+                      Price
+                      {sortAsc ? (
+                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
+                      ) : (
+                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
+                      )}
+                    </span>
+                  </button>
+                </th>
+                <th className="border px-4 py-2">
+                  <button
+                    onClick={() => {
+                      const sorted = [...items1].sort((a, b) =>
+                        sortAsc
+                          ? a.category.localeCompare(b.category)
+                          : b.category.localeCompare(a.category)
+                      );
+                      dispatch(sortManually(sorted));
+                      setSortAsc(!sortAsc);
+                    }}
+                  >
+                    <span className="flex items-center">
+                      Category
+                      {sortAsc ? (
+                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
+                      ) : (
+                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
+                      )}
+                    </span>
+                  </button>
+                </th>
                 <th className="border px-4 py-2">Actions</th>
               </tr>
             </thead>
@@ -137,7 +217,7 @@ const About = () => {
               {loading ? (
                 <tr>
                   <td colSpan="5" className="text-center py-4 text-gray-500">
-                    Loading...
+                    Loading products...
                   </td>
                 </tr>
               ) : items1.length === 0 ? (

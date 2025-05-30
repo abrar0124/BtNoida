@@ -47,6 +47,12 @@ const productSlice = createSlice({
     error: null,
   },
 
+  reducers: {
+    sortManually: (state, action) => {
+      state.items1 = action.payload;
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       // Fetch Products
@@ -99,5 +105,6 @@ const productSlice = createSlice({
       });
   },
 });
+export const { sortManually } = productSlice.actions;
 
 export default productSlice.reducer;
