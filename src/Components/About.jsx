@@ -79,7 +79,6 @@ const About = () => {
         </div>
 
         <h2 className="text-xl font-serif font-bold my-4">Products List</h2>
-
         <input
           type="text"
           placeholder="Search by title..."
@@ -168,6 +167,7 @@ const About = () => {
                     </span>
                   </button>
                 </th>
+
                 <th className="border w-[14%] px-4 py-2">
                   <button
                     onClick={() => {
@@ -188,6 +188,7 @@ const About = () => {
                     </span>
                   </button>
                 </th>
+
                 <th className="border px-4 py-2">
                   <button
                     onClick={() => {
