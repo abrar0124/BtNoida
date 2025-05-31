@@ -8,15 +8,24 @@ export const fetchProduct1 = createAsyncThunk("products/fetch1", async () => {
   return response.data;
 });
 
-// Search Products from API
+// searching
+
 export const searchProducts = createAsyncThunk(
   "products/search",
-  async (query) => {
+  async (searchTerm) => {
     const response = await axios.get("https://fakestoreapi.com/products");
-    const filtered = response.data.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-    console.log("searching products from api:", filtered);
+
+    const filtered = response.data.filter((item) => {
+      const titlematch = item.title
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const categorymatch = item.category
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const idmatch = item.id.toString() === searchTerm;
+      const pricematch = item.price.toString() === searchTerm;
+      return titlematch || categorymatch || pricematch || idmatch;
+    });
     return filtered;
   }
 );

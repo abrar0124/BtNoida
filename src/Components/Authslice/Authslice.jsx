@@ -43,7 +43,7 @@ const authSlice = createSlice({
       state.password = "";
       state.token = null;
       state.message = "Logged out successfully!";
-      localStorage.removeItem("loginData");
+      // localStorage.removeItem("loginData");
     },
     restoreSession: (state, action) => {
       state.username = action.payload.username;

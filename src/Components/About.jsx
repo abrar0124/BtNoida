@@ -7,12 +7,15 @@ import {
   searchProducts,
   sortManually,
 } from "../reduxthunk/Productslice";
+import { useNavigate } from "react-router-dom";
+import { logout } from "./Authslice/Authslice";
 
 const About = () => {
   const dispatch = useDispatch();
   const { items1, loading } = useSelector((state) => state.products);
   const { username, password } = useSelector((state) => state.auth);
   const [sortAsc, setSortAsc] = useState(true);
+  const navigate = useNavigate();
 
   const [editData, setEditData] = useState({
     id: null,
@@ -22,12 +25,14 @@ const About = () => {
     image: "",
   });
 
-  const [searchTerm, setSearchTerm] = useState("");
   const [updatingId, setUpdatingId] = useState(null);
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     dispatch(fetchProduct1());
-  }, [dispatch]);
+    dispatch(searchProducts(searchTerm));
+  }, [searchTerm, dispatch]);
 
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
@@ -48,6 +53,11 @@ const About = () => {
     setEditData({ id: null, title: "", category: "", price: "" });
     setUpdatingId(null);
   };
+  const handleLogout = () => {
+    localStorage.removeItem("loginData");
+    dispatch(logout());
+    navigate("/login");
+  };
 
   return (
     <section id="about" className="text-black py-10 bg-white min-h-screen">
@@ -57,7 +67,7 @@ const About = () => {
         </div>
 
         <div className="border border-2 w-[30%] p-3">
-          {!username || !password ? (
+          {!username && !password ? (
             <p className="font-serif font-medium text-lg text-red-600">
               User Detail will show after login.
             </p>
@@ -77,21 +87,25 @@ const About = () => {
             </>
           )}
         </div>
+        <button
+          onClick={handleLogout}
+          className="mt-2  py-2 w-[20%]  bg-red-500 text-white  text-lg rounded transition duration-300 hover:bg-red-700 "
+        >
+          Logout
+        </button>
 
         <h2 className="text-xl font-serif font-bold my-4">Products List</h2>
-        <input
-          type="text"
-          placeholder="Search by title..."
-          value={searchTerm}
-          onChange={(e) => {
-            const query = e.target.value;
-            setSearchTerm(query);
-            {
-              dispatch(searchProducts(query));
-            }
-          }}
-          className="border w-[40%] px-3 py-2 rounded mb-4"
-        />
+        <div className="flex flex-col sm:flex-row gap-4 p-4">
+          <div className="flex flex-col sm:flex-row gap-4 p-4">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="border w-[100%] px-3 py-2 rounded"
+            />
+          </div>
+        </div>
         <div className="flex mb-3 gap-2 flex-wrap">
           <input
             type="text"
