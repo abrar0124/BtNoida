@@ -26,17 +26,16 @@ const About = () => {
   });
 
   const [updatingId, setUpdatingId] = useState(null);
-
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Modal states
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProduct1());
     dispatch(searchProducts(searchTerm));
   }, [searchTerm, dispatch]);
-
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-  };
 
   const handleEdit = (item) => {
     setEditData({
@@ -53,6 +52,23 @@ const About = () => {
     setEditData({ id: null, title: "", category: "", price: "" });
     setUpdatingId(null);
   };
+
+  const handleDelete = (id) => {
+    setSelectedId(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (selectedId !== null) {
+      dispatch(deleteProduct(selectedId));
+      setIsModalOpen(false);
+    }
+  };
+
+  const cancelDelete = () => {
+    setIsModalOpen(false);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("loginData");
     dispatch(logout());
@@ -87,25 +103,26 @@ const About = () => {
             </>
           )}
         </div>
+
         <button
           onClick={handleLogout}
-          className="mt-2  py-2 w-[20%]  bg-red-500 text-white  text-lg rounded transition duration-300 hover:bg-red-700 "
+          className="mt-2 py-2 w-[20%] bg-red-500 text-white text-lg rounded transition duration-300 hover:bg-red-700"
         >
           Logout
         </button>
 
         <h2 className="text-xl font-serif font-bold my-4">Products List</h2>
+
         <div className="flex flex-col sm:flex-row gap-4 p-4">
-          <div className="flex flex-col sm:flex-row gap-4 p-4">
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="border w-[100%] px-3 py-2 rounded"
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border w-full px-3 py-2 rounded"
+          />
         </div>
+
         <div className="flex mb-3 gap-2 flex-wrap">
           <input
             type="text"
@@ -135,10 +152,12 @@ const About = () => {
             className="border w-[20%] px-3 py-2 rounded"
           />
         </div>
+
         <div className="overflow-x-auto font-serif rounded-md">
           <table className="min-w-full text-sm border-collapse">
             <thead className="text-gray-800">
               <tr>
+                {/* ID Header */}
                 <th className="border w-[10%] px-4 py-2">
                   <button
                     onClick={() => {
@@ -148,18 +167,21 @@ const About = () => {
                       dispatch(sortManually(sorted));
                       setSortAsc(!sortAsc);
                     }}
+                    className="flex items-center justify-center w-full"
                   >
-                    <span className="flex items-center">
+                    <span className="flex items-center gap-2">
                       ID
-                      {sortAsc ? (
-                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
-                      ) : (
-                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
-                      )}
+                      <img
+                        src={sortAsc ? "Images/bb.png" : "Images/tt.jpeg"}
+                        className="w-4 h-4"
+                        alt="sort"
+                      />
                     </span>
                   </button>
                 </th>
-                <th className="border px-4 ">
+
+                {/* Title Header */}
+                <th className="border px-4 py-2">
                   <button
                     onClick={() => {
                       const sorted = [...items1].sort((a, b) =>
@@ -170,18 +192,20 @@ const About = () => {
                       dispatch(sortManually(sorted));
                       setSortAsc(!sortAsc);
                     }}
+                    className="flex items-center justify-center w-full"
                   >
-                    <span className="flex items-center">
+                    <span className="flex items-center gap-2">
                       Title
-                      {sortAsc ? (
-                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
-                      ) : (
-                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
-                      )}
+                      <img
+                        src={sortAsc ? "Images/bb.png" : "Images/tt.jpeg"}
+                        className="w-4 h-4"
+                        alt="sort"
+                      />
                     </span>
                   </button>
                 </th>
 
+                {/* Price Header */}
                 <th className="border w-[14%] px-4 py-2">
                   <button
                     onClick={() => {
@@ -191,18 +215,20 @@ const About = () => {
                       dispatch(sortManually(sorted));
                       setSortAsc(!sortAsc);
                     }}
+                    className="flex items-center justify-center w-full"
                   >
-                    <span className="flex items-center">
+                    <span className="flex items-center gap-2">
                       Price
-                      {sortAsc ? (
-                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
-                      ) : (
-                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
-                      )}
+                      <img
+                        src={sortAsc ? "Images/bb.png" : "Images/tt.jpeg"}
+                        className="w-4 h-4"
+                        alt="sort"
+                      />
                     </span>
                   </button>
                 </th>
 
+                {/* Category Header */}
                 <th className="border px-4 py-2">
                   <button
                     onClick={() => {
@@ -214,20 +240,23 @@ const About = () => {
                       dispatch(sortManually(sorted));
                       setSortAsc(!sortAsc);
                     }}
+                    className="flex items-center justify-center w-full"
                   >
-                    <span className="flex items-center">
+                    <span className="flex items-center gap-2">
                       Category
-                      {sortAsc ? (
-                        <img src="Images/bb.png" className="w-3 h-3 ml-3 " />
-                      ) : (
-                        <img src="Images/t-arrow.png" className="w-10 h-10 " />
-                      )}
+                      <img
+                        src={sortAsc ? "Images/bb.png" : "Images/tt.jpeg"}
+                        className="w-4 h-4"
+                        alt="sort"
+                      />
                     </span>
                   </button>
                 </th>
+
                 <th className="border px-4 py-2">Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {loading ? (
                 <tr>
@@ -292,7 +321,6 @@ const About = () => {
                             Edit
                           </button>
                         )}
-
                         <button
                           onClick={() => handleDelete(item.id)}
                           className="bg-red-600 text-white px-3 py-1 rounded"
@@ -307,6 +335,34 @@ const About = () => {
             </tbody>
           </table>
         </div>
+
+        {/* Modal for delete confirmation */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+            <div className="bg-white p-6  text-center w-[90%] max-w-md">
+              <h3 className="text-xl font-serif font-bold mb-4 text-red-600">
+                Confirm Deletion
+              </h3>
+              <p className="mb-6 text-gray-700">
+                Are you sure you want to delete this product?
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={confirmDelete}
+                  className="bg-red-600 hover:bg-red-700  text-white px-4 py-2"
+                >
+                  Yes, Delete
+                </button>
+                <button
+                  onClick={cancelDelete}
+                  className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
