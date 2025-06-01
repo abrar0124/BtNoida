@@ -27,10 +27,9 @@ const About = () => {
 
   const [updatingId, setUpdatingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedIds, setSelectedIds] = useState([]);
 
-  // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProduct1());
@@ -53,19 +52,18 @@ const About = () => {
     setUpdatingId(null);
   };
 
-  const handleDelete = (id) => {
-    setSelectedId(id);
+  const toggleSelect = (id) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
+    );
+  };
+
+  const handleDelete = () => {
     setIsModalOpen(true);
   };
 
   const confirmDelete = () => {
-    if (selectedId !== null) {
-      dispatch(deleteProduct(selectedId));
-      setIsModalOpen(false);
-    }
-  };
-
-  const cancelDelete = () => {
+    selectedIds.forEach((id) => dispatch(deleteProduct(id)));
     setIsModalOpen(false);
   };
 
@@ -82,7 +80,7 @@ const About = () => {
           <h2 className="text-[30px] font-serif">Welcome to the Admin Panel</h2>
         </div>
 
-        <div className="border border-2 w-[30%] p-3">
+        <div className="border border-2 w-[30%] p-3 mb-4">
           {!username && !password ? (
             <p className="font-serif font-medium text-lg text-red-600">
               User Detail will show after login.
@@ -119,7 +117,7 @@ const About = () => {
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border w-full px-3 py-2 rounded"
+            className="border w-[30%] px-3 py-2 rounded"
           />
         </div>
 
@@ -157,8 +155,9 @@ const About = () => {
           <table className="min-w-full text-sm border-collapse">
             <thead className="text-gray-800">
               <tr>
-                {/* ID Header */}
-                <th className="border w-[10%] px-4 py-2">
+                <th className="border px-2 py-2 w-[5%]">Select</th>
+
+                <th className="border px-4 py-2 w-[10%]">
                   <button
                     onClick={() => {
                       const sorted = [...items1].sort((a, b) =>
@@ -180,7 +179,6 @@ const About = () => {
                   </button>
                 </th>
 
-                {/* Title Header */}
                 <th className="border px-4 py-2">
                   <button
                     onClick={() => {
@@ -205,8 +203,7 @@ const About = () => {
                   </button>
                 </th>
 
-                {/* Price Header */}
-                <th className="border w-[14%] px-4 py-2">
+                <th className="border px-4 py-2">
                   <button
                     onClick={() => {
                       const sorted = [...items1].sort((a, b) =>
@@ -228,7 +225,6 @@ const About = () => {
                   </button>
                 </th>
 
-                {/* Category Header */}
                 <th className="border px-4 py-2">
                   <button
                     onClick={() => {
@@ -260,13 +256,13 @@ const About = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="5" className="text-center py-4 text-gray-500">
+                  <td colSpan="6" className="text-center py-4 text-gray-500">
                     Loading products...
                   </td>
                 </tr>
               ) : items1.length === 0 ? (
                 <tr>
-                  <td colSpan="5" className="text-center py-4 text-gray-500">
+                  <td colSpan="6" className="text-center py-4 text-gray-500">
                     No products found.
                   </td>
                 </tr>
@@ -276,6 +272,13 @@ const About = () => {
                     key={item.id}
                     className={index % 2 === 0 ? "bg-white" : "bg-green-100"}
                   >
+                    <td className="border px-4 py-2 text-center">
+                      <input
+                        type="checkbox"
+                        onChange={() => toggleSelect(item.id)}
+                      />
+                    </td>
+
                     <td className="border px-4 py-2">{item.id}</td>
                     <td className="border px-4 py-2">
                       {updatingId === item.id ? (
@@ -321,12 +324,6 @@ const About = () => {
                             Edit
                           </button>
                         )}
-                        <button
-                          onClick={() => handleDelete(item.id)}
-                          className="bg-red-600 text-white px-3 py-1 rounded"
-                        >
-                          Delete
-                        </button>
                       </div>
                     </td>
                   </tr>
@@ -335,26 +332,34 @@ const About = () => {
             </tbody>
           </table>
         </div>
+        {/* Delete Selected Button */}
+        <button
+          onClick={handleDelete}
+          className="bg-red-600  mt-3   text-white px-4 py-2 rounded"
+        >
+          Deleted
+        </button>
 
         {/* Modal for delete confirmation */}
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
-            <div className="bg-white p-6  text-center w-[90%] max-w-md">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-6 text-center w-[90%] max-w-md">
               <h3 className="text-xl font-serif font-bold mb-4 text-red-600">
                 Confirm Deletion
               </h3>
               <p className="mb-6 text-gray-700">
-                Are you sure you want to delete this product?
+                Are you sure you want to delete {selectedIds.length} selected
+                {selectedIds.length > 1 ? "products" : "product"}?
               </p>
               <div className="flex justify-center gap-4">
                 <button
                   onClick={confirmDelete}
-                  className="bg-red-600 hover:bg-red-700  text-white px-4 py-2"
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2"
                 >
                   Yes, Delete
                 </button>
                 <button
-                  onClick={cancelDelete}
+                  onClick={() => setIsModalOpen(false)}
                   className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2"
                 >
                   Cancel
