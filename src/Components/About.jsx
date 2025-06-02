@@ -28,8 +28,8 @@ const About = () => {
   const [updatingId, setUpdatingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIds, setSelectedIds] = useState([]);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
     dispatch(fetchProduct1());
@@ -53,9 +53,14 @@ const About = () => {
   };
 
   const toggleSelect = (id) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
-    );
+    if (selectedIds.includes(id)) {
+      setSelectedIds(selectedIds.filter((item) => item.id !== id));
+      setFavourites(favourites.filter((item) => item.id !== id));
+    } else {
+      const addproducts = items1.find((item) => item.id == id);
+      setSelectedIds([...selectedIds, id]);
+      setFavourites([...favourites, addproducts]);
+    }
   };
 
   const handleDelete = () => {
@@ -64,6 +69,7 @@ const About = () => {
 
   const confirmDelete = () => {
     selectedIds.forEach((id) => dispatch(deleteProduct(id)));
+    setSelectedIds([]);
     setIsModalOpen(false);
   };
 
@@ -156,7 +162,6 @@ const About = () => {
             <thead className="text-gray-800">
               <tr>
                 <th className="border px-2 py-2 w-[5%]">Select</th>
-
                 <th className="border px-4 py-2 w-[10%]">
                   <button
                     onClick={() => {
@@ -332,13 +337,15 @@ const About = () => {
             </tbody>
           </table>
         </div>
-        {/* Delete Selected Button */}
-        <button
-          onClick={handleDelete}
-          className="bg-red-600  mt-3   text-white px-4 py-2 rounded"
-        >
-          Deleted
-        </button>
+
+        <div className="flex gap-3 mt-4">
+          <button
+            onClick={handleDelete}
+            className="bg-red-600 text-white px-4 py-2 rounded"
+          >
+            Delete
+          </button>
+        </div>
 
         {/* Modal for delete confirmation */}
         {isModalOpen && (
@@ -348,7 +355,7 @@ const About = () => {
                 Confirm Deletion
               </h3>
               <p className="mb-6 text-gray-700">
-                Are you sure you want to delete {selectedIds.length} selected
+                Are you sure you want to delete {selectedIds.length} selected{" "}
                 {selectedIds.length > 1 ? "products" : "product"}?
               </p>
               <div className="flex justify-center gap-4">
@@ -365,6 +372,72 @@ const About = () => {
                   Cancel
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Favourite Products in Table Format */}
+        {favourites.length > 0 && (
+          <div className="mt-10">
+            <h2 className="text-2xl font-serif font-bold mb-4 text-black">
+              Favourite Products
+            </h2>
+
+            <div className="overflow-x-auto font-serif rounded-md">
+              <table className="min-w-full text-sm ">
+                <thead className="text-gray-800 ">
+                  <tr>
+                    <th className="border px-4 py-2 w-[10%]">Select</th>
+                    <th className="border px-4 py-2 w-[10%]">ID</th>
+                    <th className="border px-4 py-2">Title</th>
+                    <th className="border px-4 py-2">Price</th>
+                    <th className="border px-4 py-2">Category</th>
+                    <th className="border px-4 py-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* favorite section */}
+                  {favourites.map((fav, index) => (
+                    <tr
+                      key={fav.id}
+                      className={index % 2 === 0 ? "bg-white" : "bg-green-100"}
+                    >
+                      <td className="border px-4 py-2 text-center">
+                        <input
+                          type="checkbox"
+                          onChange={() => toggleSelect(fav.id)}
+                          checked={selectedIds.includes(fav.id)}
+                        />
+                      </td>
+                      <td className="border px-4 py-2">{fav.id}</td>
+                      <td className="border px-4 py-2">{fav.title}</td>
+                      <td className="border px-4 py-2">${fav.price}</td>
+                      <td className="border px-4 py-2">{fav.category}</td>
+                      <td className="border px-4 py-2">
+                        <td className=" px-4 py-2">
+                          <div className="flex items-center">
+                            {editData.id === fav.id ? (
+                              <button
+                                onClick={handleUpdate}
+                                className="bg-yellow-600 text-white px-3 py-1 rounded mr-2"
+                              >
+                                Update
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleEdit(fav)}
+                                className="bg-green-600 rounded text-white px-3 py-1  "
+                              >
+                                Edit
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
