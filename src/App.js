@@ -12,10 +12,11 @@ import HomeData from "./Components/HomeData/HomeData";
 import ProductsCruds from "./Pages/ProductsCruds";
 import "./index.css";
 import PortfolioPage from "./Pages/PortfolioPage";
+import Arrdata from "./Components/practicearray/Arrdata";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Products crud" element={<ProductsCruds />} />
@@ -31,7 +32,8 @@ function App() {
           <Route path="/Loginapi" element={<Loginapi />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <Arrdata />
     </>
   );
 }
