@@ -2,17 +2,20 @@ import { useState } from "react";
 
 function Arrdata() {
   const [array, setArray] = useState([
-    {
-      id: 1,
-      name: "saba",
-      age: 21,
-    },
+    { id: 1, name: "saba", age: 21 },
     { id: 2, name: "amna", age: 20 },
     { id: 3, name: "Abrar", age: 22 },
+    { id: 4, name: "hassan", age: 23 },
   ]);
   const [name, setname] = useState("");
   const [age, setage] = useState(null);
   const [edit, setedit] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filtereddata = array.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const handleadd = () => {
     setArray((prev) => [
       ...prev,
@@ -22,19 +25,16 @@ function Arrdata() {
         age: age,
       },
     ]);
-    setname("");
-    setage("");
   };
 
   const handledelete = (id) => {
     setArray((prev) => prev.filter((p) => p.id != id));
   };
-
   const handledit = (id) => {
-    const userdata = array.find((p) => p.id == id);
-    setedit(userdata);
-    setname(userdata.name);
-    setage(userdata.age);
+    const data = array.find((p) => p.id == id);
+    setedit(data);
+    setname(data.name);
+    setage(data.age);
   };
 
   const handleupdate = () => {
@@ -74,43 +74,55 @@ function Arrdata() {
         </button>
       </div>
       <ul>
-        {array.map((user) => (
-          <li
-            className="border mt-5 border-black p-3 ms-5"
-            style={{ width: "60%" }}
-            key={user.id}
-          >
-            <div className="d-flex gap-5 flex-wrap ">
-              <p className="fw-bold">
-                <span className="fw-normal">Name:{user.name}</span>
-              </p>
-              <p className="fw-bold">
-                <span className="fw-normal">Age:{user.age}</span>
-              </p>
-              <button
-                className="border border-green fw-bold p-1"
-                style={{ backgroundColor: "brown", color: "white" }}
-                onClick={() => handledelete(user.id)}
-              >
-                Delete record
-              </button>
-              <button
-                className="border border-purple fw-bold p-1"
-                style={{ backgroundColor: "purple", color: "white" }}
-                onClick={() => handledit(user.id)}
-              >
-                Edit record
-              </button>
-              <button
-                className="border border-black fw-bold p-1"
-                style={{ backgroundColor: "black", color: "white" }}
-                onClick={handleupdate}
-              >
-                Update record
-              </button>
-            </div>
-          </li>
-        ))}
+        <input
+          type="text"
+          className=" ms-5 p-2 mt-3 border border-black"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        {filtereddata.length > 0 ? (
+          filtereddata.map((user) => (
+            <li
+              className="border mt-5 border-black p-3 ms-5"
+              style={{ width: "60%" }}
+              key={user.id}
+            >
+              <div className="d-flex gap-5 flex-wrap ">
+                <p className="fw-bold">
+                  <span className="fw-normal">Name:{user.name}</span>
+                </p>
+                <p className="fw-bold">
+                  <span className="fw-normal">Age:{user.age}</span>
+                </p>
+                <button
+                  className="border border-green fw-bold p-1"
+                  style={{ backgroundColor: "brown", color: "white" }}
+                  onClick={() => handledelete(user.id)}
+                >
+                  Delete record
+                </button>
+                <button
+                  className="border border-purple fw-bold p-1"
+                  style={{ backgroundColor: "purple", color: "white" }}
+                  onClick={() => handledit(user.id)}
+                >
+                  Edit record
+                </button>
+                <button
+                  className="border border-black fw-bold p-1"
+                  style={{ backgroundColor: "black", color: "white" }}
+                  onClick={handleupdate}
+                >
+                  Update record
+                </button>
+              </div>
+            </li>
+          ))
+        ) : (
+          <p className="text-center col-span-full">No products found.</p>
+        )}
       </ul>
     </>
   );
