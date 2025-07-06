@@ -2,18 +2,33 @@ import { useState } from "react";
 
 function Arrdata() {
   const [array, setArray] = useState([
-    { id: 1, name: "saba", age: 21 },
-    { id: 2, name: "amna", age: 20 },
+    { id: 1, name: "Eman", age: 21 },
+    { id: 2, name: "basil", age: 20 },
     { id: 3, name: "Abrar", age: 22 },
-    { id: 4, name: "hassan", age: 23 },
+    { id: 4, name: "fatima", age: 23 },
   ]);
   const [name, setname] = useState("");
   const [age, setage] = useState(null);
   const [edit, setedit] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortorder, setsortorder] = useState("asc");
 
-  const filtereddata = array.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const handlesortorder = () => {
+    setsortorder(sortorder === "asc" ? "desc" : "asc");
+
+    setArray((prev) =>
+      [...prev].sort((a, b) =>
+        sortorder === "asc"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name)
+      )
+    );
+  };
+
+  const filtereddata = array.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   const handleadd = () => {
@@ -77,7 +92,7 @@ function Arrdata() {
         <input
           type="text"
           className=" ms-5 p-2 mt-3 border border-black"
-          placeholder="Search"
+          placeholder="Searching record..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -85,7 +100,7 @@ function Arrdata() {
         {filtereddata.length > 0 ? (
           filtereddata.map((user) => (
             <li
-              className="border mt-5 border-black p-3 ms-5"
+              className="border  border-black mt-5  p-3 ms-5"
               style={{ width: "60%" }}
               key={user.id}
             >
@@ -124,6 +139,19 @@ function Arrdata() {
           <p className="text-center col-span-full">No products found.</p>
         )}
       </ul>
+      <button
+        className=" mt-2 border fw-bold  fs-5 p-3"
+        style={{
+          backgroundColor: "ThreeDHighlight",
+          border: "palegreen",
+          color: "white",
+          marginLeft: "6%",
+          width: "130px",
+        }}
+        onClick={handlesortorder}
+      >
+        Sorting
+      </button>
     </>
   );
 }
